@@ -3,5 +3,6 @@ title : "Configuration"
 weight : 20
 ---
 
-# Configuration
-Find out how to create and organize your content quickly and intuitively.
+## Configuration
+
+This workshop includes configuration tasks in three parts: cloud configuration, Datakit configuration, and application deployment configuration.
