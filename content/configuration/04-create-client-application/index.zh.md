@@ -1,3 +1,8 @@
+---
+title : "Creating a Client Application for RUM"
+weight : 23
+---
+
 ## 建立 RUM 客戶端應用程式
 
 TrueWatch 透過在前端應用程式中進行簡單配置，即可支援真實用戶監控（RUM），並實現從前端到後端的端到端追蹤。本指南說明如何在 TrueWatch 建立客戶端應用程式並取得所需的 `clientToken`。

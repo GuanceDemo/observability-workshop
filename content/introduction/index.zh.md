@@ -1,3 +1,8 @@
+---
+title: 'Introduction'
+weight: 11
+---
+
 ## TrueWatch 可觀測性工作坊簡介
 
 本工作坊將透過在 AWS EKS（Elastic Kubernetes Service）中部署並監控開源 CRM 應用程式 iDURAR，介紹 TrueWatch 可觀測性平台的實際應用。目標是提供學員完整的實作體驗，涵蓋即時指標、日誌、使用者體驗監控、警示管理及端到端追蹤等核心功能。

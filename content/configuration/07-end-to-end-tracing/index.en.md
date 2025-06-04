@@ -1,3 +1,8 @@
+---
+title : "End-to-End Tracing Demonstration"
+weight : 26
+---
+
 ## End-to-End Tracing Demonstration
 
 Follow these steps to explore TrueWatch's end-to-end tracing capabilities:

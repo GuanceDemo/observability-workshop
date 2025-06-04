@@ -1,3 +1,8 @@
+---
+title : "Deploying the Demo Application"
+weight : 24
+---
+
 ## Deploying the Demo Application
 
 Follow these steps to deploy the demo application on AWS EKS:

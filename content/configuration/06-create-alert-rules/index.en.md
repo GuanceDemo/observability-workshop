@@ -1,3 +1,8 @@
+---
+title : "Creating Alert Rules"
+weight : 25
+---
+
 ## Creating Alert Rules
 
 TrueWatch allows you to configure diverse alerts for timely detection of anomalies. Follow these steps to set up an alert rule for detecting link anomalies:

@@ -1,3 +1,8 @@
+---
+title : "Deploying the Demo Application"
+weight : 24
+---
+
 ## 部署示範應用程式
 
 請依以下步驟將示範應用程式部署至 AWS EKS：

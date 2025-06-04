@@ -1,3 +1,8 @@
+---
+title : "Creating a Client Application for RUM"
+weight : 23
+---
+
 ## Creating a Client Application for RUM
 
 TrueWatch supports integrating Real User Monitoring (RUM) through minimal configuration in front-end applications, enabling end-to-end tracing from frontend to backend. This guide demonstrates creating a client application in TrueWatch to obtain the necessary `clientToken`.

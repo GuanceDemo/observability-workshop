@@ -1,3 +1,8 @@
+---
+title : "Configure Datakit on AWS EKS"
+weight : 20
+---
+
 ## 在 AWS EKS 配置 Datakit
 
 請依照以下步驟於 Amazon EKS 上完成 Datakit 與 TrueWatch 的整合：

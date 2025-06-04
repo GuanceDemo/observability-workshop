@@ -1,3 +1,8 @@
+---
+title : "Creating Alert Rules"
+weight : 25
+---
+
 ## 建立警示規則
 
 TrueWatch 支援多種警示配置，協助您即時偵測異常狀況。請依以下步驟設定用於偵測連結異常的警示規則：

@@ -1,3 +1,8 @@
+---
+title : "Configure Datakit on AWS EKS"
+weight : 21
+---
+
 ## Configure Datakit on AWS EKS
 
 Follow these steps to set up Datakit integration with TrueWatch on Amazon EKS.

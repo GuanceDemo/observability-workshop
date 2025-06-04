@@ -1,3 +1,8 @@
+---
+title : "Creating a Log Pipeline"
+weight : 22
+---
+
 ## 建立日誌管道
 
 TrueWatch 支援在 Datakit 端（本地端）或平台中央端使用管道腳本處理觀測資料。本範例將說明如何使用 Grok 從自定義日誌訊息欄位提取資料。

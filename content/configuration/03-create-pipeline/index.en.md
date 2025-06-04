@@ -1,3 +1,8 @@
+---
+title : "Creating a Log Pipeline"
+weight : 22
+---
+
 ## Creating a Log Pipeline
 
 TrueWatch supports using pipeline scripts either locally (on Datakit) or centrally on the platform for processing observability data. This example demonstrates how to extract data from custom log message fields using Grok.

@@ -1,3 +1,8 @@
+---
+title: 'Introduction'
+weight: 11
+---
+
 ## Introduction to the TrueWatch Observability Workshop
 
 This workshop introduces the TrueWatch Observability Platform by demonstrating how to integrate and monitor the open-source iDURAR CRM application on AWS EKS (Elastic Kubernetes Service). The goal is to provide participants hands-on experience with key observability capabilities, including real-time metrics, logs, user experience monitoring, alerting, and tracing.
