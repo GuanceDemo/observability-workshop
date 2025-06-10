@@ -1,5 +1,5 @@
 ---
-title : "Architecture Overview"
+title : "Deployment Architecture"
 weight : 30
 ---
 
@@ -9,7 +9,7 @@ The iDURAR application is an open-source Customer Relationship Management (CRM) 
 
 ## Deployment Architecture
 
-![01](/static/static-architecture/01.png)
+![01](/static/static-30/01.png)
 
 ## Component Description
 

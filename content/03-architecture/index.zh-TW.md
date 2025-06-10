@@ -1,5 +1,5 @@
 ---
-title : "Architecture Overview"
+title : "部署架構圖"
 weight : 30
 ---
 
@@ -9,7 +9,7 @@ iDURAR 是一套開源的客戶關係管理（CRM）系統，具備現代化的�
 
 ## 部署架構圖
 
-![01](/static/static-architecture/01.png)
+![01](/static/static-30/01.png)
 
 ## 元件說明
 
