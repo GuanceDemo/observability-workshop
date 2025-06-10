@@ -13,7 +13,7 @@ weight : 25
 
 ![01](/static/static-25/01.png)
 
-### 步驟二：分析用戶會話
+### 步驟二：分析使用者會話
 
 在 TrueWatch 中前往 **RUM → Explorers → Session**，點擊最新的會話紀錄。
 

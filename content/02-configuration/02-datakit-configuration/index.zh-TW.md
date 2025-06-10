@@ -1,9 +1,9 @@
 ---
-title : "在 AWS EKS 配置 Datakit"
+title : "在 AWS EKS 設定 Datakit"
 weight : 22
 ---
 
-## 在 AWS EKS 配置 Datakit
+## 在 AWS EKS 設定 Datakit
 
 請依照以下步驟在 Amazon EKS 中完成 Datakit 與 TrueWatch 的整合。所有的指令都在 AWS CloudShell 終端機中執行。
 
