@@ -214,7 +214,7 @@ Resources:
     Type: AWS::EKS::Cluster
     Properties:
       Name: eks-demo-cluster
-      Version: '1.31'
+      Version: '1.36'
       RoleArn: !GetAtt EksClusterRole.Arn
       ResourcesVpcConfig:
         SecurityGroupIds:
@@ -278,7 +278,7 @@ Resources:
       ClusterName: !Ref EksCluster
       NodegroupName: eks-general-nodegroup
       NodeRole: !GetAtt EksNodeRole.Arn
-      AmiType: AL2_x86_64
+      AmiType: AL2023_x86_64_STANDARD
       InstanceTypes:
         - t3.large
       ScalingConfig:
@@ -290,6 +290,31 @@ Resources:
         - !Ref PrivateSubnet2
       Tags:
         NodeType: general
+
+  # EKS Add-ons
+  VpcCniAddon:
+    Type: AWS::EKS::Addon
+    DependsOn: EksNodeGroup
+    Properties:
+      ClusterName: !Ref EksCluster
+      AddonName: vpc-cni
+      ResolveConflicts: OVERWRITE
+
+  CoreDnsAddon:
+    Type: AWS::EKS::Addon
+    DependsOn: EksNodeGroup
+    Properties:
+      ClusterName: !Ref EksCluster
+      AddonName: coredns
+      ResolveConflicts: OVERWRITE
+
+  KubeProxyAddon:
+    Type: AWS::EKS::Addon
+    DependsOn: EksNodeGroup
+    Properties:
+      ClusterName: !Ref EksCluster
+      AddonName: kube-proxy
+      ResolveConflicts: OVERWRITE
 
 Outputs:
   VpcId:
