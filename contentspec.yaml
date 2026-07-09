@@ -4,6 +4,7 @@ defaultLocaleCode: en-US
 localeCodes:
   - en-US
   # - pt
+  - zh-CN
   - zh-TW
 
 infrastructure:
