@@ -9,10 +9,10 @@ weight : 33
 
 ### 步骤一：下载配置附件
 
-先将以下两个 JSON 附件下载到本地：
+::alert[右键点击以下链接并选择「另存为」，将两个 JSON 文件下载到本地。]{type="info"}
 
-- [下载 Product Service Monitor Template](/static/attachments/chapter-07/product-service-monitor-template.json)
-- [下载 Product Service Operational Quality Dashboard](/static/attachments/chapter-07/product-service-operational-quality-dashboard.json)
+- [product-service-monitor-template.json](https://ws-assets-prod-iad-r-nrt-2cb4b4649d0e0f94.s3.ap-northeast-1.amazonaws.com/24932227-1f86-44e3-acc9-3df44d13d2fc/product-service-monitor-template.json)
+- [product-service-operational-quality-dashboard.json](https://ws-assets-prod-iad-r-nrt-2cb4b4649d0e0f94.s3.ap-northeast-1.amazonaws.com/24932227-1f86-44e3-acc9-3df44d13d2fc/product-service-operational-quality-dashboard.json)
 
 ### 步骤二：导入并创建监控器
 

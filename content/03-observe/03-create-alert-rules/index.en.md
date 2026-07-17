@@ -9,10 +9,10 @@ In this chapter, you will import APM monitors at the product and service level, 
 
 ### Step 1: Download Configuration Attachments
 
-Download the following two JSON attachments to your local machine:
+::alert[Right-click the following links and select "Save As" to download the two JSON files.]{type="info"}
 
-- [Download Product Service Monitor Template](/static/attachments/chapter-07/product-service-monitor-template.json)
-- [Download Product Service Operational Quality Dashboard](/static/attachments/chapter-07/product-service-operational-quality-dashboard.json)
+- [product-service-monitor-template.json](https://ws-assets-prod-iad-r-nrt-2cb4b4649d0e0f94.s3.ap-northeast-1.amazonaws.com/24932227-1f86-44e3-acc9-3df44d13d2fc/product-service-monitor-template.json)
+- [product-service-operational-quality-dashboard.json](https://ws-assets-prod-iad-r-nrt-2cb4b4649d0e0f94.s3.ap-northeast-1.amazonaws.com/24932227-1f86-44e3-acc9-3df44d13d2fc/product-service-operational-quality-dashboard.json)
 
 ### Step 2: Import and Create Monitors
 
