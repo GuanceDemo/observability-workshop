@@ -5,6 +5,8 @@ weight : 21
 
 ## TrueWatch 功能概览
 
+本工作坊使用同一个 `project=mall-demo` 标签贯穿基础设施、APM、日志、JVM、Profiling 与 RUM。完成部署后，可以在以下功能页面中从不同信号观察同一条商城下单链路。
+
 ### 交互式仪表板
 
 TrueWatch 提供大量内置仪表板，帮助您快速且轻松地分析各种可观测性数据。

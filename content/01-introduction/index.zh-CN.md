@@ -5,18 +5,18 @@ weight : 10
 
 ## TrueWatch 可观测性工作坊简介
 
-本工作坊将通过在 AWS EKS（Elastic Kubernetes Service）中部署并监控开源 CRM 应用程序 iDURAR，介绍 TrueWatch 可观测性平台的实际应用。目标是提供学员完整的实操体验，涵盖实时指标、日志、用户体验监控、告警管理及端到端追踪等核心功能。
+本工作坊将通过在 AWS EKS（Elastic Kubernetes Service）中部署并监控一个可注入故障的微服务商城 Demo，介绍 TrueWatch 可观测性平台的实际应用。目标是为学员提供完整的实操体验，涵盖 Kubernetes 与容器指标、应用性能监控、日志分析、JVM 监控、Profiling、用户体验监控、告警管理及端到端链路追踪等核心功能。
 
-### 关于 iDURAR CRM 应用程序
+### 关于微服务商城 Demo
 
-iDURAR 是一个开源的客户关系管理（CRM）平台，旨在通过直观的工作流程与集成功能，简化客户管理。其主要特点包括：
+该 Demo 是一个面向可观测性教学场景设计的 Java 微服务商城应用，通过完整的下单链路展示不同服务和依赖之间的调用关系。其主要特点包括：
 
-- 采用现代化的 **React** 前端框架
-- 后端使用 **Node.js 与 Express** 开发
-- 数据库使用 **MongoDB**
-- 支持 Kubernetes 等容器化环境部署
+- 采用 **Spring Boot** 构建 Gateway、订单、库存和支付四个 Java 微服务
+- 使用 **MySQL** 保存订单数据，并通过 **Redis** 模拟库存缓存
+- 支持通过 **Helm** 部署到 AWS EKS 等标准 Kubernetes 环境
+- 内置前端、服务、JVM 和依赖层故障场景，可用于演示指标、日志、Trace、Profiling、RUM、Browser Logs 和 Session Replay 的关联分析
 
-本工作坊将带领您将 iDURAR 应用程序部署到 AWS EKS 集群中，并进行相关监控配置。
+本工作坊将带领您在 AWS EKS 集群中安装 DataKit、部署微服务商城 Demo、生成业务流量、注入故障，并通过 TrueWatch 完成从用户访问到后端服务及基础设施的全链路观测与问题分析。
 
 ### TrueWatch 可观测性平台功能特色
 
@@ -35,11 +35,11 @@ TrueWatch 是全面的可观测性解决方案，提供应用性能、基础设�
 
 工作坊将带领参与者完成以下实操步骤：
 
-- 在 AWS EKS 部署 iDURAR 与 Datakit（TrueWatch 可观测性代理程序）。
-- 前端应用程序集成 RUM SDK，实现完整用户体验监控。
-- 建立管道以解析日志并收集指标数据。
-- 配置高级告警规则，主动检测系统异常。
-- 利用 AI 辅助追踪，快速进行错误分析与问题排查。
+- 连接 AWS EKS，并通过官方 Helm Chart 安装 DataKit。
+- 创建 Web RUM 应用，并通过节点 DataKit 接收 RUM、Browser Logs 与 Session Replay 数据。
+- 使用公开 GHCR 镜像部署微服务商城，无需在 Workshop 环境中构建镜像。
+- 通过 `project=mall-demo` 关联 Kubernetes 指标、APM、日志、JVM、Profiling 与 RUM 数据。
+- 生成业务流量、注入可恢复的故障，并配置告警与关联分析流程。
 
 ### 准备步骤
 
@@ -47,6 +47,10 @@ TrueWatch 是全面的可观测性解决方案，提供应用性能、基础设�
 
 1. **TrueWatch Cloud 账号：**
    - 注册 [https://id1-auth.truewatch.com/businessRegister](https://id1-auth.truewatch.com/businessRegister) 并创建工作区 (Workspace)，默认为商业版。
+2. **AWS EKS 集群：**
+   - 集群至少包含一个状态为 `Ready` 的工作节点，并允许创建 `LoadBalancer` 类型的 Service。
+3. **AWS CloudShell 权限：**
+   - 当前身份需要能够读取 EKS 集群信息，并在集群中创建 Namespace、Secret、Service、Deployment、DaemonSet、Role 与 RoleBinding。
 
 **注意事项：**  
-TrueWatch 通过「工作区」将不同环境或应用的观测数据分离，多个环境间可通过授权方式共享数据。
+TrueWatch 通过「工作区」将不同环境或应用的观测数据分离，多个环境间可通过授权方式共享数据。DataWay URL 中包含敏感 token，请勿将其写入文档、截图或 Git 仓库。

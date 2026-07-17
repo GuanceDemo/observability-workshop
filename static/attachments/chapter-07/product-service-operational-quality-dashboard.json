@@ -1,0 +1,5733 @@
+{
+  "dashboardBindSet": [],
+  "dashboardExtend": {
+    "groupUnfoldStatus": {
+      "01｜🧭 Business Observability Navigation": true,
+      "02｜📌 Product Operations Overview": true,
+      "03｜⏱️ Response Time Analysis": true,
+      "04｜🚨 Error and Alert Analysis": true
+    }
+  },
+  "dashboardMapping": [],
+  "dashboardOwnerType": "node",
+  "dashboardType": "CUSTOM",
+  "iconSet": {},
+  "identifier": "product-service-operational-quality",
+  "main": {
+    "chartGroupPos": [
+      "chtg_b4642b4767834293ba9d6c3d635b4a64",
+      "chtg_418e5c1654294f19a639589163ad95b5",
+      "chtg_57d4d9b0fb4f443884644b2a9af529d2",
+      "chtg_7d52d9f602424ae48d2bfd764c0299db"
+    ],
+    "charts": [
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedGroupByTime": null,
+          "fixedTime": {
+            "key": "1h",
+            "text": "Past 1 hour"
+          },
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "bgColor": "#326CE5",
+            "changeWorkspace": false,
+            "chartOpacity": "",
+            "colors": [
+              {
+                "color": "#326CE5",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "1h",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "labelColor": "",
+            "levels": [
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "nodata",
+                "value": [
+                  "N/A"
+                ]
+              },
+              {
+                "bgColor": "#F8080E",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "<=",
+                "value": [
+                  "0.4"
+                ]
+              },
+              {
+                "bgColor": "#FEAC4E",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.4,
+                  0.6
+                ]
+              },
+              {
+                "bgColor": "#FFDA43",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.6,
+                  0.8
+                ]
+              },
+              {
+                "bgColor": "#D9EE53",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.8,
+                  0.9
+                ]
+              },
+              {
+                "bgColor": "#A0DD86",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.9,
+                  0.95
+                ]
+              },
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "0.95"
+                ]
+              }
+            ],
+            "lineColor": "#FFFFFF",
+            "mappings": [
+              {
+                "mappingVal": "100%",
+                "operation": "nodata",
+                "originalVal": [
+                  "N/A"
+                ]
+              }
+            ],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "overviewBorderColor": "",
+            "overviewCardBackground": "",
+            "overviewCustomBaseColor": "",
+            "overviewCustomChartColor": "",
+            "overviewCustomTextColor": "",
+            "overviewPreviewOpacity": "",
+            "overviewSchemeTone": "",
+            "overviewTheme": null,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "themeColor": null,
+            "timeInterval": "auto",
+            "titleColor": "",
+            "titleDesc": "Product SLO attainment rate over the last hour",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🎯 Product SLO｜1 Hour",
+        "pos": {
+          "h": 8,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": true,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "6f3f6620-5dac-11f1-8571-59d62e4630df",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "81b3fe40-7b90-11f1-8102-79169f4957f8",
+                  "logic": "and",
+                  "name": "slo_name",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "Project SLO",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/60",
+              "funcList": [],
+              "q": "eval(1-a/60, a=\"M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }\")",
+              "type": "expression"
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_f155b3b8bee54b6cb0fa7992029a1dfc"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "bgColor": "#326CE5",
+            "changeWorkspace": false,
+            "colors": [
+              {
+                "color": "#326CE5",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "slo",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "showCostTime": true,
+            "showFieldMapping": false,
+            "showLine": false,
+            "showRemainingTime": true,
+            "showTitle": true,
+            "showYearlySLA": true,
+            "timeInterval": "auto",
+            "titleDesc": "Current product-level SLO overview",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "🎯 Product SLO",
+        "pos": {
+          "h": 8,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "funcList": [],
+              "q": "M::slo:(SUM(`slo_cost`)) { `slo_name` = 'Project SLO' AND `project` = '#{project}' }",
+              "slo": {
+                "goal": 95,
+                "groupBy": [
+                  "project"
+                ],
+                "groupByFilters": {
+                  "project": "#{project}"
+                },
+                "id": "",
+                "minGoal": 90,
+                "name": "Project SLO",
+                "workspaceUUID": ""
+              }
+            },
+            "type": "slo",
+            "unit": ""
+          }
+        ],
+        "type": "slo",
+        "uuid": "chrt_d09746dd79a847efb384c009832aaddd"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "bgColor": "#3AB8FF",
+            "changeWorkspace": false,
+            "colors": [
+              {
+                "color": "#3AB8FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "lineColor": "#3AB8FF",
+            "mappings": [],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "timeInterval": "auto",
+            "titleDesc": "Number of online services within the current filters",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "🟢 Total Online Services",
+        "pos": {
+          "h": 8,
+          "w": 4,
+          "x": 4,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "field": "service",
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "0232e860-3ea6-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "span_type",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "entry",
+                  "values": []
+                },
+                {
+                  "id": "0232e861-3ea6-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "040648d0-3ea6-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "13577cf0-3ea6-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "1f50d380-3ea6-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last"
+              ],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(count_distinct(`service`)) { `span_type` = 'entry' and `host` = '#{host}' and `project` = '#{project}' and `env` = '#{env}' and `version` = '#{version}' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_9c435a4c3bac4ca1a213d5e483f6ffa3"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{V.service}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bgColor": "#F5A623",
+            "changeWorkspace": false,
+            "colors": [
+              {
+                "color": "#F5A623",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [
+              {
+                "bgColor": "",
+                "fontColor": "#EA5E74",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "1000000"
+                ]
+              }
+            ],
+            "lineColor": "#3AB8FF",
+            "mappings": [],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "timeInterval": "auto",
+            "titleDesc": "Maximum response time within the current filters",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "Maximum Response Time",
+                "name": "Maximum Response Time",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "🐢 Maximum Response Time",
+        "pos": {
+          "h": 8,
+          "w": 4,
+          "x": 8,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "Maximum Response Time",
+              "code": "A",
+              "dataSource": "*",
+              "field": "duration",
+              "fieldFunc": "max",
+              "fieldType": "long",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "70a49c60-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "span_type",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "entry",
+                  "values": []
+                },
+                {
+                  "id": "70a49c61-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "70a49c62-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "70a49c63-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "id": "70a49c64-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "7388a980-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last"
+              ],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(max(`duration`) AS `Maximum Response Time`) { `span_type` = 'entry' and `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `host` = '#{host}' and `project` = '#{project}' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_c4060eb14b5d49748a987d067814fc18"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{V.service}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bgColor": "#7B61FF",
+            "changeWorkspace": false,
+            "colors": [
+              {
+                "color": "#7B61FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [
+              {
+                "bgColor": "",
+                "fontColor": "#EA5E74",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "1000000"
+                ]
+              }
+            ],
+            "lineColor": "#3AB8FF",
+            "mappings": [],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "timeInterval": "auto",
+            "titleDesc": "P90 response time within the current filters",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "P90 Response Time",
+                "name": "P90 Response Time",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "⏱️ P90 Response Time",
+        "pos": {
+          "h": 8,
+          "w": 4,
+          "x": 12,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "P90 Response Time",
+              "code": "A",
+              "dataSource": "*",
+              "field": "duration",
+              "fieldFunc": "p90",
+              "fieldType": "long",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "b0eb9560-ec1d-11ee-b7c1-65148ef74774",
+                  "logic": "and",
+                  "name": "span_type",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "entry",
+                  "values": []
+                },
+                {
+                  "id": "b0eb9561-ec1d-11ee-b7c1-65148ef74774",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "b0eb9562-ec1d-11ee-b7c1-65148ef74774",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "b0eb9563-ec1d-11ee-b7c1-65148ef74774",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "id": "b0eb9564-ec1d-11ee-b7c1-65148ef74774",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "2fb3b3d0-3ea8-11f1-98b6-e9c0a167da67",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last"
+              ],
+              "groupBy": [],
+              "groupByTime": "",
+              "labelOp": "",
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(percentile(`duration`, 90) AS `P90 Response Time`) { `span_type` = 'entry' and `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `host` = '#{host}' and `project` = '#{project}' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_4abe4b325a7543ab9f3beeed0d51c042"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"status\":\"error\",\"span_type\":\"entry\",\"service\":\"#{V.service}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bgColor": "#FF8A00",
+            "changeWorkspace": false,
+            "colors": [
+              {
+                "color": "#FF8A00",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [
+              {
+                "bgColor": "",
+                "fontColor": "#EA5E74",
+                "lineColor": "",
+                "operation": ">",
+                "value": [
+                  "0.10"
+                ]
+              }
+            ],
+            "lineColor": "#3AB8FF",
+            "mappings": [],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "timeInterval": "auto",
+            "titleDesc": "Request error rate within the current filters",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "A / B",
+                "name": "A / B",
+                "unit": "",
+                "units": [
+                  "percent",
+                  "percent_decimal"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "⚠️ Request Error Rate",
+        "pos": {
+          "h": 8,
+          "w": 4,
+          "x": 16,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "children": [
+                {
+                  "alias": "",
+                  "code": "A",
+                  "dataSource": "*",
+                  "field": "status",
+                  "fieldFunc": "count",
+                  "fieldType": "keyword",
+                  "fill": null,
+                  "fillNum": null,
+                  "filters": [
+                    {
+                      "id": "8a6d9022-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "status",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "error",
+                      "values": []
+                    },
+                    {
+                      "id": "8a6d9023-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "service",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{service}",
+                      "values": []
+                    },
+                    {
+                      "id": "8a6d9024-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "env",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{env}",
+                      "values": []
+                    },
+                    {
+                      "id": "8a6d9025-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "version",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{version}",
+                      "values": []
+                    },
+                    {
+                      "id": "916fff20-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "project",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{project}",
+                      "values": []
+                    }
+                  ],
+                  "groupBy": [],
+                  "groupByTime": "",
+                  "indexFilter": "default",
+                  "labelOp": "",
+                  "limit": null,
+                  "namespace": "tracing",
+                  "q": "T::RE(`.*`):(count(`status`)) { `status` = 'error' and `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `project` = '#{project}' }",
+                  "queryFuncs": [],
+                  "type": "simple",
+                  "withLabels": []
+                },
+                {
+                  "alias": "",
+                  "code": "B",
+                  "dataSource": "*",
+                  "field": "status",
+                  "fieldFunc": "count",
+                  "fieldType": "keyword",
+                  "fill": null,
+                  "fillNum": null,
+                  "filters": [
+                    {
+                      "id": "8b1edec1-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "service",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{service}",
+                      "values": []
+                    },
+                    {
+                      "id": "8b1edec2-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "env",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{env}",
+                      "values": []
+                    },
+                    {
+                      "id": "8b1edec3-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "version",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{version}",
+                      "values": []
+                    },
+                    {
+                      "id": "99a262a0-3ea8-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "project",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{project}",
+                      "values": []
+                    }
+                  ],
+                  "groupBy": [],
+                  "groupByTime": "",
+                  "indexFilter": "default",
+                  "labelOp": "",
+                  "limit": null,
+                  "namespace": "tracing",
+                  "q": "T::RE(`.*`):(count(`status`)) { `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `project` = '#{project}' }",
+                  "queryFuncs": [],
+                  "type": "simple",
+                  "withLabels": []
+                }
+              ],
+              "code": "A",
+              "expression": "A/B",
+              "funcList": [
+                "last"
+              ],
+              "q": "eval(A/B, A=\"T::RE(`.*`):(count(`status`)) { `status` = 'error' and `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `project` = '#{project}' }\", B=\"T::RE(`.*`):(count(`status`)) { `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `project` = '#{project}' }\")",
+              "type": "expression"
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_ed039d2346cc4640aa6b4c24dff072cd"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"status\":\"error\",\"service\":\"#{V.service}\"}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bgColor": "#EA5E74",
+            "changeWorkspace": false,
+            "chartOpacity": "",
+            "colors": [
+              {
+                "color": "#EA5E74",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "labelColor": "",
+            "levels": [
+              {
+                "bgColor": "",
+                "fontColor": "#EA5E74",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "100"
+                ]
+              }
+            ],
+            "lineColor": "#FFFFFF",
+            "mappings": [],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "overviewBorderColor": "",
+            "overviewCardBackground": "",
+            "overviewCustomBaseColor": "",
+            "overviewCustomChartColor": "",
+            "overviewCustomTextColor": "#FFFFFF",
+            "overviewPreviewOpacity": "",
+            "overviewSchemeTone": "",
+            "overviewTheme": null,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "themeColor": {
+              "colors": [],
+              "custom": true,
+              "key": "custom",
+              "kind": "overview",
+              "labelKey": "chart.theme_palette_custom"
+            },
+            "timeInterval": "auto",
+            "titleColor": "#FFFFFF",
+            "titleDesc": "Total error requests within the current filters",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "🚨 Error Requests",
+        "pos": {
+          "h": 8,
+          "w": 4,
+          "x": 20,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "field": "status",
+              "fieldFunc": "count",
+              "fieldType": "keyword",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "319ff671-13fb-11ee-be1b-7b4689046c03",
+                  "logic": "and",
+                  "name": "status",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "error"
+                },
+                {
+                  "id": "319ff673-13fb-11ee-be1b-7b4689046c03",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}"
+                },
+                {
+                  "id": "c256f6f0-ec1d-11ee-b7c1-65148ef74774",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "1c959590-7e98-11f1-bb34-edb7d0283301",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [],
+              "groupByTime": "",
+              "labelOp": "",
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(count(`status`)) { `status` = 'error' and `service` = '#{service}' and `host` = '#{host}' and `project` = '#{project}' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_dbce2f7dee15472aa5f57131aa7d2414"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": {
+            "key": "15m",
+            "text": "Last 15 Minutes"
+          },
+          "isCombineChart": true,
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Service Error Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colorLevel": 3,
+            "colors": [
+              {
+                "color": "#3AB8FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "hexgon",
+            "enablePreflightEstimate": false,
+            "fixedTime": "15m",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": true,
+            "levelArr": [
+              {
+                "color": "#F8080E",
+                "max": 0.4,
+                "min": 0
+              },
+              {
+                "color": "#FEAC4E",
+                "max": 0.6,
+                "min": 0.4
+              },
+              {
+                "color": "#FFDA43",
+                "max": 0.95,
+                "min": 0.6
+              },
+              {
+                "color": "#A0DD86",
+                "max": 1,
+                "min": 0.95
+              }
+            ],
+            "levels": [],
+            "mainMeasurementQueryCode": "B",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "rangeColor": "",
+            "rangeColorKey": "light-green",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showLegend": "bottom",
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "auto",
+            "titleDesc": "Availability view aggregated by service",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "🛡️ Service Availability",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "Availability",
+              "children": [
+                {
+                  "alias": "",
+                  "code": "A",
+                  "dataSource": "*",
+                  "field": "trace_id",
+                  "fieldFunc": "count",
+                  "fieldType": "keyword",
+                  "fill": null,
+                  "fillNum": null,
+                  "filters": [
+                    {
+                      "id": "798de0d0-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "host",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{host}",
+                      "values": []
+                    },
+                    {
+                      "id": "798de0d1-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "service",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{service}",
+                      "values": []
+                    },
+                    {
+                      "id": "80e574b0-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "project",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{project}",
+                      "values": []
+                    },
+                    {
+                      "id": "d31f3600-3ea5-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "env",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{env}",
+                      "values": []
+                    },
+                    {
+                      "id": "e2c95f90-3ea5-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "version",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{version}",
+                      "values": []
+                    }
+                  ],
+                  "funcList": [],
+                  "groupBy": [
+                    "service"
+                  ],
+                  "groupByTime": "",
+                  "indexFilter": "default",
+                  "labelOp": "",
+                  "limit": null,
+                  "namespace": "tracing",
+                  "q": "T::RE(`.*`):(count(`trace_id`)) { `host` = '#{host}' and `service` = '#{service}' and `project` = '#{project}' and `env` = '#{env}' and `version` = '#{version}' } BY `service`",
+                  "queryFuncs": [],
+                  "type": "simple",
+                  "withLabels": []
+                },
+                {
+                  "alias": "",
+                  "code": "B",
+                  "dataSource": "*",
+                  "field": "trace_id",
+                  "fieldFunc": "count",
+                  "fieldType": "keyword",
+                  "fill": null,
+                  "fillNum": null,
+                  "filters": [
+                    {
+                      "id": "8c48f3e0-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "status",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "ok",
+                      "values": []
+                    },
+                    {
+                      "id": "8c48f3e1-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "host",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{host}",
+                      "values": []
+                    },
+                    {
+                      "id": "8c48f3e2-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "service",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{service}",
+                      "values": []
+                    },
+                    {
+                      "id": "8ed236d0-ca49-11f0-ad0c-2ffe7aa0216c",
+                      "logic": "and",
+                      "name": "project",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{project}",
+                      "values": []
+                    },
+                    {
+                      "id": "db9643a0-3ea5-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "env",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{env}",
+                      "values": []
+                    },
+                    {
+                      "id": "ead3c8b0-3ea5-11f1-98b6-e9c0a167da67",
+                      "logic": "and",
+                      "name": "version",
+                      "op": "=",
+                      "type": "keyword",
+                      "value": "#{version}",
+                      "values": []
+                    }
+                  ],
+                  "funcList": [],
+                  "groupBy": [
+                    "service"
+                  ],
+                  "groupByTime": "",
+                  "indexFilter": "default",
+                  "labelOp": "",
+                  "limit": null,
+                  "namespace": "tracing",
+                  "q": "T::RE(`.*`):(count(`trace_id`)) { `status` = 'ok' and `host` = '#{host}' and `service` = '#{service}' and `project` = '#{project}' and `env` = '#{env}' and `version` = '#{version}' } BY `service`",
+                  "queryFuncs": [],
+                  "type": "simple",
+                  "withLabels": []
+                }
+              ],
+              "code": "B",
+              "expression": "B/A",
+              "funcList": [
+                "last"
+              ],
+              "q": "eval(B/A, alias='Availability', A=\"T::RE(`.*`):(count(`trace_id`)) { `host` = '#{host}' and `service` = '#{service}' and `project` = '#{project}' and `env` = '#{env}' and `version` = '#{version}' } BY `service`\", B=\"T::RE(`.*`):(count(`trace_id`)) { `status` = 'ok' and `host` = '#{host}' and `service` = '#{service}' and `project` = '#{project}' and `env` = '#{env}' and `version` = '#{version}' } BY `service`\")",
+              "type": "expression"
+            },
+            "type": "hexgon",
+            "unit": ""
+          }
+        ],
+        "type": "hexgon",
+        "uuid": "chrt_8b597be6cee145bfa298f864c94697b3"
+      },
+      {
+        "chartGroupUUID": "chtg_418e5c1654294f19a639589163ad95b5",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "changeWorkspace": false,
+            "color": {},
+            "colors": [],
+            "currentChartType": "topology",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "openThousandsSeparator": true,
+            "showFieldMapping": false,
+            "showLegend": "bottom",
+            "showTitle": true,
+            "timeInterval": "auto",
+            "titleDesc": "Service call relationships and error distribution topology",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "02｜📌 Real-Time Product Performance Overview"
+        },
+        "name": "🌐 Product Service Topology",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "chartType": "serviceMap",
+              "fill": "error_rate",
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                }
+              ],
+              "resource": "",
+              "service": "#{service}",
+              "type": "default"
+            },
+            "type": "topology",
+            "unit": ""
+          }
+        ],
+        "type": "topology",
+        "uuid": "chrt_4c47a4a2dc4d476ab38aa02d330dfe8d"
+      },
+      {
+        "chartGroupUUID": "chtg_57d4d9b0fb4f443884644b2a9af529d2",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\"}"
+            },
+            {
+              "alias": "View Related Logs",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/logIndi/log/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "changeWorkspace": false,
+            "chartType": "bar",
+            "color": "#6C63FF",
+            "colors": [
+              {
+                "color": "#6C63FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "toplist",
+            "fixedTime": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementLimit": 10,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showTableHead": true,
+            "showTitle": true,
+            "showTopSize": true,
+            "slimit": 20,
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "tableSortMetricName": "",
+            "tableSortType": "top",
+            "timeInterval": "auto",
+            "titleDesc": "Top 10 services by P90 response time",
+            "topSize": 10,
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "P90 Response Time",
+                "name": "P90 Response Time",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "03｜⏱️ Response Time Analysis"
+        },
+        "name": "🚀 P90 Service Response Time Top 10",
+        "pos": {
+          "h": 22,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "P90 Response Time",
+              "code": "A",
+              "dataSource": "*",
+              "field": "duration",
+              "fieldFunc": "p90",
+              "fieldType": "long",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "5c1d1ac0-ca49-11f0-ad0c-2ffe7aa0216c",
+                  "logic": "and",
+                  "name": "span_type",
+                  "op": "=",
+                  "type": "",
+                  "value": "entry",
+                  "values": []
+                },
+                {
+                  "id": "5c1d1ac1-ca49-11f0-ad0c-2ffe7aa0216c",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "5c1d1ac2-ca49-11f0-ad0c-2ffe7aa0216c",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "5c1d1ac3-ca49-11f0-ad0c-2ffe7aa0216c",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "id": "5c1d1ac4-ca49-11f0-ad0c-2ffe7aa0216c",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "5d73aa10-ca49-11f0-ad0c-2ffe7aa0216c",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last",
+                "top:10"
+              ],
+              "groupBy": [
+                "service"
+              ],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(percentile(`duration`, 90) AS `P90 Response Time`) { `span_type` = 'entry' and `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `host` = '#{host}' and `project` = '#{project}' } BY `service`",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "toplist",
+            "unit": ""
+          }
+        ],
+        "type": "toplist",
+        "uuid": "chrt_e7b9869b1863446d8bf4762ef0699f35"
+      },
+      {
+        "chartGroupUUID": "chtg_57d4d9b0fb4f443884644b2a9af529d2",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\",\"resource\":\"#{T.resource}\"}"
+            },
+            {
+              "alias": "View Related Logs",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/logIndi/log/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\",\"resource\":\"#{T.resource}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "changeWorkspace": false,
+            "chartType": "bar",
+            "color": "#6C63FF",
+            "colors": [
+              {
+                "color": "#6C63FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "toplist",
+            "fixedTime": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementLimit": 10,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showTableHead": true,
+            "showTitle": true,
+            "showTopSize": true,
+            "slimit": 20,
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "tableSortMetricName": "",
+            "tableSortType": "top",
+            "timeInterval": "auto",
+            "titleDesc": "Top 10 resources by P90 response time",
+            "topSize": 10,
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "P90 Response Time",
+                "name": "P90 Response Time",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "03｜⏱️ Response Time Analysis"
+        },
+        "name": "🧩 P90 Resource Response Time Top 10",
+        "pos": {
+          "h": 22,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "P90 Response Time",
+              "code": "A",
+              "dataSource": "*",
+              "dataSourceFunc": "re",
+              "field": "duration",
+              "fieldFunc": "p90",
+              "fields": [
+                {
+                  "alias": "P90 Response Time",
+                  "field": "duration",
+                  "fieldFunc": "p90"
+                }
+              ],
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last",
+                "top:10"
+              ],
+              "groupBy": [
+                "service",
+                "resource"
+              ],
+              "groupByTime": "",
+              "index": "default",
+              "indexFilter": "default",
+              "indexes": [
+                "default"
+              ],
+              "interval": "",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::re(`.*`):(PERCENTILE(`duration`, 90) as `P90 Response Time`) {service = '#{service}' and env = '#{env}' and version = '#{version}' and host = '#{host}'  and `project` = '#{project}'}  by `service`,`resource`",
+              "queryFuncs": [],
+              "slimit": null,
+              "type": "dql",
+              "withLabels": []
+            },
+            "type": "toplist",
+            "unit": ""
+          }
+        ],
+        "type": "toplist",
+        "uuid": "chrt_640c26c67fd646398346d05dd9295591"
+      },
+      {
+        "chartGroupUUID": "chtg_57d4d9b0fb4f443884644b2a9af529d2",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\",\"operation\":\"#{T.operation}\"}"
+            },
+            {
+              "alias": "View Related Logs",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/logIndi/log/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\",\"operation\":\"#{T.operation}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "changeWorkspace": false,
+            "chartType": "bar",
+            "color": "#6C63FF",
+            "colors": [
+              {
+                "color": "#6C63FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "toplist",
+            "fixedTime": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementLimit": 10,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showTableHead": true,
+            "showTitle": true,
+            "showTopSize": true,
+            "slimit": 20,
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "tableSortMetricName": "",
+            "tableSortType": "top",
+            "timeInterval": "auto",
+            "titleDesc": "Top 10 operations by P90 response time",
+            "topSize": 10,
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "P90 Response Time",
+                "name": "P90 Response Time",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "03｜⏱️ Response Time Analysis"
+        },
+        "name": "🔧 P90 Operation Response Time Top 10",
+        "pos": {
+          "h": 22,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "P90 Response Time",
+              "code": "A",
+              "dataSource": "*",
+              "dataSourceFunc": "re",
+              "field": "duration",
+              "fieldFunc": "p90",
+              "fields": [
+                {
+                  "alias": "P90 Response Time",
+                  "field": "duration",
+                  "fieldFunc": "p90"
+                }
+              ],
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last",
+                "top:10"
+              ],
+              "groupBy": [
+                "service",
+                "operation"
+              ],
+              "groupByTime": "",
+              "index": "default",
+              "indexFilter": "default",
+              "indexes": [
+                "default"
+              ],
+              "interval": "",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::re(`.*`):(PERCENTILE(`duration`, 90) as `P90 Response Time`) {service = '#{service}' and env = '#{env}' and version = '#{version}' and host = '#{host}' and `project` = '#{project}'} by `service`,`operation`",
+              "queryFuncs": [],
+              "slimit": null,
+              "type": "dql",
+              "withLabels": []
+            },
+            "type": "toplist",
+            "unit": ""
+          }
+        ],
+        "type": "toplist",
+        "uuid": "chrt_45ad94391cc846838b4cff925b33c7ad"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\"}"
+            },
+            {
+              "alias": "View Related Logs",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/logIndi/log/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{T.service}\"}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "changeWorkspace": false,
+            "chartType": "bar",
+            "color": "#EA5E74",
+            "colors": [
+              {
+                "color": "#EA5E74",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "toplist",
+            "fixedTime": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementLimit": 10,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showTableHead": true,
+            "showTitle": true,
+            "showTopSize": true,
+            "slimit": 20,
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "tableSortMetricName": "",
+            "tableSortType": "top",
+            "timeInterval": "auto",
+            "titleDesc": "Top 10 services by error request count",
+            "topSize": 10,
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "🔥 Service Errors Top 10",
+        "pos": {
+          "h": 17,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "dataSourceFunc": "re",
+              "field": "status",
+              "fieldFunc": "count",
+              "fields": [
+                {
+                  "alias": "",
+                  "field": "status",
+                  "fieldFunc": "count"
+                }
+              ],
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "status",
+                  "op": "=",
+                  "type": "",
+                  "value": "error",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last",
+                "top:10"
+              ],
+              "groupBy": [
+                "service"
+              ],
+              "groupByTime": "",
+              "index": "default",
+              "indexFilter": "default",
+              "indexes": [
+                "default"
+              ],
+              "interval": "",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::re(`.*`):(COUNT(`status`)) {status = 'error' and host = '#{host}' and service = '#{service}' and env = '#{env}' and version = '#{version}' and `project` = '#{project}'} by service",
+              "queryFuncs": [],
+              "slimit": null,
+              "type": "dql",
+              "withLabels": []
+            },
+            "type": "toplist",
+            "unit": ""
+          }
+        ],
+        "type": "toplist",
+        "uuid": "chrt_deb2aad8e0314137bdd0e6aa3c728cb7"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "Open Trace Explorer",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{V.service}\",\"resource\":\"#{T.resource}\",\"http_status_code\":[\"500\",\"501\",\"502\",\"503\",\"504\",\"505\"]}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "changeWorkspace": false,
+            "chartType": "bar",
+            "color": "#EA5E74",
+            "colors": [
+              {
+                "color": "#EA5E74",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "toplist",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementLimit": 10,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showTableHead": true,
+            "showTitle": true,
+            "showTopSize": true,
+            "slimit": 20,
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "tableSortMetricName": "",
+            "tableSortType": "top",
+            "timeInterval": "auto",
+            "titleDesc": "Top 10 resources by server-side 5xx errors",
+            "topSize": 10,
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "🧯 Resource 5xx Errors Top 10",
+        "pos": {
+          "h": 17,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "dataSourceFunc": "re",
+              "field": "status",
+              "fieldFunc": "count",
+              "fields": [
+                {
+                  "alias": "",
+                  "field": "status",
+                  "fieldFunc": "count"
+                }
+              ],
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "http_status_code",
+                  "op": ">=",
+                  "type": "",
+                  "value": "500",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last",
+                "top:10"
+              ],
+              "groupBy": [
+                "resource"
+              ],
+              "groupByTime": "",
+              "index": "default",
+              "indexFilter": "default",
+              "indexes": [
+                "default"
+              ],
+              "interval": "",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::re(`.*`):(COUNT(`status`)) {http_status_code >= '500' and host = '#{host}' and service = '#{service}' and env = '#{env}' and version = '#{version}' and `project` = '#{project}'} by resource",
+              "queryFuncs": [],
+              "slimit": null,
+              "type": "dql",
+              "withLabels": []
+            },
+            "type": "toplist",
+            "unit": ""
+          }
+        ],
+        "type": "toplist",
+        "uuid": "chrt_73eb40e15df0497ba664e9ccd89f9947"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&tags={\"env\":\"#{V.env}\",\"version\":\"#{V.version}\",\"service\":\"#{V.service}\",\"resource\":\"#{T.resource}\",\"http_status_code\":[\"400\",\"401\",\"403\",\"404\",\"412\",\"417\"]}"
+            },
+            {
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [],
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "changeWorkspace": false,
+            "chartType": "bar",
+            "color": "#EA5E74",
+            "colors": [
+              {
+                "color": "#EA5E74",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "currentChartType": "toplist",
+            "fixedTime": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementLimit": 10,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "showFieldMapping": false,
+            "showTableHead": true,
+            "showTitle": true,
+            "showTopSize": true,
+            "slimit": 20,
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "tableSortMetricName": "",
+            "tableSortType": "top",
+            "timeInterval": "default",
+            "titleDesc": "Top 10 resources by client-side 4xx errors",
+            "topSize": 10,
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "⚠️ Resource 4xx Errors Top 10",
+        "pos": {
+          "h": 17,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "dataSourceFunc": "re",
+              "field": "status",
+              "fieldFunc": "count",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "http_status_code",
+                  "op": ">=",
+                  "type": "",
+                  "value": "400",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "http_status_code",
+                  "op": "<",
+                  "type": "",
+                  "value": "500",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{version}",
+                  "values": []
+                }
+              ],
+              "funcList": [
+                "last",
+                "top:10"
+              ],
+              "groupBy": [
+                "resource"
+              ],
+              "labelOp": "",
+              "namespace": "tracing",
+              "q": "T::re(`.*`):(COUNT(`status`)) {http_status_code >= '400' and http_status_code < '500' and host = '#{host}' and service = '#{service}' and env = '#{env}' and version = '#{version}'} by resource",
+              "queryFuncs": [],
+              "type": "dql",
+              "withLabels": []
+            },
+            "type": "toplist",
+            "unit": ""
+          }
+        ],
+        "type": "toplist",
+        "uuid": "chrt_458daa73ce9546489fed2a1225fa041d"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Services",
+              "open": "newWin",
+              "show": false,
+              "type": "custom",
+              "url": "/tracing/service/table?leftActiveKey=Tracing&activeName=LinkToTrackService&tags=service:#{T.service}&time=#{TR}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": true,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&query=service:#{T.service} resource:#{T.resource} status:error"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "Error Requests",
+                "key": "count(trace_id)",
+                "name": "count(trace_id)"
+              },
+              {
+                "alias": "P90 Response Time",
+                "key": "percentile(duration, 90)",
+                "name": "percentile(duration, 90)"
+              },
+              {
+                "alias": "Service Name",
+                "key": "service",
+                "name": "service"
+              },
+              {
+                "alias": "Endpoint",
+                "key": "resource",
+                "name": "resource"
+              },
+              {
+                "alias": "Error Type",
+                "key": "error_type",
+                "name": "error_type",
+                "queryCode": ""
+              },
+              {
+                "alias": "Error Message",
+                "key": "error_message",
+                "name": "error_message",
+                "queryCode": ""
+              },
+              {
+                "alias": "Response Status Code",
+                "key": "http_status_code",
+                "name": "http_status_code",
+                "queryCode": ""
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colors": [],
+            "columnsWidth": [
+              {
+                "field": "service",
+                "width": 235
+              },
+              {
+                "field": "resource",
+                "width": 356
+              },
+              {
+                "field": "error_type",
+                "width": 460
+              },
+              {
+                "field": "error_message",
+                "width": 543
+              },
+              {
+                "field": "http_status_code",
+                "width": 133
+              },
+              {
+                "field": "0_count(trace_id)",
+                "width": 80
+              }
+            ],
+            "currentChartType": "table",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementField": "count(trace_id)",
+            "mainMeasurementLimit": 20,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "pageEnable": false,
+            "pageSize": 20,
+            "precision": "2",
+            "queryMode": "toGroupColumn",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "showColumns": [],
+            "showFieldMapping": false,
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "1s",
+            "titleDesc": "Trace error details, including service, resource, error type, and error stack",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "percentile(duration, 90)",
+                "name": "percentile(duration, 90)",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ],
+            "valColorMappings": [],
+            "valMappings": []
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "📋 Service Request Error List",
+        "pos": {
+          "h": 19,
+          "w": 24,
+          "x": 0,
+          "y": 17
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "dataSourceFunc": "re",
+              "field": "trace_id",
+              "fieldFunc": "count",
+              "fields": [
+                {
+                  "alias": "",
+                  "field": "trace_id",
+                  "fieldFunc": "count"
+                }
+              ],
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "logic": "and",
+                  "name": "status",
+                  "op": "=",
+                  "type": "",
+                  "value": "error",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "service",
+                "resource",
+                "error_type",
+                "error_message",
+                "http_status_code"
+              ],
+              "groupByTime": "",
+              "index": "",
+              "indexes": [],
+              "interval": "",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(count(`trace_id`)) { `project` = '#{project}',`host` = '#{host}' and `service` = '#{service}' and `status` = 'error' } BY `service`,  `resource`,`error_type`,`error_message`,`http_status_code`",
+              "queryFuncs": [],
+              "slimit": null,
+              "type": "dql",
+              "withLabels": []
+            },
+            "type": "table",
+            "unit": ""
+          }
+        ],
+        "type": "table",
+        "uuid": "chrt_5d043097a7e04d039244508b2a7b4397"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedGroupByTime": null,
+          "fixedTime": "",
+          "isRefresh": false,
+          "links": [
+            {
+              "open": "newWin",
+              "show": true,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&query=project:#{V.project} service:#{T.service}  status:error"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "Service",
+                "key": "service",
+                "name": "service"
+              },
+              {
+                "alias": "Thread",
+                "key": "thread",
+                "name": "thread"
+              },
+              {
+                "alias": "Error Message",
+                "key": "msg",
+                "name": "msg"
+              },
+              {
+                "alias": "Count",
+                "key": "count(*)",
+                "name": "count(*)"
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colors": [],
+            "columnsWidth": [
+              {
+                "field": "service",
+                "width": 160
+              },
+              {
+                "field": "message",
+                "width": 1532
+              },
+              {
+                "field": "0_count(*)",
+                "width": 80
+              }
+            ],
+            "currentChartType": "table",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementField": "count(*)",
+            "mainMeasurementLimit": 20,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openRepeatChart": false,
+            "openThousandsSeparator": false,
+            "pageEnable": false,
+            "pageSize": 20,
+            "precision": "2",
+            "queryMode": "toGroupColumn",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "showColumns": [],
+            "showFieldMapping": false,
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "auto",
+            "titleDesc": "Aggregated log error details",
+            "unitType": "global",
+            "units": [],
+            "valColorMappings": [],
+            "valMappings": []
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "🧾 Log Errors",
+        "pos": {
+          "h": 22,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "additionalFields": null,
+              "alias": "",
+              "code": "A",
+              "dataSource": "*",
+              "field": [
+                "*"
+              ],
+              "fieldFunc": "count",
+              "fieldType": "keyword",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "a1793fb0-c5f6-11f0-8167-e783b16e4df1",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "224f3a10-3ee0-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "30d09b10-3ee0-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "5e9dea20-7eaf-11f1-9765-5bdb795f6508",
+                  "logic": "and",
+                  "name": "status",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "error",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "service",
+                "message"
+              ],
+              "groupByTime": "",
+              "indexFilter": "*",
+              "labelOp": "",
+              "namespace": "logging",
+              "q": "L('*')::RE(`.*`):(count(`*`)) { `project` = '#{project}' and `host` = '#{host}' and `service` = '#{service}' and `status` = 'error' } BY `service`, `message`",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "table",
+            "unit": ""
+          }
+        ],
+        "type": "table",
+        "uuid": "chrt_d917207d4771492eb1060a78714291e8"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": false,
+          "settings": {
+            "addColumns": [
+              {
+                "field": "df_status",
+                "headerName": "Status"
+              },
+              {
+                "field": "df_title",
+                "headerName": "Event"
+              }
+            ],
+            "alias": [],
+            "changeWorkspace": false,
+            "colors": [],
+            "currentChartType": "alarm",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "globalUnit": [],
+            "inColumns": [
+              {
+                "field": "time",
+                "headerName": "Time"
+              }
+            ],
+            "index": "default",
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "openThousandsSeparator": true,
+            "pageSize": 10,
+            "precision": "2",
+            "showFieldMapping": false,
+            "showPart": "all",
+            "showTitle": true,
+            "timeInterval": "",
+            "titleDesc": "Related alert events within the current filters",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "🔔 Current Alert Summary",
+        "pos": {
+          "h": 36,
+          "w": 24,
+          "x": 0,
+          "y": 58
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "noTimeRange": false,
+            "qtype": "dql",
+            "query": {
+              "alias": "Event",
+              "code": "A",
+              "dataSource": "monitor",
+              "disableMultipleField": false,
+              "field": null,
+              "fieldFunc": "",
+              "fieldType": "float",
+              "fields": [
+                {
+                  "alias": "Status",
+                  "field": "df_status"
+                },
+                {
+                  "alias": "Event",
+                  "field": "df_title"
+                }
+              ],
+              "fill": null,
+              "filters": [
+                {
+                  "id": "fa533a00-e617-11f0-8e2f-9984c3ca2ae2",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "2164ef30-3ee2-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "289c02c0-3ee2-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "46997870-3ee2-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "56e2c830-3ee2-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "id": "9e7dc5c0-7c1b-11f1-bceb-51501b01eab7",
+                  "logic": "and",
+                  "name": "df_monitor_checker",
+                  "op": "!=",
+                  "type": "keyword",
+                  "value": "custom_slo",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "namespace": "event",
+              "q": "E::monitor:(`df_status` AS `Status`, `df_title` AS `Event`) { `project` = '#{project}' and `service` = '#{service}' and `host` = '#{host}' and `env` = '#{env}' and `version` = '#{version}' and `df_monitor_checker` != 'custom_slo' }",
+              "queryFuncs": [],
+              "type": "simple"
+            },
+            "type": "alarm",
+            "unit": ""
+          }
+        ],
+        "type": "alarm",
+        "uuid": "chrt_e813b975b6794683bc19aa1d552bad6b"
+      },
+      {
+        "chartGroupUUID": "chtg_7d52d9f602424ae48d2bfd764c0299db",
+        "extend": {
+          "fixedTime": "",
+          "isRefresh": true,
+          "links": [
+            {
+              "alias": "View Traces Related to [Call Errors]",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "/tracing/link/all?time=#{TR}&query=status:error resource:#{T.resource} service:#{V.service} env:#{V.env} version:#{V.version}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&query=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "Resource Name",
+                "key": "resource",
+                "name": "resource"
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colors": [],
+            "columnsWidth": [
+              {
+                "field": "resource",
+                "width": 708
+              },
+              {
+                "field": "Calls",
+                "width": 80
+              },
+              {
+                "field": "Call Errors",
+                "width": 90
+              },
+              {
+                "field": "Total Time",
+                "width": 99
+              },
+              {
+                "field": "P75 Response Time",
+                "width": 102
+              },
+              {
+                "field": "P99 Response Time",
+                "width": 80
+              }
+            ],
+            "currentChartType": "table",
+            "enablePreflightEstimate": false,
+            "fixedTime": "",
+            "globalUnit": [],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levels": [],
+            "mainMeasurementField": "Calls",
+            "mainMeasurementLimit": 50,
+            "mainMeasurementQueryCode": "A",
+            "mainMeasurementSort": "top",
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "pageEnable": false,
+            "pageSize": 20,
+            "precision": "2",
+            "queryMode": "toGroupColumn",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "showColumns": [],
+            "showFieldMapping": false,
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "1s",
+            "titleDesc": "Top 50 resources by call volume, error count, and error rate",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "P90 Response Time",
+                "name": "P90 Response Time",
+                "unit": "",
+                "units": [
+                  "time",
+                  "μs"
+                ]
+              }
+            ],
+            "valColorMappings": [
+              {
+                "bgColor": "#FCF5E2",
+                "field": "P75 Response Time",
+                "fontColor": "#E59740",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  3000000,
+                  5000000
+                ]
+              },
+              {
+                "bgColor": "#F8E9EA",
+                "field": "P75 Response Time",
+                "fontColor": "#D0424D",
+                "lineColor": "",
+                "operation": ">",
+                "value": [
+                  "5000000"
+                ]
+              },
+              {
+                "bgColor": "#FCF5E2",
+                "field": "P99 Response Time",
+                "fontColor": "#E59740",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  3000000,
+                  5000000
+                ]
+              },
+              {
+                "bgColor": "#F8E9EA",
+                "field": "P99 Response Time",
+                "fontColor": "#D0424D",
+                "lineColor": "",
+                "operation": ">",
+                "value": [
+                  "5000000"
+                ]
+              },
+              {
+                "bgColor": "",
+                "field": "Call Errors",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "nodata",
+                "value": [
+                  "N/A"
+                ]
+              },
+              {
+                "bgColor": "#F8E9EA",
+                "field": "Call Errors",
+                "fontColor": "#D0424D",
+                "lineColor": "",
+                "operation": ">",
+                "value": [
+                  "0"
+                ]
+              }
+            ],
+            "valMappings": [
+              {
+                "field": "Call Errors",
+                "mappingVal": "0",
+                "operation": "nodata",
+                "originalVal": [
+                  "N/A"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "04｜🚨 Error and Alert Analysis"
+        },
+        "name": "🧪 Resource Call Error Analysis Top 50",
+        "pos": {
+          "h": 18,
+          "w": 24,
+          "x": 0,
+          "y": 94
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "Calls",
+              "code": "A",
+              "dataSource": "*",
+              "field": [
+                "*"
+              ],
+              "fieldFunc": "count",
+              "fieldType": "keyword",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "dc18e9e0-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "dc18e9e1-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "dc18e9e2-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "id": "dc18e9e3-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "e3b2ddf0-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "f4482ad0-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "resource"
+              ],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(count(`*`) AS `Calls`) { `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `host` = '#{host}' and `project` = '#{project}' and `service` = '#{service}' } BY `resource`",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "table",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "Call Errors",
+              "code": "E",
+              "dataSource": "*",
+              "field": [
+                "*"
+              ],
+              "fieldFunc": "count",
+              "fieldType": "keyword",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "dd14fd22-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "dd14fd23-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "env",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{env}",
+                  "values": []
+                },
+                {
+                  "id": "dd14fd24-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "version",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{version}",
+                  "values": []
+                },
+                {
+                  "id": "dd14fd25-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "host",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{host}",
+                  "values": []
+                },
+                {
+                  "id": "dd14fd26-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "status",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "error",
+                  "values": []
+                },
+                {
+                  "id": "ec8d4140-3ee1-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "093cb320-3ee2-11f1-afda-cfb8bfda95a2",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "resource"
+              ],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "tracing",
+              "q": "T::RE(`.*`):(count(`*`) AS `Call Errors`) { `service` = '#{service}' and `env` = '#{env}' and `version` = '#{version}' and `host` = '#{host}' and `status` = 'error' and `project` = '#{project}' and `service` = '#{service}' } BY `resource`",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "table",
+            "unit": ""
+          }
+        ],
+        "type": "table",
+        "uuid": "chrt_f722f79a7a3e418d87947b3e15b57695"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedTime": {
+            "key": "1h",
+            "text": "Past 1 hour"
+          },
+          "isCombineChart": true,
+          "isRefresh": false,
+          "links": [
+            {
+              "alias": "View Related Service Error Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "slo_cost",
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "queryCode": "A"
+              },
+              {
+                "alias": "slo",
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "queryCode": "B"
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colorLevel": 3,
+            "colors": [
+              {
+                "color": "#3AB8FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "hexgon",
+            "enablePreflightEstimate": false,
+            "fixedTime": "1h",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levelArr": [
+              {
+                "color": "#F8080E",
+                "max": 0.4,
+                "min": 0
+              },
+              {
+                "color": "#FEAC4E",
+                "max": 0.6,
+                "min": 0.4
+              },
+              {
+                "color": "#FFDA43",
+                "max": 0.8,
+                "min": 0.6
+              },
+              {
+                "color": "#D9EE53",
+                "max": 0.9,
+                "min": 0.8
+              },
+              {
+                "color": "#A0DD86",
+                "max": 0.95,
+                "min": 0.9
+              },
+              {
+                "color": "#16A085",
+                "max": null,
+                "min": 0.95
+              }
+            ],
+            "levels": [],
+            "mainMeasurementQueryCode": "B",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "rangeColor": "",
+            "rangeColorKey": "light-green",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showLegend": "bottom",
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "1h",
+            "titleDesc": "Availability view aggregated by service",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "unit": "",
+                "units": [
+                  "time",
+                  "min"
+                ]
+              },
+              {
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "unit": "",
+                "units": [
+                  "percent",
+                  "percent_decimal"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🛡️ Service SLO",
+        "pos": {
+          "h": 12,
+          "w": 6,
+          "x": 0,
+          "y": 8
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "additionalFields": null,
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "filters": [
+                {
+                  "id": "c17480e0-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "c5464960-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "service"
+              ],
+              "groupByTime": "",
+              "indexFilter": "",
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`",
+              "queryFuncs": [],
+              "type": "simple"
+            },
+            "type": "hexgon",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/60",
+              "funcList": [],
+              "q": "eval(1-a/60, a=\"M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`\")",
+              "type": "expression"
+            },
+            "type": "hexgon",
+            "unit": ""
+          }
+        ],
+        "type": "hexgon",
+        "uuid": "chrt_bec35499b427434fb3d96ee4d2464830"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedTime": {
+            "key": "1d",
+            "text": "Last 1 Day"
+          },
+          "isCombineChart": true,
+          "isRefresh": true,
+          "links": [
+            {
+              "alias": "View Related Service Error Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "slo_cost",
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "queryCode": "A"
+              },
+              {
+                "alias": "slo",
+                "key": "1 - (a / 1440)",
+                "name": "1 - (a / 1440)",
+                "queryCode": "B"
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colorLevel": 3,
+            "colors": [
+              {
+                "color": "#3AB8FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "hexgon",
+            "enablePreflightEstimate": false,
+            "fixedTime": "1d",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levelArr": [
+              {
+                "color": "#F8080E",
+                "max": 0.4,
+                "min": 0
+              },
+              {
+                "color": "#FEAC4E",
+                "max": 0.6,
+                "min": 0.4
+              },
+              {
+                "color": "#FFDA43",
+                "max": 0.8,
+                "min": 0.6
+              },
+              {
+                "color": "#D9EE53",
+                "max": 0.9,
+                "min": 0.8
+              },
+              {
+                "color": "#A0DD86",
+                "max": 0.95,
+                "min": 0.9
+              },
+              {
+                "color": "#16A085",
+                "max": null,
+                "min": 0.95
+              }
+            ],
+            "levels": [],
+            "mainMeasurementQueryCode": "B",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "rangeColor": "",
+            "rangeColorKey": "light-green",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showLegend": "bottom",
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "1d",
+            "titleDesc": "Availability view aggregated by service",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "unit": "",
+                "units": [
+                  "time",
+                  "min"
+                ]
+              },
+              {
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "unit": "",
+                "units": [
+                  "percent",
+                  "percent_decimal"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🛡️ Service SLO",
+        "pos": {
+          "h": 12,
+          "w": 6,
+          "x": 6,
+          "y": 8
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "additionalFields": null,
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "filters": [
+                {
+                  "id": "c17480e0-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "c5464960-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "service"
+              ],
+              "groupByTime": "",
+              "indexFilter": "",
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`",
+              "queryFuncs": [],
+              "type": "simple"
+            },
+            "type": "hexgon",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/1440",
+              "funcList": [],
+              "q": "eval(1-a/1440, a=\"M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`\")",
+              "type": "expression"
+            },
+            "type": "hexgon",
+            "unit": ""
+          }
+        ],
+        "type": "hexgon",
+        "uuid": "chrt_3f88566e60544380a469de38191cf54b"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedTime": {
+            "key": "7d",
+            "text": "Last 7 Days"
+          },
+          "isCombineChart": true,
+          "isRefresh": true,
+          "links": [
+            {
+              "alias": "View Related Service Error Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "slo_cost",
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "queryCode": "A"
+              },
+              {
+                "alias": "slo",
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "queryCode": "B"
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colorLevel": 3,
+            "colors": [
+              {
+                "color": "#3AB8FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "hexgon",
+            "enablePreflightEstimate": false,
+            "fixedTime": "7d",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levelArr": [
+              {
+                "color": "#F8080E",
+                "max": 0.4,
+                "min": 0
+              },
+              {
+                "color": "#FEAC4E",
+                "max": 0.6,
+                "min": 0.4
+              },
+              {
+                "color": "#FFDA43",
+                "max": 0.8,
+                "min": 0.6
+              },
+              {
+                "color": "#D9EE53",
+                "max": 0.9,
+                "min": 0.8
+              },
+              {
+                "color": "#A0DD86",
+                "max": 0.95,
+                "min": 0.9
+              },
+              {
+                "color": "#16A085",
+                "max": null,
+                "min": 0.95
+              }
+            ],
+            "levels": [],
+            "mainMeasurementQueryCode": "B",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "rangeColor": "",
+            "rangeColorKey": "light-green",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showLegend": "bottom",
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "7d",
+            "titleDesc": "Availability view aggregated by service",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "unit": "",
+                "units": [
+                  "time",
+                  "min"
+                ]
+              },
+              {
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "unit": "",
+                "units": [
+                  "percent",
+                  "percent_decimal"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🛡️ Service SLO",
+        "pos": {
+          "h": 12,
+          "w": 6,
+          "x": 12,
+          "y": 8
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "additionalFields": null,
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "filters": [
+                {
+                  "id": "c17480e0-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "c5464960-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "service"
+              ],
+              "groupByTime": "",
+              "indexFilter": "",
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`",
+              "queryFuncs": [],
+              "type": "simple"
+            },
+            "type": "hexgon",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/10080",
+              "funcList": [],
+              "q": "eval(1-a/10080, a=\"M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`\")",
+              "type": "expression"
+            },
+            "type": "hexgon",
+            "unit": ""
+          }
+        ],
+        "type": "hexgon",
+        "uuid": "chrt_3eedf63f419c44a9aaa79aeac7d94a6a"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedTime": {
+            "key": "30d",
+            "text": "Last 30 Days"
+          },
+          "isCombineChart": true,
+          "isRefresh": true,
+          "links": [
+            {
+              "alias": "View Related Service Error Traces",
+              "open": "newWin",
+              "show": true,
+              "type": "custom",
+              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "logging",
+              "url": "/logIndi/log/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "container",
+              "url": "/objectadmin/docker_containers?routerTabActive=ObjectadminDocker&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "processes",
+              "url": "/objectadmin/host_processes?routerTabActive=ObjectadminProcesses&time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "tracing",
+              "url": "/tracing/link/all?time=#{TR}&tags=#{T}"
+            },
+            {
+              "open": "newWin",
+              "show": false,
+              "showChanged": false,
+              "type": "host",
+              "url": "/scene/builtinview/detail?time=#{TR}&query=#{T}"
+            }
+          ],
+          "settings": {
+            "alias": [
+              {
+                "alias": "slo_cost",
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "queryCode": "A"
+              },
+              {
+                "alias": "slo",
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "queryCode": "B"
+              }
+            ],
+            "aliasVersion": 2,
+            "changeWorkspace": false,
+            "colorLevel": 3,
+            "colors": [
+              {
+                "color": "#3AB8FF",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareTitle": "",
+            "compareType": "",
+            "currentChartType": "hexgon",
+            "enablePreflightEstimate": false,
+            "fixedTime": "30d",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "levelArr": [
+              {
+                "color": "#F8080E",
+                "max": 0.4,
+                "min": 0
+              },
+              {
+                "color": "#FEAC4E",
+                "max": 0.6,
+                "min": 0.4
+              },
+              {
+                "color": "#FFDA43",
+                "max": 0.8,
+                "min": 0.6
+              },
+              {
+                "color": "#D9EE53",
+                "max": 0.9,
+                "min": 0.8
+              },
+              {
+                "color": "#A0DD86",
+                "max": 0.95,
+                "min": 0.9
+              },
+              {
+                "color": "#16A085",
+                "max": null,
+                "min": 0.95
+              }
+            ],
+            "levels": [],
+            "mainMeasurementQueryCode": "B",
+            "openCompare": false,
+            "openThousandsSeparator": true,
+            "precision": "2",
+            "rangeColor": "",
+            "rangeColorKey": "light-green",
+            "scientificNotation": true,
+            "showFieldMapping": false,
+            "showLegend": "bottom",
+            "showTitle": true,
+            "slimit": 20,
+            "timeInterval": "30d",
+            "titleDesc": "Availability view aggregated by service",
+            "unitType": "custom",
+            "units": [
+              {
+                "key": "sum(slo_cost)",
+                "name": "sum(slo_cost)",
+                "unit": "",
+                "units": [
+                  "time",
+                  "min"
+                ]
+              },
+              {
+                "key": "1 - (a / 60)",
+                "name": "1 - (a / 60)",
+                "unit": "",
+                "units": [
+                  "percent",
+                  "percent_decimal"
+                ]
+              }
+            ]
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🛡️ Service SLO",
+        "pos": {
+          "h": 12,
+          "w": 6,
+          "x": 18,
+          "y": 8
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "additionalFields": null,
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "filters": [
+                {
+                  "id": "c17480e0-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "service",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{service}",
+                  "values": []
+                },
+                {
+                  "id": "c5464960-7c03-11f1-a221-19b0a6a9b119",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [
+                "service"
+              ],
+              "groupByTime": "",
+              "indexFilter": "",
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`",
+              "queryFuncs": [],
+              "type": "simple"
+            },
+            "type": "hexgon",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/43200",
+              "funcList": [],
+              "q": "eval(1-a/43200, a=\"M::slo:(sum(`slo_cost`)) { `service` = '#{service}' and `project` = '#{project}' } BY `service`\")",
+              "type": "expression"
+            },
+            "type": "hexgon",
+            "unit": ""
+          }
+        ],
+        "type": "hexgon",
+        "uuid": "chrt_8444a0b3a65e4f388e9c1c3197010148"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedGroupByTime": null,
+          "fixedTime": {
+            "key": "1d",
+            "text": "Past 1 day"
+          },
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "bgColor": "#326CE5",
+            "changeWorkspace": false,
+            "chartOpacity": "",
+            "colors": [
+              {
+                "color": "#326CE5",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "1d",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "labelColor": "",
+            "levels": [
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "nodata",
+                "value": [
+                  "N/A"
+                ]
+              },
+              {
+                "bgColor": "#F8080E",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "<=",
+                "value": [
+                  "0.4"
+                ]
+              },
+              {
+                "bgColor": "#FEAC4E",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.4,
+                  0.6
+                ]
+              },
+              {
+                "bgColor": "#FFDA43",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.6,
+                  0.8
+                ]
+              },
+              {
+                "bgColor": "#D9EE53",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.8,
+                  0.9
+                ]
+              },
+              {
+                "bgColor": "#A0DD86",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.9,
+                  0.95
+                ]
+              },
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "0.95"
+                ]
+              }
+            ],
+            "lineColor": "#FFFFFF",
+            "mappings": [
+              {
+                "mappingVal": "100%",
+                "operation": "nodata",
+                "originalVal": [
+                  "N/A"
+                ]
+              }
+            ],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "overviewBorderColor": "",
+            "overviewCardBackground": "",
+            "overviewCustomBaseColor": "",
+            "overviewCustomChartColor": "",
+            "overviewCustomTextColor": "",
+            "overviewPreviewOpacity": "",
+            "overviewSchemeTone": "",
+            "overviewTheme": null,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "themeColor": null,
+            "timeInterval": "auto",
+            "titleColor": "",
+            "titleDesc": "Product SLO attainment rate over the last day",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🎯 Product SLO｜1 Day",
+        "pos": {
+          "h": 8,
+          "w": 6,
+          "x": 6,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": true,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "6f3f6620-5dac-11f1-8571-59d62e4630df",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "81b3fe40-7b90-11f1-8102-79169f4957f8",
+                  "logic": "and",
+                  "name": "slo_name",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "Project SLO",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/1440",
+              "funcList": [],
+              "q": "eval(1-a/1440, a=\"M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }\")",
+              "type": "expression"
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_3319829eb98a44e1a66645a473334961"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedGroupByTime": null,
+          "fixedTime": {
+            "key": "7d",
+            "text": "Past 7 days"
+          },
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "bgColor": "#326CE5",
+            "changeWorkspace": false,
+            "chartOpacity": "",
+            "colors": [
+              {
+                "color": "#326CE5",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "7d",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "labelColor": "",
+            "levels": [
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "nodata",
+                "value": [
+                  "N/A"
+                ]
+              },
+              {
+                "bgColor": "#F8080E",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "<=",
+                "value": [
+                  "0.4"
+                ]
+              },
+              {
+                "bgColor": "#FEAC4E",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.4,
+                  0.6
+                ]
+              },
+              {
+                "bgColor": "#FFDA43",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.6,
+                  0.8
+                ]
+              },
+              {
+                "bgColor": "#D9EE53",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.8,
+                  0.9
+                ]
+              },
+              {
+                "bgColor": "#A0DD86",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.9,
+                  0.95
+                ]
+              },
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "0.95"
+                ]
+              }
+            ],
+            "lineColor": "#FFFFFF",
+            "mappings": [
+              {
+                "mappingVal": "100%",
+                "operation": "nodata",
+                "originalVal": [
+                  "N/A"
+                ]
+              }
+            ],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "overviewBorderColor": "",
+            "overviewCardBackground": "",
+            "overviewCustomBaseColor": "",
+            "overviewCustomChartColor": "",
+            "overviewCustomTextColor": "",
+            "overviewPreviewOpacity": "",
+            "overviewSchemeTone": "",
+            "overviewTheme": null,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "themeColor": null,
+            "timeInterval": "auto",
+            "titleColor": "",
+            "titleDesc": "Product SLO attainment rate over the last 7 days",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🎯 Product SLO｜7 Days",
+        "pos": {
+          "h": 8,
+          "w": 6,
+          "x": 12,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": true,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "6f3f6620-5dac-11f1-8571-59d62e4630df",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "81b3fe40-7b90-11f1-8102-79169f4957f8",
+                  "logic": "and",
+                  "name": "slo_name",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "Project SLO",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/10080",
+              "funcList": [],
+              "q": "eval(1-a/10080, a=\"M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }\")",
+              "type": "expression"
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_915b542bea5e41e298bc6a1714f6e572"
+      },
+      {
+        "chartGroupUUID": "chtg_b4642b4767834293ba9d6c3d635b4a64",
+        "extend": {
+          "fixedGroupByTime": null,
+          "fixedTime": {
+            "key": "30d",
+            "text": "Past 30 days"
+          },
+          "isRefresh": false,
+          "settings": {
+            "alias": [],
+            "bgColor": "#326CE5",
+            "changeWorkspace": false,
+            "chartOpacity": "",
+            "colors": [
+              {
+                "color": "#326CE5",
+                "key": "",
+                "name": ""
+              }
+            ],
+            "compareType": "",
+            "currentChartType": "singlestat",
+            "downsample": "last",
+            "enablePreflightEstimate": false,
+            "fixedTime": "30d",
+            "fontColor": "#FFFFFF",
+            "globalUnit": [
+              "percent",
+              "percent_decimal"
+            ],
+            "isCombineChart": false,
+            "isSampling": true,
+            "isTimeInterval": false,
+            "labelColor": "",
+            "levels": [
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "nodata",
+                "value": [
+                  "N/A"
+                ]
+              },
+              {
+                "bgColor": "#F8080E",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "<=",
+                "value": [
+                  "0.4"
+                ]
+              },
+              {
+                "bgColor": "#FEAC4E",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.4,
+                  0.6
+                ]
+              },
+              {
+                "bgColor": "#FFDA43",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.6,
+                  0.8
+                ]
+              },
+              {
+                "bgColor": "#D9EE53",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.8,
+                  0.9
+                ]
+              },
+              {
+                "bgColor": "#A0DD86",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": "between",
+                "value": [
+                  0.9,
+                  0.95
+                ]
+              },
+              {
+                "bgColor": "#16A085",
+                "fontColor": "#FFFFFF",
+                "lineColor": "",
+                "operation": ">=",
+                "value": [
+                  "0.95"
+                ]
+              }
+            ],
+            "lineColor": "#FFFFFF",
+            "mappings": [
+              {
+                "mappingVal": "100%",
+                "operation": "nodata",
+                "originalVal": [
+                  "N/A"
+                ]
+              }
+            ],
+            "openCompare": false,
+            "openRepeatChart": false,
+            "openThousandsSeparator": true,
+            "overviewBorderColor": "",
+            "overviewCardBackground": "",
+            "overviewCustomBaseColor": "",
+            "overviewCustomChartColor": "",
+            "overviewCustomTextColor": "",
+            "overviewPreviewOpacity": "",
+            "overviewSchemeTone": "",
+            "overviewTheme": null,
+            "precision": "2",
+            "repeatChartRowLimit": 3,
+            "repeatChartVariable": "",
+            "scientificNotation": true,
+            "sequenceChartType": "line",
+            "showFieldMapping": false,
+            "showLine": false,
+            "showLineAxis": false,
+            "showTitle": true,
+            "themeColor": null,
+            "timeInterval": "auto",
+            "titleColor": "",
+            "titleDesc": "Product SLO attainment rate over the last 30 days",
+            "unitType": "global",
+            "units": []
+          }
+        },
+        "group": {
+          "name": "01｜🧭 Overall Business SLO"
+        },
+        "name": "🎯 Product SLO｜30 Days",
+        "pos": {
+          "h": 8,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        },
+        "prevGroupName": null,
+        "queries": [
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": true,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "code": "A",
+              "dataSource": "slo",
+              "field": "slo_cost",
+              "fieldFunc": "sum",
+              "fieldType": "float",
+              "fill": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "6f3f6620-5dac-11f1-8571-59d62e4630df",
+                  "logic": "and",
+                  "name": "project",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "#{project}",
+                  "values": []
+                },
+                {
+                  "id": "81b3fe40-7b90-11f1-8102-79169f4957f8",
+                  "logic": "and",
+                  "name": "slo_name",
+                  "op": "=",
+                  "type": "keyword",
+                  "value": "Project SLO",
+                  "values": []
+                }
+              ],
+              "funcList": [],
+              "groupBy": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "labelOp": "",
+              "limit": null,
+              "namespace": "metric",
+              "q": "M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }",
+              "queryFuncs": [],
+              "type": "simple",
+              "withLabels": []
+            },
+            "type": "singlestat",
+            "unit": ""
+          },
+          {
+            "color": "",
+            "datasource": "dataflux",
+            "disabled": false,
+            "name": "",
+            "qtype": "dql",
+            "query": {
+              "alias": "",
+              "children": [],
+              "code": "B",
+              "expression": "1-a/43200",
+              "funcList": [],
+              "q": "eval(1-a/43200, a=\"M::slo:(sum(`slo_cost`)) { `project` = '#{project}' and `slo_name` = 'Project SLO' }\")",
+              "type": "expression"
+            },
+            "type": "singlestat",
+            "unit": ""
+          }
+        ],
+        "type": "singlestat",
+        "uuid": "chrt_8adf9a6088ca473bb41a8cd76c2f0091"
+      }
+    ],
+    "groups": [
+      {
+        "extend": {
+          "colorKey": "style_key18",
+          "isExpanded": true
+        },
+        "name": "01｜🧭 Overall Business SLO"
+      },
+      {
+        "extend": {
+          "colorKey": "style_key18",
+          "isExpanded": true
+        },
+        "name": "02｜📌 Real-Time Product Performance Overview"
+      },
+      {
+        "extend": {
+          "colorKey": "style_key1"
+        },
+        "name": "03｜⏱️ Response Time Analysis"
+      },
+      {
+        "extend": {
+          "colorKey": "style_key9"
+        },
+        "name": "04｜🚨 Error and Alert Analysis"
+      }
+    ],
+    "type": "template",
+    "vars": [
+      {
+        "code": "project",
+        "datasource": "dataflux",
+        "definition": {
+          "args": [],
+          "defaultVal": {
+            "label": "mall-demo",
+            "value": "mall-demo"
+          },
+          "field": "project",
+          "metric": "",
+          "object": "",
+          "tag": "",
+          "value": "",
+          "valueField": ""
+        },
+        "extend": {},
+        "hide": 0,
+        "includeStar": false,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "name": "Product",
+        "seq": 0,
+        "type": "TRACING",
+        "valueSort": "asc"
+      },
+      {
+        "code": "host",
+        "datasource": "object",
+        "definition": {
+          "defaultVal": {
+            "label": "*",
+            "value": "*"
+          },
+          "field": "host",
+          "metric": "",
+          "object": "HOST",
+          "tag": "",
+          "value": ""
+        },
+        "extend": {},
+        "hide": 0,
+        "includeStar": true,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "name": "Hostname",
+        "seq": 1,
+        "type": "FIELD",
+        "valueSort": "asc"
+      },
+      {
+        "code": "service",
+        "datasource": "dataflux",
+        "definition": {
+          "defaultVal": {
+            "label": "*",
+            "value": "*"
+          },
+          "field": "",
+          "metric": "",
+          "object": "",
+          "tag": "",
+          "value": "T::re(`.*`):(distinct(service)) {host = '#{host}'}"
+        },
+        "extend": {},
+        "hide": 0,
+        "includeStar": true,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "name": "Service",
+        "seq": 2,
+        "type": "QUERY",
+        "valueSort": "default"
+      },
+      {
+        "code": "env",
+        "datasource": "dataflux",
+        "definition": {
+          "defaultVal": {
+            "label": "*",
+            "value": "*"
+          },
+          "field": "",
+          "metric": "",
+          "object": "",
+          "tag": "",
+          "value": "T::re(`.*`):(distinct(env)) {service = '#{service}'}"
+        },
+        "extend": {
+          "starMeaning": "*"
+        },
+        "hide": 0,
+        "includeStar": true,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "name": "Environment",
+        "seq": 3,
+        "type": "QUERY",
+        "valueSort": "default"
+      },
+      {
+        "code": "version",
+        "datasource": "dataflux",
+        "definition": {
+          "defaultVal": {
+            "label": "*",
+            "value": "*"
+          },
+          "field": "",
+          "metric": "",
+          "object": "",
+          "tag": "",
+          "value": "T::re(`.*`):(distinct(version)) {service = '#{service}'}"
+        },
+        "extend": {
+          "starMeaning": "*"
+        },
+        "hide": 0,
+        "includeStar": true,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "name": "Version",
+        "seq": 4,
+        "type": "QUERY",
+        "valueSort": "default"
+      }
+    ]
+  },
+  "summary": "",
+  "tagInfo": [
+    {
+      "name": "Application Monitoring"
+    }
+  ],
+  "thumbnail": "",
+  "title": "Product Service Operational Quality Analysis Dashboard"
+}

@@ -1,70 +1,125 @@
 ---
-title : "Configure Datakit on AWS EKS"
+title : "Configure DataKit on AWS EKS"
 weight : 22
 ---
 
-## Configure Datakit on AWS EKS
+## Configure DataKit on AWS EKS
 
-Follow these steps to set up Datakit integration with TrueWatch on Amazon EKS. All shell commands are executed in the AWS CloudShell terminal.
+Follow the steps below to integrate DataKit with TrueWatch in Amazon EKS. Unless otherwise noted (e.g., TrueWatch console operations), all commands in this chapter are executed in the same AWS CloudShell terminal.
 
-### Step 1: Clone the Workshop Repository
+### Step 1: Prepare Information and Declare Parameters
 
-Open AWS CloudShell and run the following command in the terminal:
+Before you begin, gather the following information:
 
-```shell
-git clone https://github.com/TrueWatchTech/idurar-demo-workshop
-```
+- The AWS Region where the EKS cluster is located.
+- The EKS cluster name.
+- The DataWay URL provided by your TrueWatch workspace.
 
-### Step 2: Obtain Dataway Endpoint
-
-Log in to TrueWatch Cloud, navigate to Integration → Datakit → Kubernetes, and copy the ENV_DATAWAY value:
+Log in to TrueWatch Cloud, navigate to **Integration → DataKit → Kubernetes(Helm)**, and copy the full value of `datakit.dataway_url`:
 
 ![01](/static/static-22/01.png)
 
-### Step 3: Update Datakit Configuration
+Open AWS CloudShell and declare all parameters used in this chapter. Replace the first two example values; the DataWay URL uses hidden input and will not appear in shell history:
 
-Replace YOUR-ENV-DATAWAY in the datakit.yaml file (line 166) with the value copied above:
-
+```shell
+export AWS_REGION="ap-northeast-2"
+export EKS_CLUSTER_NAME="observability-demo"
+read -rsp 'DataWay URL: ' DATAWAY_URL && export DATAWAY_URL && echo
 ```
-cd idurar-demo-workshop/workshop
-vim datakit.yaml  # Use ":set nu" to show line numbers
+
+This demo uses fixed values `project=mall-demo`, DataKit Namespace `datakit`, and application Namespace `observability-demo`; no additional declarations are needed. The DataWay URL contains a sensitive token — do not write it directly into YAML files, documentation, or Git repositories.
+
+### Step 2: Verify Command-Line Tools
+
+AWS CloudShell typically provides the AWS CLI and `kubectl`. First, check for Helm:
+
+```shell
+helm version --short
+```
+
+If `helm` is not found, install Helm to CloudShell's persistent directory `$HOME/bin`:
+
+```shell
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+mkdir -p "$HOME/bin"
+HELM_INSTALL_DIR="$HOME/bin" USE_SUDO=false ./get_helm.sh
+rm -f get_helm.sh
+export PATH="$HOME/bin:$PATH"
+grep -qxF 'export PATH="$HOME/bin:$PATH"' "$HOME/.bashrc" || \
+  echo 'export PATH="$HOME/bin:$PATH"' >> "$HOME/.bashrc"
+helm version --short
+```
+
+This ensures Helm remains available even after CloudShell is reopened.
+
+### Step 3: Connect to the Target EKS Cluster
+
+Use the parameters declared in Step 1 to generate the kubeconfig for the current CloudShell session:
+
+```shell
+aws eks update-kubeconfig \
+  --region "$AWS_REGION" \
+  --name "$EKS_CLUSTER_NAME"
+
+kubectl config current-context
+kubectl get nodes
 ```
 
 ![02](/static/static-22/02.png)
 
-### Step 4: Update Kubernetes Configuration
+When `kubectl get nodes` shows at least one node with `Ready` status, the connection is successful. If the current context already points to the target cluster, you can skip `aws eks update-kubeconfig`, but you should still run the two verification commands above.
 
-Run the following command to configure your Kubernetes context for the EKS cluster:
+### Step 4: Clone the Demo Repository
 
+```shell
+git clone https://github.com/TrueWatchTech/observability-demo.git
+cd observability-demo
 ```
-aws eks --region ap-southeast-1 update-kubeconfig --name eks-demo-cluster
+
+All subsequent Helm and script commands are executed from the repository root directory.
+
+### Step 5: Install DataKit Using Helm
+
+Add the official DataKit Chart repository and install the pinned version `2.5.0`:
+
+```shell
+helm repo add datakit https://pubrepo.truewatch.com/chartrepo/datakit
+helm repo update
+
+helm upgrade --install datakit datakit/datakit \
+  --version 2.5.0 \
+  --namespace datakit \
+  --create-namespace \
+  -f observability/datakit-values.example.yaml \
+  --set-string datakit.dataway_url="$DATAWAY_URL" \
+  --set-string datakit.cluster_name_k8s="$EKS_CLUSTER_NAME"
+
+unset DATAWAY_URL
+```
+
+The values file in the repository enables Kubernetes/container metrics, DDTrace, JVM StatsD, Profiling, RUM, log collection, and log Pipeline. The actual DataWay URL is written into a Kubernetes Secret by the Chart and is not stored in repository files.
+
+Check the DaemonSet and Pod status:
+
+```shell
+kubectl get pods -n datakit
+kubectl logs -n datakit daemonset/datakit --tail=200 | grep 'add input'
 ```
 
 ![03](/static/static-22/03.png)
 
-### Step 5: Deploy Datakit to Kubernetes
+### Step 6: Verify DataKit Integration Status in TrueWatch
 
-Execute these commands to deploy and verify Datakit:
+After a few minutes, verify that data is being sent to TrueWatch correctly:
 
-```
-# Deploy Datakit
-kubectl apply -f datakit.yaml
-
-# Check deployment status
-kubectl get pods -n datakit
-```
-
-### Step 6: Verify Datakit Integration on TrueWatch
-
-After a few minutes, verify that data is sent correctly to TrueWatch:
-
-1. Click Infrastructure to view the EKS cluster nodes.
+1. Go to **Infrastructure**, filter by `project=mall-demo`, and view EKS cluster node information.
 	![04](/static/static-22/04.png)
-2. Navigate to Containers → Pods to view Pod metrics and details.
+2. Navigate to **Containers → Pods** to view basic information and performance metrics for the DataKit Pods.
 	![05](/static/static-22/05.png)
-3. Access the Analysis Dashboard for detailed analysis.
+3. Click **Analysis Dashboard** to view the detailed Kubernetes analysis dashboard.
 	![06](/static/static-22/06.png)
-4. Check Network → Map for network topology traffic flows. The following screenshot illustrates data flow from EKS nodes to TrueWatch:
-	![07](/static/static-22/07.png)
-5. View logs for the kube-proxy component and cluster events under Logs.
+4. Check **Logs** to view Kubernetes component logs and cluster events.
 	![08](/static/static-22/08.png)
+
+At this point the mall application has not been deployed yet, so APM, application logs, JVM, Profiling, and RUM data will appear in later chapters after the application is installed and traffic is generated.

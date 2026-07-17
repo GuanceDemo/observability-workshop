@@ -1,0 +1,2488 @@
+{
+  "checkers": [
+    {
+      "jsonScript": {
+        "type": "apmCheck",
+        "every": "5m",
+        "title": "Product {{project}} error rate has reached {{Result|to_percent(1)}}",
+        "groupBy": [
+          "project"
+        ],
+        "message": "Product: {{project}}\nError Rate: {{Result|to_percent(1)}}\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=project:\"{{project}}\">)",
+        "targets": [
+          {
+            "dql": "eval(A.a1/B.b1,A=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`\",B=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`\").fill(0)",
+            "alias": "Result"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "windowDql": "eval(A.a1/B.b1,A=\"<window>T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`</window>\",B=\"<window>T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`</window>\").fill(0)",
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.01"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.01"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "uiType": "default",
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "4881e667-0e3b-4b55-9ac0-1c7e27eb54d6",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A.a1/B.b1,A=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`\",B=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`\").fill(0)",
+              "field": "请求错误率",
+              "filters": [],
+              "groupBy": [
+                "project"
+              ],
+              "dataSource": [
+                "*"
+              ],
+              "additionalFields": []
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": true,
+        "bindIncidentsInfo": [
+          {
+            "incidentsDfStatus": [
+              "fatal",
+              "critical"
+            ],
+            "incidentsLevelUUID": "system_level_0"
+          }
+        ],
+        "isNeedCreateIssue": true
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "General Tracing"
+        },
+        {
+          "name": "Product Level"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "c7fa6e30327ddbf9f0ef0d8b1ce0c1b0",
+      "monitorName": "Product Error Rate",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "HTTP status code error rate for service {{service}} in product {{project}} has reached {{Result|to_percent(1)}}",
+        "groupBy": [
+          "project",
+          "service"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}\nError Rate: {{Result|to_percent(1)}}\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\">)\n\n\n",
+        "targets": [
+          {
+            "dql": "eval(a/b, a=\"T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`, `service`\", b=\"T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`, `service`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.01"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.01"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "cdc1b904-8b0f-4026-93e9-39963ede4d78",
+            "qtype": "dql",
+            "query": {
+              "q": "T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`, `service`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "trace_id",
+              "limit": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "4bab0fb0-55a6-11f1-9312-d35df466c76c",
+                  "op": "in",
+                  "name": "http_status_group",
+                  "type": "keyword",
+                  "logic": "and",
+                  "value": "",
+                  "values": [
+                    "4xx",
+                    "5xx"
+                  ]
+                }
+              ],
+              "groupBy": [
+                "project",
+                "service"
+              ],
+              "labelOp": "",
+              "funcList": [],
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "namespace": "tracing",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "withLabels": [],
+              "groupByTime": ""
+            },
+            "disabled": true,
+            "datasource": "dataflux"
+          },
+          {
+            "uuid": "c581ac6e-8332-4a77-ae86-0df724bea13e",
+            "qtype": "dql",
+            "query": {
+              "q": "T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`, `service`",
+              "code": "B",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "trace_id",
+              "limit": null,
+              "fillNum": null,
+              "filters": [],
+              "groupBy": [
+                "project",
+                "service"
+              ],
+              "labelOp": "",
+              "funcList": [],
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "namespace": "tracing",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "withLabels": [],
+              "groupByTime": ""
+            },
+            "disabled": true,
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "uuid": "782d30c6-0889-4b7e-a335-b6ac25c44cda",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(a/b, a=\"T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`, `service`\", b=\"T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`, `service`\")",
+              "code": "C",
+              "fill": null,
+              "type": "expression",
+              "alias": "",
+              "fillNum": null,
+              "children": [],
+              "funcList": [],
+              "expression": "a/b"
+            },
+            "checked": true,
+            "disabled": false,
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": true,
+        "bindIncidentsInfo": [
+          {
+            "incidentsDfStatus": [
+              "fatal",
+              "critical"
+            ],
+            "incidentsLevelUUID": "system_level_0"
+          }
+        ],
+        "isNeedCreateIssue": true
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Service Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "ce2159133cebb4c8a94798549b43ed8e",
+      "monitorName": "Service HTTP Error Rate",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "P90 response time for endpoint {{resource}} of service {{service}} in product {{project}} exceeds {{Result|to_fixed(0)}} ms",
+        "groupBy": [
+          "project",
+          "service",
+          "resource"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}\nRequest: {{resource}}\nP90 Response Time: {{Result|to_fixed(0)}}ms\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\" resource:\"{{resource}}\">)",
+        "targets": [
+          {
+            "dql": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 90)) BY `project`, `service`, `resource`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "9000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "6000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "3000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "9000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "6000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "3000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "03a3888e-5147-42f3-9097-19f281cae44d",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 90)) BY `project`, `service`, `resource`\")",
+              "code": "A",
+              "type": "expression",
+              "alias": "",
+              "children": [
+                {
+                  "q": "T::RE(`.*`):(percentile(`duration`, 90)) BY `project`, `service`, `resource`",
+                  "code": "A",
+                  "fill": null,
+                  "type": "simple",
+                  "alias": "",
+                  "field": "duration",
+                  "limit": null,
+                  "fillNum": null,
+                  "filters": [],
+                  "groupBy": [
+                    "project",
+                    "service",
+                    "resource"
+                  ],
+                  "labelOp": "",
+                  "funcList": [],
+                  "fieldFunc": "p90",
+                  "fieldType": "long",
+                  "namespace": "tracing",
+                  "dataSource": "*",
+                  "queryFuncs": [],
+                  "withLabels": [],
+                  "groupByTime": "",
+                  "indexFilter": "default"
+                }
+              ],
+              "funcList": [],
+              "expression": "A/1000"
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": false,
+        "bindIncidentsInfo": [],
+        "isNeedCreateIssue": false
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Endpoint Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "658b323da10ef1fa8b2acb373054891d",
+      "monitorName": "Endpoint P90 Latency",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "P99 response time for service {{service}} in product {{project}} exceeds {{Result|to_fixed(0)}} ms",
+        "groupBy": [
+          "project",
+          "service"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}\nP99 Response Time: {{Result|to_fixed(0)}}ms\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\">)",
+        "targets": [
+          {
+            "dql": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 99)) BY `project`, `service`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "15000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "10000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "5000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "15000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "10000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "5000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "21d50797-73e3-4ca0-9d8b-11f69626e18e",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 99)) BY `project`, `service`\")",
+              "code": "A",
+              "type": "expression",
+              "alias": "",
+              "children": [
+                {
+                  "q": "T::RE(`.*`):(percentile(`duration`, 99)) BY `project`, `service`",
+                  "code": "A",
+                  "fill": null,
+                  "type": "simple",
+                  "alias": "",
+                  "field": "duration",
+                  "limit": null,
+                  "fillNum": null,
+                  "filters": [],
+                  "groupBy": [
+                    "project",
+                    "service"
+                  ],
+                  "labelOp": "",
+                  "funcList": [],
+                  "fieldFunc": "p99",
+                  "fieldType": "long",
+                  "namespace": "tracing",
+                  "dataSource": "*",
+                  "queryFuncs": [],
+                  "withLabels": [],
+                  "groupByTime": "",
+                  "indexFilter": "default"
+                }
+              ],
+              "funcList": [],
+              "expression": "A/1000"
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": false,
+        "bindIncidentsInfo": [],
+        "isNeedCreateIssue": false
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Service Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "ee5d7c0fb68294f394960bba3766c293",
+      "monitorName": "Service P99 Latency",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "HTTP status code {{http_status_code}} error rate for endpoint {{resource}} of service {{service}} in product {{project}} has reached {{Result|to_percent(1)}}",
+        "groupBy": [
+          "project",
+          "service",
+          "resource",
+          "http_status_code"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}\nEndpoint Request: {{resource}}\nStatus Code: {{http_status_code}}\nError Rate: {{Result|to_percent(1)}}\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\" http_status_code:{{http_status_code}} resource:\"{{resource}}\">)\n\n\n",
+        "targets": [
+          {
+            "dql": "eval(a/b, a=\"T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`, `service`, `resource`, `http_status_code`\", b=\"T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`, `service`, `resource`, `http_status_code`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.01"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.01"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "cdc1b904-8b0f-4026-93e9-39963ede4d78",
+            "qtype": "dql",
+            "query": {
+              "q": "T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`, `service`, `resource`, `http_status_code`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "trace_id",
+              "limit": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "4bab0fb0-55a6-11f1-9312-d35df466c76c",
+                  "op": "in",
+                  "name": "http_status_group",
+                  "type": "keyword",
+                  "logic": "and",
+                  "value": "",
+                  "values": [
+                    "4xx",
+                    "5xx"
+                  ]
+                }
+              ],
+              "groupBy": [
+                "project",
+                "service",
+                "resource",
+                "http_status_code"
+              ],
+              "labelOp": "",
+              "funcList": [],
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "namespace": "tracing",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "withLabels": [],
+              "groupByTime": ""
+            },
+            "disabled": true,
+            "datasource": "dataflux"
+          },
+          {
+            "uuid": "c581ac6e-8332-4a77-ae86-0df724bea13e",
+            "qtype": "dql",
+            "query": {
+              "q": "T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`, `service`, `resource`, `http_status_code`",
+              "code": "B",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "trace_id",
+              "limit": null,
+              "fillNum": null,
+              "filters": [],
+              "groupBy": [
+                "project",
+                "service",
+                "resource",
+                "http_status_code"
+              ],
+              "labelOp": "",
+              "funcList": [],
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "namespace": "tracing",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "withLabels": [],
+              "groupByTime": ""
+            },
+            "disabled": true,
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "uuid": "782d30c6-0889-4b7e-a335-b6ac25c44cda",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(a/b, a=\"T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`, `service`, `resource`, `http_status_code`\", b=\"T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`, `service`, `resource`, `http_status_code`\")",
+              "code": "C",
+              "fill": null,
+              "type": "expression",
+              "alias": "",
+              "fillNum": null,
+              "children": [],
+              "funcList": [],
+              "expression": "a/b"
+            },
+            "checked": true,
+            "disabled": false,
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": true,
+        "bindIncidentsInfo": [
+          {
+            "incidentsDfStatus": [
+              "fatal",
+              "critical"
+            ],
+            "incidentsLevelUUID": "system_level_0"
+          }
+        ],
+        "isNeedCreateIssue": true
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Endpoint Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "a4b47b3e0685d93552494146a7bbf1b2",
+      "monitorName": "Endpoint HTTP Status Error Rate",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "apmCheck",
+        "every": "5m",
+        "title": "Alert: Error rate for endpoint {{resource}} of service {{service}} in product {{project}} has reached {{Result|to_percent(1)}}",
+        "groupBy": [
+          "project",
+          "service",
+          "resource"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}  \nEndpoint: {{resource}} \nError Rate: {{Result|to_percent(1)}}\n{% set dql_data = DQL(\"T::RE(`.*`):(`error_type`,`error_message`,`error_stack`) { `status` = 'error' and `service` = ? and `resource` = ? } \", service, resource) %}\nError Type: {{ dql_data.error_type}}\nError Message: {{ dql_data.error_message | limit_lines(10) }}\nError Stack: {{ dql_data.error_stack | limit_lines(10) }}\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\" status:error resource:\"{{resource}}\">)\n",
+        "targets": [
+          {
+            "dql": "eval(A.a1/B.b1,A=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`, `service`, `resource`\",B=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`, `service`, `resource`\").fill(0)",
+            "alias": "Result"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "windowDql": "eval(A.a1/B.b1,A=\"<window>T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`, `service`, `resource`</window>\",B=\"<window>T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`, `service`, `resource`</window>\").fill(0)",
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.01"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.01"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "uiType": "default",
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "e42b1377-fec7-47fe-a5ce-f1d38f8352eb",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A.a1/B.b1,A=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`, `service`, `resource`\",B=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`, `service`, `resource`\").fill(0)",
+              "field": "请求错误率",
+              "filters": [],
+              "groupBy": [
+                "project",
+                "service",
+                "resource"
+              ],
+              "dataSource": [
+                "*"
+              ],
+              "additionalFields": []
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": true,
+        "bindIncidentsInfo": [
+          {
+            "incidentsDfStatus": [
+              "fatal",
+              "critical"
+            ],
+            "incidentsLevelUUID": "system_level_0"
+          }
+        ],
+        "isNeedCreateIssue": true
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Endpoint Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "92e66b2a3fc1f649e80e4b1f6e9828b9",
+      "monitorName": "Endpoint Trace Error Rate",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "P90 response time for service {{service}} in product {{project}} exceeds {{Result|to_fixed(0)}} ms",
+        "groupBy": [
+          "project",
+          "service"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}\nP90 Response Time: {{Result|to_fixed(0)}}ms\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\" >)",
+        "targets": [
+          {
+            "dql": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 90)) BY `project`, `service`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "9000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "6000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "3000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "9000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "6000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "3000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "03a3888e-5147-42f3-9097-19f281cae44d",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 90)) BY `project`, `service`\")",
+              "code": "A",
+              "type": "expression",
+              "alias": "",
+              "children": [
+                {
+                  "q": "T::RE(`.*`):(percentile(`duration`, 90)) BY `project`, `service`",
+                  "code": "A",
+                  "fill": null,
+                  "type": "simple",
+                  "alias": "",
+                  "field": "duration",
+                  "limit": null,
+                  "fillNum": null,
+                  "filters": [],
+                  "groupBy": [
+                    "project",
+                    "service"
+                  ],
+                  "labelOp": "",
+                  "funcList": [],
+                  "fieldFunc": "p90",
+                  "fieldType": "long",
+                  "namespace": "tracing",
+                  "dataSource": "*",
+                  "queryFuncs": [],
+                  "withLabels": [],
+                  "groupByTime": "",
+                  "indexFilter": "default"
+                }
+              ],
+              "funcList": [],
+              "expression": "A/1000"
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": false,
+        "bindIncidentsInfo": [],
+        "isNeedCreateIssue": false
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Service Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "ed38e6f1b8eabdfdf17468dea10328a9",
+      "monitorName": "Service P90 Latency",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "P90 response time for product {{project}} exceeds {{Result|to_fixed(0)}} ms",
+        "groupBy": [
+          "project"
+        ],
+        "message": "Product: {{project}}\nP90 Response Time: {{Result|to_fixed(0)}}ms\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=project:\"{{project}}\">)",
+        "targets": [
+          {
+            "dql": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 90)) BY `project`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "9000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "6000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "3000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "9000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "6000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "3000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "03a3888e-5147-42f3-9097-19f281cae44d",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 90)) BY `project`\")",
+              "code": "A",
+              "type": "expression",
+              "alias": "",
+              "children": [
+                {
+                  "q": "T::RE(`.*`):(percentile(`duration`, 90)) BY `project`",
+                  "code": "A",
+                  "fill": null,
+                  "type": "simple",
+                  "alias": "",
+                  "field": "duration",
+                  "limit": null,
+                  "fillNum": null,
+                  "filters": [],
+                  "groupBy": [
+                    "project"
+                  ],
+                  "labelOp": "",
+                  "funcList": [],
+                  "fieldFunc": "p90",
+                  "fieldType": "long",
+                  "namespace": "tracing",
+                  "dataSource": "*",
+                  "queryFuncs": [],
+                  "withLabels": [],
+                  "groupByTime": "",
+                  "indexFilter": "default"
+                }
+              ],
+              "funcList": [],
+              "expression": "A/1000"
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": false,
+        "bindIncidentsInfo": [],
+        "isNeedCreateIssue": false
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "General Tracing"
+        },
+        {
+          "name": "Product Level"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "04570c0773b99cd80bcefc1969b1cfd3",
+      "monitorName": "Product P90 Latency",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "P99 response time for endpoint {{resource}} of service {{service}} in product {{project}} exceeds {{Result|to_fixed(0)}} ms",
+        "groupBy": [
+          "project",
+          "service",
+          "resource"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}\nRequest: {{resource}}\nP99 Response Time: {{Result|to_fixed(0)}}ms\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\" resource:\"{{resource}}\">)",
+        "targets": [
+          {
+            "dql": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 99)) BY `project`, `service`, `resource`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "15000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "10000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "5000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "15000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "10000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "5000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "21d50797-73e3-4ca0-9d8b-11f69626e18e",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 99)) BY `project`, `service`, `resource`\")",
+              "code": "A",
+              "type": "expression",
+              "alias": "",
+              "children": [
+                {
+                  "q": "T::RE(`.*`):(percentile(`duration`, 99)) BY `project`, `service`, `resource`",
+                  "code": "A",
+                  "fill": null,
+                  "type": "simple",
+                  "alias": "",
+                  "field": "duration",
+                  "limit": null,
+                  "fillNum": null,
+                  "filters": [],
+                  "groupBy": [
+                    "project",
+                    "service",
+                    "resource"
+                  ],
+                  "labelOp": "",
+                  "funcList": [],
+                  "fieldFunc": "p99",
+                  "fieldType": "long",
+                  "namespace": "tracing",
+                  "dataSource": "*",
+                  "queryFuncs": [],
+                  "withLabels": [],
+                  "groupByTime": "",
+                  "indexFilter": "default"
+                }
+              ],
+              "funcList": [],
+              "expression": "A/1000"
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": false,
+        "bindIncidentsInfo": [],
+        "isNeedCreateIssue": false
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Endpoint Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "ae03246000a344ada3f7c4a4dab5ea8a",
+      "monitorName": "Endpoint P99 Latency",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "P99 response time for product {{project}} exceeds {{Result|to_fixed(0)}} ms",
+        "groupBy": [
+          "project"
+        ],
+        "message": "Product: {{project}}\nP99 Response Time: {{Result|to_fixed(0)}}ms\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=project:\"{{project}}\">)",
+        "targets": [
+          {
+            "dql": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 99)) BY `project`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "15000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "10000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "5000"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "15000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "10000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "5000"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "21d50797-73e3-4ca0-9d8b-11f69626e18e",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A/1000, A=\"T::RE(`.*`):(percentile(`duration`, 99)) BY `project`\")",
+              "code": "A",
+              "type": "expression",
+              "alias": "",
+              "children": [
+                {
+                  "q": "T::RE(`.*`):(percentile(`duration`, 99)) BY `project`",
+                  "code": "A",
+                  "fill": null,
+                  "type": "simple",
+                  "alias": "",
+                  "field": "duration",
+                  "limit": null,
+                  "fillNum": null,
+                  "filters": [],
+                  "groupBy": [
+                    "project"
+                  ],
+                  "labelOp": "",
+                  "funcList": [],
+                  "fieldFunc": "p99",
+                  "fieldType": "long",
+                  "namespace": "tracing",
+                  "dataSource": "*",
+                  "queryFuncs": [],
+                  "withLabels": [],
+                  "groupByTime": "",
+                  "indexFilter": "default"
+                }
+              ],
+              "funcList": [],
+              "expression": "A/1000"
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": false,
+        "bindIncidentsInfo": [],
+        "isNeedCreateIssue": false
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "General Tracing"
+        },
+        {
+          "name": "Product Level"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "0c77ccb2569633e9f3f131218fa1f31c",
+      "monitorName": "Product P99 Latency",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "simpleCheck",
+        "every": "5m",
+        "title": "HTTP status code error rate for product {{project}} has reached {{Result|to_percent(1)}}",
+        "groupBy": [
+          "project"
+        ],
+        "message": "Product: {{project}}\nError Rate: {{Result|to_percent(1)}}\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=project:\"{{project}}\">)\n\n\n",
+        "targets": [
+          {
+            "dql": "eval(a/b, a=\"T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`\", b=\"T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`\")",
+            "alias": "Result",
+            "qtype": "dql"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.01"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "openOkConditions": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.01"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "cdc1b904-8b0f-4026-93e9-39963ede4d78",
+            "qtype": "dql",
+            "query": {
+              "q": "T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "trace_id",
+              "limit": null,
+              "fillNum": null,
+              "filters": [
+                {
+                  "id": "4bab0fb0-55a6-11f1-9312-d35df466c76c",
+                  "op": "in",
+                  "name": "http_status_group",
+                  "type": "keyword",
+                  "logic": "and",
+                  "value": "",
+                  "values": [
+                    "4xx",
+                    "5xx"
+                  ]
+                }
+              ],
+              "groupBy": [
+                "project"
+              ],
+              "labelOp": "",
+              "funcList": [],
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "namespace": "tracing",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "withLabels": [],
+              "groupByTime": ""
+            },
+            "disabled": true,
+            "datasource": "dataflux"
+          },
+          {
+            "uuid": "c581ac6e-8332-4a77-ae86-0df724bea13e",
+            "qtype": "dql",
+            "query": {
+              "q": "T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`",
+              "code": "B",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "trace_id",
+              "limit": null,
+              "fillNum": null,
+              "filters": [],
+              "groupBy": [
+                "project"
+              ],
+              "labelOp": "",
+              "funcList": [],
+              "fieldFunc": "count_distinct",
+              "fieldType": "keyword",
+              "namespace": "tracing",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "withLabels": [],
+              "groupByTime": ""
+            },
+            "disabled": true,
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "uuid": "782d30c6-0889-4b7e-a335-b6ac25c44cda",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(a/b, a=\"T::RE(`.*`):(count_distinct(`trace_id`)) { `http_status_group` IN ['4xx', '5xx'] } BY `project`\", b=\"T::RE(`.*`):(count_distinct(`trace_id`)) BY `project`\")",
+              "code": "C",
+              "fill": null,
+              "type": "expression",
+              "alias": "",
+              "fillNum": null,
+              "children": [],
+              "funcList": [],
+              "expression": "a/b"
+            },
+            "checked": true,
+            "disabled": false,
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": true,
+        "bindIncidentsInfo": [
+          {
+            "incidentsDfStatus": [
+              "fatal",
+              "critical"
+            ],
+            "incidentsLevelUUID": "system_level_0"
+          }
+        ],
+        "isNeedCreateIssue": true
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "General Tracing"
+        },
+        {
+          "name": "Product Level"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "d93ef3a8d16ef4187b903c15d546681f",
+      "monitorName": "Product HTTP Error Rate",
+      "alertPolicyNames": []
+    },
+    {
+      "jsonScript": {
+        "type": "apmCheck",
+        "every": "5m",
+        "title": "Alert: Error rate for service {{service}} in product {{project}} has reached {{Result|to_percent(1)}}",
+        "groupBy": [
+          "project",
+          "service"
+        ],
+        "message": "Product: {{project}}\nService: {{service}}  \nError Rate: {{Result|to_percent(1)}}\nDetailed Analysis Link: [View Related Traces](<{{STUDIO_CONSOLE_BASE_URL}}/tracing/link/all?time={{df_check_range_start}},{{df_check_range_end}}&w={{df_workspace_uuid}}&lak=Tracing&query=service:\"{{service}}\" status:error>)\n",
+        "targets": [
+          {
+            "dql": "eval(A.a1/B.b1,A=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`, `service`\",B=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`, `service`\").fill(0)",
+            "alias": "Result"
+          }
+        ],
+        "channels": [],
+        "interval": 300,
+        "windowDql": "eval(A.a1/B.b1,A=\"<window>T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`, `service`</window>\",B=\"<window>T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`, `service`</window>\").fill(0)",
+        "atAccounts": [],
+        "checkerOpt": {
+          "rules": [
+            {
+              "status": "fatal",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "critical",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.1"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            },
+            {
+              "status": "error",
+              "conditions": [
+                {
+                  "alias": "Result",
+                  "operands": [
+                    "0.01"
+                  ],
+                  "operator": ">="
+                }
+              ],
+              "matchTimes": 1,
+              "conditionLogic": "and"
+            }
+          ],
+          "infoEvent": false,
+          "combineExpr": "A && B",
+          "openMatchTimes": false,
+          "disableLargeScaleEventProtect": false
+        },
+        "eventCharts": [],
+        "noDataTitle": "",
+        "noDataMessage": "",
+        "atNoDataAccounts": [],
+        "eventChartEnable": false,
+        "disableCheckEndTime": false,
+        "notificationMessage": "",
+        "recoverNeedPeriodCount": 2,
+        "openNotificationMessage": false,
+        "noDataNotificationMessage": "",
+        "openNoDataNotificationMessage": false
+      },
+      "extend": {
+        "rules": [
+          {
+            "status": "fatal",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "critical",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.1"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          },
+          {
+            "status": "error",
+            "conditions": [
+              {
+                "alias": "Result",
+                "operands": [
+                  "0.01"
+                ],
+                "operator": ">="
+              }
+            ],
+            "matchTimes": 1,
+            "conditionLogic": "and"
+          }
+        ],
+        "uiType": "default",
+        "manager": [],
+        "funcName": "",
+        "querylist": [
+          {
+            "uuid": "646d0222-059d-407c-9bb0-e00b3627be2c",
+            "qtype": "dql",
+            "query": {
+              "q": "eval(A.a1/B.b1,A=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as a1) {`status` = 'error',  }  BY `project`, `service`\",B=\"T::RE(`.*`):(COUNT_DISTINCT(`trace_id`) as b1)   BY `project`, `service`\").fill(0)",
+              "field": "请求错误率",
+              "filters": [],
+              "groupBy": [
+                "project",
+                "service"
+              ],
+              "dataSource": [
+                "*"
+              ],
+              "additionalFields": []
+            },
+            "datasource": "dataflux"
+          }
+        ],
+        "rulesExtend": [],
+        "incidentsTags": [],
+        "issueDfStatus": [],
+        "issueLevelUUID": "",
+        "needRecoverIssue": true,
+        "bindIncidentsInfo": [
+          {
+            "incidentsDfStatus": [
+              "fatal",
+              "critical"
+            ],
+            "incidentsLevelUUID": "system_level_0"
+          }
+        ],
+        "isNeedCreateIssue": true
+      },
+      "is_disable": false,
+      "tagInfo": [
+        {
+          "name": "Service Level"
+        },
+        {
+          "name": "General Tracing"
+        }
+      ],
+      "secret": "",
+      "type": "trigger",
+      "signId": "1a0e13ef1156efa53107c042886c6cf9",
+      "monitorName": "Service Trace Error Rate",
+      "alertPolicyNames": []
+    }
+  ]
+}
