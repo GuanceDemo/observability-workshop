@@ -9,7 +9,19 @@ This chapter builds on the payment anomalies and monitoring alerts generated in 
 
 Toby AI can be used directly within the platform; the Agent Runtime for Agent Teams must be deployed by the user. This Workshop temporarily installs the Runtime on an EKS EC2 worker node and performs a unified cleanup after the demo.
 
-### Step 1: Create the Workshop Agent
+### Step 1: Enable AI Intelligent Analysis
+
+Before creating an Agent, ensure the AI feature is enabled in your workspace:
+
+1. Log in to TrueWatch.
+2. Navigate to **Management → Workspace Settings**.
+3. Locate the **Security** configuration section.
+4. Enable **AI Intelligent Analysis**.
+5. Confirm the toggle is active.
+
+If you cannot see this toggle, contact your workspace administrator to verify permissions and feature authorization.
+
+### Step 2: Create the Workshop Agent
 
 Click **Toby AI → Toby Agent Teams** at the top of the platform to enter the Agent Workspace and create an Agent dedicated to this Workshop:
 
@@ -23,7 +35,7 @@ Navigate to the Agent's **Run & Deploy** page, select the Linux installation met
 
 ![01](/static/static-28/01.png)
 
-### Step 2: Deploy Agent Runtime on an EKS Node
+### Step 3: Deploy Agent Runtime on an EKS Node
 
 The installation script is designed for EKS clusters with EC2 worker nodes running Amazon Linux or Ubuntu with `systemd` support. This step does not apply to Fargate-only clusters, Bottlerocket nodes, or nodes that already have `obs-agent` installed.
 
@@ -68,7 +80,7 @@ export TARGET_INSTANCE_ID="i-xxxxxxxxxxxxxxxxx"
 scripts/install-obs-agent-eks-node-demo.sh
 ```
 
-### Step 3: Verify Agent Runtime
+### Step 4: Verify Agent Runtime
 
 After installation, return to the Agent Workspace and wait for the `Observability Navigator` status to change to **Online**.
 
@@ -80,7 +92,7 @@ List the nodes, namespaces, and Pods in the observability-demo namespace of the 
 
 Confirm that the Agent can list nodes and Pods.
 
-### Step 4: Prepare Payment Anomaly and Alert Events
+### Step 5: Prepare Payment Anomaly and Alert Events
 
 In the mall Demo, select **Backend → Payment 5xx error → Inject selected fault**, submit multiple orders consecutively, and wait for the error rate monitor created in Chapter 7 to trigger an alert.
 
@@ -92,7 +104,7 @@ Navigate to **APM → Traces** and search for the anomalous Trace using the foll
 
 Open a Trace containing a payment-service error Span, confirm that the Gateway returned HTTP 503, and record the Trace ID.
 
-### Step 5: Analyze the Error Trace with Toby AI
+### Step 6: Analyze the Error Trace with Toby AI
 
 On the error Trace detail page, open **Toby AI**, select the current Trace for analysis, and enter:
 
@@ -116,14 +128,14 @@ Correlate logs using the same trace_id, confirm the error cause in payment-servi
 
 ![03](/static/static-28/03.png)
 
-### Step 6: Handle Alert Tasks with Agent Teams
+### Step 7: Handle Alert Tasks with Agent Teams
 
 First, navigate to **Monitoring → Alert Strategies** and create or edit the alert strategy used in this Workshop:
 
-1. Under **关联**, add the service error rate, HTTP status code error rate, and response time monitors created in Chapter 7.
-2. Expand **通知规则** and set the timezone to `(UTC+09:00) Asia/Tokyo`.
-3. Select notification **按等级（Level）** and choose `Observability Navigator` as the notification target for the `Fatal` level. If the monitors use other event levels, add the same Agent notification rule for those levels.
-4. Click **保存**. Only events matching the notification level will be delivered to the Agent.
+1. Under **Association**, add the service error rate, HTTP status code error rate, and response time monitors created in Chapter 7.
+2. Expand **Notification Rules** and set the timezone to `(UTC+09:00) Asia/Tokyo`.
+3. Select notification by **Level** and choose `Observability Navigator` as the notification target for the `Fatal` level. If the monitors use other event levels, add the same Agent notification rule for those levels.
+4. Click **Save**. Only events matching the notification level will be delivered to the Agent.
 
 If `Observability Navigator` does not appear in the notification target list, first confirm that the Agent has been created in the current workspace and that the Runtime status is **Online**.
 
@@ -142,7 +154,7 @@ Go to the Agent Workspace, select the deployed `Observability Navigator` that is
 
 Deliver the alert strategy from the Chapter 7 monitors to this task intake, then trigger the payment error again. Confirm that the **Received messages** count increases, and open the new task in the execution history or **My Tasks** to check whether the Agent automatically performs correlated analysis of events, Traces, logs, and EKS resources.
 
-### Step 7: Close the Fault and Verify End-to-End
+### Step 8: Close the Fault and Verify End-to-End
 
 Return to the mall Demo, disable the current fault, and continue submitting normal orders. After the next monitoring detection cycle, confirm:
 

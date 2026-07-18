@@ -46,7 +46,7 @@ TrueWatch 是全面的可觀測性解決方案，提供應用效能、基礎設�
 開始前請確保已完成以下準備：
 
 1. **TrueWatch Cloud 帳號：**
-   - 註冊 [https://id1-auth.truewatch.com/businessRegister](https://id1-auth.truewatch.com/businessRegister) 並建立工作區 (Workspace)，預設為商業版。
+   - 註冊 [https://ap1-auth.truewatch.com/businessRegister](https://ap1-auth.truewatch.com/businessRegister) 並建立工作區 (Workspace)，預設為商業版。
 2. **AWS EKS 叢集：**
    - 叢集至少包含一個狀態為 `Ready` 的工作節點，並允許建立 `LoadBalancer` 類型的 Service。
 3. **AWS CloudShell 權限：**

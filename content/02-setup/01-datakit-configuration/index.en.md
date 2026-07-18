@@ -11,7 +11,6 @@ Follow the steps below to integrate DataKit with TrueWatch in Amazon EKS. Unless
 
 Before you begin, gather the following information:
 
-- The AWS Region where the EKS cluster is located.
 - The EKS cluster name.
 - The DataWay URL provided by your TrueWatch workspace.
 
@@ -19,11 +18,10 @@ Log in to TrueWatch Cloud, navigate to **Integration → DataKit → Kubernetes(
 
 ![01](/static/static-22/01.png)
 
-Open AWS CloudShell and declare all parameters used in this chapter. Replace the first two example values; the DataWay URL uses hidden input and will not appear in shell history:
+Open AWS CloudShell and declare all parameters used in this chapter. The DataWay URL uses hidden input and will not appear in shell history:
 
 ```shell
-export AWS_REGION="ap-northeast-2"
-export EKS_CLUSTER_NAME="observability-demo"
+export EKS_CLUSTER_NAME="eks-demo-cluster"
 read -rsp 'DataWay URL: ' DATAWAY_URL && export DATAWAY_URL && echo
 ```
 
@@ -59,7 +57,6 @@ Use the parameters declared in Step 1 to generate the kubeconfig for the current
 
 ```shell
 aws eks update-kubeconfig \
-  --region "$AWS_REGION" \
   --name "$EKS_CLUSTER_NAME"
 
 kubectl config current-context
@@ -98,7 +95,7 @@ helm upgrade --install datakit datakit/datakit \
 unset DATAWAY_URL
 ```
 
-The values file in the repository enables Kubernetes/container metrics, DDTrace, JVM StatsD, Profiling, RUM, log collection, and log Pipeline. The actual DataWay URL is written into a Kubernetes Secret by the Chart and is not stored in repository files.
+The values file in the repository enables Kubernetes/container metrics, DDTrace, JVM StatsD, Profiling, and RUM. The actual DataWay URL is written into a Kubernetes Secret by the Chart and is not stored in repository files.
 
 Check the DaemonSet and Pod status:
 

@@ -46,7 +46,7 @@ TrueWatch 是全面的可观测性解决方案，提供应用性能、基础设�
 开始前请确保已完成以下准备：
 
 1. **TrueWatch Cloud 账号：**
-   - 注册 [https://id1-auth.truewatch.com/businessRegister](https://id1-auth.truewatch.com/businessRegister) 并创建工作区 (Workspace)，默认为商业版。
+   - 注册 [https://ap1-auth.truewatch.com/businessRegister](https://ap1-auth.truewatch.com/businessRegister) 并创建工作区 (Workspace)，默认为商业版。
 2. **AWS EKS 集群：**
    - 集群至少包含一个状态为 `Ready` 的工作节点，并允许创建 `LoadBalancer` 类型的 Service。
 3. **AWS CloudShell 权限：**

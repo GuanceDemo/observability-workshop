@@ -11,7 +11,6 @@ weight : 21
 
 開始前準備以下資訊：
 
-- EKS 所在的 AWS Region。
 - EKS 叢集名稱。
 - TrueWatch 工作區提供的 DataWay URL。
 
@@ -19,11 +18,10 @@ weight : 21
 
 ![01](/static/static-22/01.png)
 
-開啟 AWS CloudShell，先集中宣告本章使用的參數。請替換前兩個範例值；DataWay URL 使用隱藏輸入，不會出現在 Shell 歷史記錄中：
+開啟 AWS CloudShell，先集中宣告本章使用的參數。DataWay URL 使用隱藏輸入，不會出現在 Shell 歷史記錄中：
 
 ```shell
-export AWS_REGION="ap-northeast-2"
-export EKS_CLUSTER_NAME="observability-demo"
+export EKS_CLUSTER_NAME="eks-demo-cluster"
 read -rsp 'DataWay URL: ' DATAWAY_URL && export DATAWAY_URL && echo
 ```
 
@@ -59,7 +57,6 @@ helm version --short
 
 ```shell
 aws eks update-kubeconfig \
-  --region "$AWS_REGION" \
   --name "$EKS_CLUSTER_NAME"
 
 kubectl config current-context
@@ -98,7 +95,7 @@ helm upgrade --install datakit datakit/datakit \
 unset DATAWAY_URL
 ```
 
-儲存庫中的 values 會開啟 Kubernetes/容器指標、DDTrace、JVM StatsD、Profiling、RUM、日誌採集和日誌 Pipeline。真實 DataWay URL 由 Chart 寫入 Kubernetes Secret，不會保存在儲存庫檔案中。
+儲存庫中的 values 會開啟 Kubernetes/容器指標、DDTrace、JVM StatsD、Profiling 與 RUM。真實 DataWay URL 由 Chart 寫入 Kubernetes Secret，不會保存在儲存庫檔案中。
 
 檢查 DaemonSet 與 Pod 狀態：
 

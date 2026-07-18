@@ -9,7 +9,19 @@ weight : 41
 
 Toby AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由用户部署。本 Workshop 将 Runtime 临时安装到一台 EKS EC2 工作节点，演示结束后再统一清理。
 
-### 步骤一：创建 Workshop Agent
+### 步骤一：开启 AI 智能分析
+
+在创建 Agent 之前，需要先确认工作空间已开启 AI 功能：
+
+1. 登录 TrueWatch。
+2. 进入 **Management → Workspace Settings**。
+3. 找到 **Security** 配置区域。
+4. 开启 **AI 智能分析**。
+5. 确认开关已经生效。
+
+如果看不到此开关，请联系工作空间管理员确认权限和功能授权。
+
+### 步骤二：创建 Workshop Agent
 
 点击平台顶部的 **Toby AI → Toby Agent Teams**，进入 Agent Workspace 并创建一个专用于本次 Workshop 的 Agent：
 
@@ -23,7 +35,7 @@ Toby AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由
 
 ![01](/static/static-28/01.png)
 
-### 步骤二：在 EKS 节点部署 Agent Runtime
+### 步骤三：在 EKS 节点部署 Agent Runtime
 
 安装脚本适用于带 EC2 工作节点的 EKS 集群，节点需要使用支持 `systemd` 的 Amazon Linux 或 Ubuntu。Fargate-only、Bottlerocket 以及已经安装 `obs-agent` 的节点不使用本步骤。
 
@@ -68,7 +80,7 @@ export TARGET_INSTANCE_ID="i-xxxxxxxxxxxxxxxxx"
 scripts/install-obs-agent-eks-node-demo.sh
 ```
 
-### 步骤三：验证 Agent Runtime
+### 步骤四：验证 Agent Runtime
 
 安装完成后回到 Agent Workspace，等待 `Observability Navigator` 状态变为 **Online**。
 
@@ -80,7 +92,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 确认 Agent 能够列出节点和 Pod。
 
-### 步骤四：准备支付异常与告警事件
+### 步骤五：准备支付异常与告警事件
 
 在商城 Demo 中选择 **Backend → Payment 5xx error → Inject selected fault**，连续提交多笔订单，等待第七章创建的错误率监控器触发告警。
 
@@ -92,7 +104,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 打开一条包含 payment-service 错误 Span 的 Trace，确认 Gateway 返回 HTTP 503，并记录该 Trace ID。
 
-### 步骤五：使用 Toby AI 分析错误 Trace
+### 步骤六：使用 Toby AI 分析错误 Trace
 
 在错误 Trace 详情页打开 **Toby AI**，选择分析当前 Trace，并输入：
 
@@ -116,7 +128,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 ![03](/static/static-28/03.png)
 
-### 步骤六：使用 Agent Teams 处理告警任务
+### 步骤七：使用 Agent Teams 处理告警任务
 
 首先进入 **Monitoring → Alert Strategies**，新建或编辑本 Workshop 使用的告警策略：
 
@@ -142,7 +154,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 将第七章监控器的告警策略投递到该任务入口，再次触发支付错误。确认 **Received messages** 数量增加，并在运行记录或 **My Tasks** 中打开新任务，检查 Agent 是否自动完成事件、Trace、日志和 EKS 资源的关联分析。
 
-### 步骤七：关闭故障并验证闭环
+### 步骤八：关闭故障并验证闭环
 
 返回商城 Demo，关闭当前故障并继续提交正常订单。等待下一个监控检测周期后，确认：
 

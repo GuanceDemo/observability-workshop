@@ -46,7 +46,7 @@ The workshop guides participants through the following hands-on steps:
 Before starting, ensure the following prerequisites are met:
 
 1. **TrueWatch Cloud Account:**
-   - Register at [https://id1-auth.truewatch.com/businessRegister](https://id1-auth.truewatch.com/businessRegister) and create a Workspace (defaults to Commercial version).
+   - Register at [https://ap1-auth.truewatch.com/businessRegister](https://ap1-auth.truewatch.com/businessRegister) and create a Workspace (defaults to Commercial version).
 2. **AWS EKS Cluster:**
    - The cluster must have at least one worker node in `Ready` state and allow creating `LoadBalancer` type Services.
 3. **AWS CloudShell Permissions:**

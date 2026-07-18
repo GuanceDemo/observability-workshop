@@ -9,7 +9,19 @@ weight : 41
 
 Toby AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由使用者部署。本 Workshop 將 Runtime 臨時安裝到一台 EKS EC2 工作節點，演示結束後再統一清理。
 
-### 步驟一：建立 Workshop Agent
+### 步驟一：開啟 AI 智慧分析
+
+在建立 Agent 之前，需要先確認工作空間已開啟 AI 功能：
+
+1. 登入 TrueWatch。
+2. 進入 **Management → Workspace Settings**。
+3. 找到 **Security** 設定區域。
+4. 開啟 **AI 智慧分析**。
+5. 確認開關已經生效。
+
+如果看不到此開關，請聯繫工作空間管理員確認權限和功能授權。
+
+### 步驟二：建立 Workshop Agent
 
 點選平台頂部的 **Toby AI → Toby Agent Teams**，進入 Agent Workspace 並建立一個專用於本次 Workshop 的 Agent：
 
@@ -23,7 +35,7 @@ Toby AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由
 
 ![01](/static/static-28/01.png)
 
-### 步驟二：在 EKS 節點部署 Agent Runtime
+### 步驟三：在 EKS 節點部署 Agent Runtime
 
 安裝腳本適用於帶 EC2 工作節點的 EKS 叢集，節點需要使用支援 `systemd` 的 Amazon Linux 或 Ubuntu。Fargate-only、Bottlerocket 以及已經安裝 `obs-agent` 的節點不使用本步驟。
 
@@ -68,7 +80,7 @@ export TARGET_INSTANCE_ID="i-xxxxxxxxxxxxxxxxx"
 scripts/install-obs-agent-eks-node-demo.sh
 ```
 
-### 步驟三：驗證 Agent Runtime
+### 步驟四：驗證 Agent Runtime
 
 安裝完成後回到 Agent Workspace，等待 `Observability Navigator` 狀態變為 **Online**。
 
@@ -80,7 +92,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 確認 Agent 能夠列出節點和 Pod。
 
-### 步驟四：準備支付異常與告警事件
+### 步驟五：準備支付異常與告警事件
 
 在商城 Demo 中選擇 **Backend → Payment 5xx error → Inject selected fault**，連續提交多筆訂單，等待第七章建立的錯誤率監控器觸發告警。
 
@@ -92,7 +104,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 開啟一條包含 payment-service 錯誤 Span 的 Trace，確認 Gateway 回傳 HTTP 503，並記錄該 Trace ID。
 
-### 步驟五：使用 Toby AI 分析錯誤 Trace
+### 步驟六：使用 Toby AI 分析錯誤 Trace
 
 在錯誤 Trace 詳情頁開啟 **Toby AI**，選擇分析當前 Trace，並輸入：
 
@@ -116,7 +128,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 ![03](/static/static-28/03.png)
 
-### 步驟六：使用 Agent Teams 處理告警任務
+### 步驟七：使用 Agent Teams 處理告警任務
 
 首先進入 **Monitoring → Alert Strategies**，新建或編輯本 Workshop 使用的告警策略：
 
@@ -142,7 +154,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 將第七章監控器的告警策略投遞到該任務入口，再次觸發支付錯誤。確認 **Received messages** 數量增加，並在執行記錄或 **My Tasks** 中開啟新任務，檢查 Agent 是否自動完成事件、Trace、日誌和 EKS 資源的關聯分析。
 
-### 步驟七：關閉故障並驗證閉環
+### 步驟八：關閉故障並驗證閉環
 
 返回商城 Demo，關閉當前故障並繼續提交正常訂單。等待下一個監控偵測週期後，確認：
 
