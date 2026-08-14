@@ -5,25 +5,37 @@ weight : 23
 
 ## Deploy Demo Application
 
-This chapter deploys the shopping mall demo to AWS EKS using public GHCR images — no need to build images or configure ECR in CloudShell. Except for the Gateway, the order, inventory, payment, MySQL, and Redis services are only accessible within the cluster.
+This chapter deploys the shopping mall demo to AWS EKS using the public Harbor `2.3.0` images. No image build, ECR configuration, or registry login is required in CloudShell. Except for the Gateway, the order, inventory, payment, MySQL, and Redis services remain cluster-internal.
+
+The Gateway is public and the demo fault endpoints intentionally require no credential. Use this profile only in an isolated, short-lived workshop cluster and clean it up after the exercise.
+
+### Fast path: install and verify automatically
+
+If you selected the automated path, run:
+
+```shell
+scripts/workshop.sh install
+```
+
+The script confirms the Kubernetes context, installs or upgrades both Helm releases, waits for DataKit and all six application workloads, discovers the LoadBalancer URL, runs the smoke test, generates traffic, and checks fault recovery. Continue with the observation chapters after it prints `verification passed`.
 
 ### Step 1: Deploy the Shopping Mall Demo with Helm
 
-Run the following command to install the application:
+For the manual path, install the application with the pinned TrueWatch workshop profile:
 
 ```shell
 helm upgrade --install demo charts/observability-demo \
   --namespace observability-demo \
   --create-namespace \
-  -f charts/observability-demo/values-eks.yaml \
-  --set rum.enabled=true \
+  -f charts/observability-demo/values-workshop-truewatch.yaml \
   --set-string rum.applicationId="$RUM_APPLICATION_ID" \
+  --set-string observability.clusterName="$EKS_CLUSTER_NAME" \
   --set-string observabilityConsole.workspaceId="$TRUEWATCH_WORKSPACE_ID"
 
 unset RUM_APPLICATION_ID TRUEWATCH_WORKSPACE_ID
 ```
 
-![01](/static/static-24/01.png)
+The profile pulls `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.0` with `IfNotPresent`. The images are public and support `linux/amd64` and `linux/arm64`.
 
 ### Step 2: Wait for Workloads to Become Ready
 
@@ -35,40 +47,59 @@ kubectl wait --for=condition=Available deployment --all \
 kubectl -n observability-demo get pods
 ```
 
-![02](/static/static-24/02.png)
-
-Under normal conditions you should see six workloads: Gateway, order, inventory, payment, MySQL, and Redis. The Java Pods run as a non-root user and send Trace, JVM metrics, and Profiling data to DataKit via the node IP.
+Under normal conditions you should see six workloads: Gateway, order, inventory, payment, MySQL, and Redis. The Java Pods run as a non-root user and send Trace, JVM metrics, and Profiling data to DataKit through the node IP. The application and DataKit use the same `EKS_CLUSTER_NAME` for correlation.
 
 ### Step 3: Obtain the Public Access URL
 
-AWS typically takes a few minutes to provision a Load Balancer. Run the following command to wait for the Gateway's public address:
+Wait up to ten minutes for either a LoadBalancer hostname or IP:
 
 ```shell
-GATEWAY_HOST=""
-until [ -n "$GATEWAY_HOST" ]; do
-  GATEWAY_HOST="$(kubectl -n observability-demo get service \
+deadline=$((SECONDS + 600))
+GATEWAY_ADDRESS=""
+while [[ -z "$GATEWAY_ADDRESS" && "$SECONDS" -lt "$deadline" ]]; do
+  GATEWAY_ADDRESS="$(kubectl -n observability-demo get service \
     -l app.kubernetes.io/component=gateway-service \
     -o jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}')"
-  [ -n "$GATEWAY_HOST" ] || sleep 10
+  if [[ -z "$GATEWAY_ADDRESS" ]]; then
+    GATEWAY_ADDRESS="$(kubectl -n observability-demo get service \
+      -l app.kubernetes.io/component=gateway-service \
+      -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}')"
+  fi
+  [[ -n "$GATEWAY_ADDRESS" ]] || sleep 10
 done
 
-kubectl -n observability-demo get service \
-  -l app.kubernetes.io/component=gateway-service
+if [[ -z "$GATEWAY_ADDRESS" ]]; then
+  kubectl -n observability-demo describe service \
+    -l app.kubernetes.io/component=gateway-service
+  exit 1
+fi
+
+export DEMO_BASE_URL="http://${GATEWAY_ADDRESS}"
+echo "$DEMO_BASE_URL"
 ```
 
-![03](/static/static-24/03.png)
+AWS assigns this public address automatically. No custom domain is required, but the LoadBalancer incurs AWS charges.
 
-This is a public DNS automatically assigned by AWS — no custom domain is required. The Load Balancer incurs AWS charges; please clean up using the commands at the end of this chapter after the workshop.
+### Step 4: Verify the Deployment
 
-### Step 4: Open the Shopping Mall and Verify the Deployment
-
-Open the `EXTERNAL-IP` in your browser. The shopping mall page requires no login and supports switching between Chinese and English. The first time you perform a fault operation, the page will prompt you to enter a fault-control token, which is stored only in the current browser's `sessionStorage`.
-
-Retrieve the token in CloudShell and run the automated verification:
+Open `$DEMO_BASE_URL` in a browser, then run the complete automated verification:
 
 ```shell
-printf '%s\n' "$(kubectl -n observability-demo get secret demo-observability-demo \
-  -o jsonpath='{.data.demo-control-token}' | base64 --decode)"
+scripts/workshop.sh verify
 ```
 
-![04](/static/static-24/04.png)
+The command runs the smoke test, generates normal orders, injects `payment_slow`, and restores the normal state. A successful run ends with `verification passed`. Fault injection, recovery, and warm-up do not require a control token.
+
+### Cleanup
+
+Remove the application and public LoadBalancer while preserving DataKit:
+
+```shell
+scripts/workshop.sh cleanup
+```
+
+Only when the cluster no longer needs DataKit, remove both releases:
+
+```shell
+scripts/workshop.sh cleanup --with-datakit
+```

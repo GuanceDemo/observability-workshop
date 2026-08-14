@@ -11,7 +11,7 @@ You will complete the following tasks in order:
 
 - Install DataKit in EKS using the official Helm Chart.
 - Create a Web RUM application and enable Browser Logs, Session Replay, and SourceMap.
-- Deploy Gateway, Order, Inventory, Payment, MySQL, and Redis using public GHCR images.
+- Deploy Gateway, Order, Inventory, Payment, MySQL, and Redis using versioned public Harbor images.
 - Generate mall traffic and inject faults to observe Kubernetes metrics, Traces, logs, JVM, Profiling, and RUM data.
 - Correlate different types of observability data through a unified `project=mall-demo` tag.
 

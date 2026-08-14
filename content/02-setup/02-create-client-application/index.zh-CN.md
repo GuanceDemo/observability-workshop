@@ -39,16 +39,16 @@ read -rp 'TrueWatch Workspace ID: ' TRUEWATCH_WORKSPACE_ID && export TRUEWATCH_W
 Demo 已包含用于演示源码还原的压缩 JavaScript 与 SourceMap。在仓库根目录执行：
 
 ```shell
-scripts/package-rum-sourcemap.sh
+scripts/package-rum-sourcemap.sh --version 2.3.0
 
-SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap.zip)"
+SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap-2.3.0.zip)"
 ls -lh "$SOURCE_MAP_FILE"
 echo "$SOURCE_MAP_FILE"
 ```
 
 ![04](/static/static-23/04.png)
 
-随后将 AWS CloudShell 里面的observability-demo-rum-sourcemap.zip文件下载到浏览器默认下载目录:
+随后将 AWS CloudShell 里面的 observability-demo-rum-sourcemap-2.3.0.zip 文件下载到浏览器默认下载目录：
 
 1. 点击 AWS CloudShell 右上角的 操作（Actions）。
 2. 选择 下载文件（Download file）。
@@ -57,11 +57,9 @@ echo "$SOURCE_MAP_FILE"
 
 ![05](/static/static-23/05.png)
 
-生成的文件位于 `dist/observability-demo-rum-sourcemap.zip`。进入刚刚创建的 RUM 应用设置，在 **SourceMap** 页面上传该压缩包，并填写：
+生成的文件位于 `dist/observability-demo-rum-sourcemap-2.3.0.zip`。进入刚刚创建的 RUM 应用设置，在 **SourceMap** 页面上传该压缩包，并填写：
 
 - Environment：`demo`
-- Version：`latest`
-
-![06](/static/static-23/06.png)
+- Version：`2.3.0`
 
 应用部署完成后，可以在 Demo 页面启用 `frontend_sourcemap_error`，再点击商城中的购买按钮。上传 SourceMap 前，错误栈指向压缩文件；上传后应还原到 `assets/src/checkout-sourcemap-fault.js` 中的源码位置。

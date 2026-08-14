@@ -37,7 +37,7 @@ The workshop guides participants through the following hands-on steps:
 
 - Connect to AWS EKS and install DataKit via the official Helm Chart.
 - Create a Web RUM application and receive RUM, Browser Logs, and Session Replay data through node DataKit.
-- Deploy the microservice mall using public GHCR images — no need to build images in the workshop environment.
+- Deploy the microservice mall using versioned public Harbor images — no need to build images in the workshop environment.
 - Correlate Kubernetes metrics, APM, logs, JVM, Profiling, and RUM data through `project=mall-demo`.
 - Generate business traffic, inject recoverable faults, and configure alerting and correlated analysis workflows.
 

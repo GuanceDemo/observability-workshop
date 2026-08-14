@@ -11,7 +11,7 @@ weight : 01
 
 - 使用官方 Helm Chart 在 EKS 中安装 DataKit。
 - 创建 Web RUM 应用并启用 Browser Logs、Session Replay 与 SourceMap。
-- 使用公开 GHCR 镜像部署 Gateway、订单、库存、支付、MySQL 和 Redis。
+- 使用公开 Harbor 固定版本镜像部署 Gateway、订单、库存、支付、MySQL 和 Redis。
 - 生成商城流量并注入故障，观察 Kubernetes 指标、Trace、日志、JVM、Profiling 与 RUM 数据。
 - 通过统一的 `project=mall-demo` 标签关联不同类型的观测数据。
 

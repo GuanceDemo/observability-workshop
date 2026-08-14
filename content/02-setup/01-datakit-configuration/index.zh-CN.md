@@ -22,6 +22,7 @@ weight : 21
 
 ```shell
 export EKS_CLUSTER_NAME="eks-demo-cluster"
+export AWS_REGION="us-west-2"
 read -rsp 'DataWay URL: ' DATAWAY_URL && export DATAWAY_URL && echo
 ```
 
@@ -57,6 +58,7 @@ helm version --short
 
 ```shell
 aws eks update-kubeconfig \
+  --region "$AWS_REGION" \
   --name "$EKS_CLUSTER_NAME"
 
 kubectl config current-context
@@ -70,7 +72,9 @@ kubectl get nodes
 ### 步骤四：克隆 Demo 仓库
 
 ```shell
-git clone https://github.com/TrueWatchTech/observability-demo.git
+export DEMO_VERSION="2.3.0"
+git clone --branch "v${DEMO_VERSION}" --depth 1 \
+  https://github.com/GuanceDemo/observability-demo.git
 cd observability-demo
 ```
 

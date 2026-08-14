@@ -1,0 +1,65 @@
+name: Deployment contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DEMO_VERSION: 2.3.0
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.17.3
+      - name: Verify localized deployment content
+        shell: bash
+        run: |
+          if rg -n -i \
+            'TrueWatchTech/observability-demo|cherrycove/observability-demo|ghcr|demo-control-token|DEMO_CONTROL_TOKEN|sessionStorage|\blatest\b' \
+            content/02-setup; then
+            echo 'obsolete deployment contract found in workshop content' >&2
+            exit 1
+          fi
+          for locale in en zh-CN zh-TW; do
+            grep -q 'GuanceDemo/observability-demo' "content/02-setup/01-datakit-configuration/index.${locale}.md"
+            grep -q 'values-workshop-truewatch.yaml' "content/02-setup/03-deploy-demo-application/index.${locale}.md"
+            grep -q '2.3.0' "content/02-setup/02-create-client-application/index.${locale}.md"
+          done
+      - name: Clone the pinned official demo release
+        run: |
+          git clone --branch "v${DEMO_VERSION}" --depth 1 \
+            https://github.com/GuanceDemo/observability-demo.git /tmp/observability-demo
+      - name: Verify demo scripts and Helm profile
+        working-directory: /tmp/observability-demo
+        run: |
+          for script in scripts/*.sh; do bash -n "$script"; done
+          helm lint charts/observability-demo \
+            --values charts/observability-demo/values-workshop-truewatch.yaml \
+            --set-string rum.applicationId=test-rum \
+            --set-string observability.clusterName=test-cluster \
+            --set-string observabilityConsole.workspaceId=test-workspace
+          helm template demo charts/observability-demo \
+            --namespace observability-demo \
+            --values charts/observability-demo/values-workshop-truewatch.yaml \
+            --set-string rum.applicationId=test-rum \
+            --set-string observability.clusterName=test-cluster \
+            --set-string observabilityConsole.workspaceId=test-workspace \
+            >/tmp/workshop-rendered.yaml
+          grep -q 'pubrepo.jiagouyun.com/demo/observability-demo-gateway-service:2.3.0' /tmp/workshop-rendered.yaml
+          grep -q 'cluster_name_k8s:test-cluster' /tmp/workshop-rendered.yaml
+      - name: Verify public Harbor images
+        run: |
+          for service in gateway order inventory payment; do
+            docker manifest inspect \
+              "pubrepo.jiagouyun.com/demo/observability-demo-${service}-service:${DEMO_VERSION}" \
+              >/dev/null
+          done

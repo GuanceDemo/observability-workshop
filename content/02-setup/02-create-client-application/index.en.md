@@ -39,16 +39,16 @@ In the next chapter, the RUM Application ID and TrueWatch Workspace ID will be p
 The demo already includes compressed JavaScript and SourceMap files for demonstrating source code restoration. Run the following in the repository root directory:
 
 ```shell
-scripts/package-rum-sourcemap.sh
+scripts/package-rum-sourcemap.sh --version 2.3.0
 
-SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap.zip)"
+SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap-2.3.0.zip)"
 ls -lh "$SOURCE_MAP_FILE"
 echo "$SOURCE_MAP_FILE"
 ```
 
 ![04](/static/static-23/04.png)
 
-Next, download the observability-demo-rum-sourcemap.zip file from AWS CloudShell to your browser's default download directory:
+Next, download the observability-demo-rum-sourcemap-2.3.0.zip file from AWS CloudShell to your browser's default download directory:
 
 1. Click **Actions** in the upper-right corner of AWS CloudShell.
 2. Select **Download file**.
@@ -57,11 +57,9 @@ Next, download the observability-demo-rum-sourcemap.zip file from AWS CloudShell
 
 ![05](/static/static-23/05.png)
 
-The generated file is located at `dist/observability-demo-rum-sourcemap.zip`. Go to the settings of the RUM application you just created, upload the zip file on the **SourceMap** page, and fill in:
+The generated file is located at `dist/observability-demo-rum-sourcemap-2.3.0.zip`. Go to the settings of the RUM application you just created, upload the zip file on the **SourceMap** page, and fill in:
 
 - Environment: `demo`
-- Version: `latest`
-
-![06](/static/static-23/06.png)
+- Version: `2.3.0`
 
 After the application is deployed, you can enable `frontend_sourcemap_error` on the Demo page, then click the purchase button in the mall. Before uploading the SourceMap, the error stack points to the compressed file; after uploading, it should resolve to the source location in `assets/src/checkout-sourcemap-fault.js`.

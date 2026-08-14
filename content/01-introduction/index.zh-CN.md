@@ -37,7 +37,7 @@ TrueWatch 是全面的可观测性解决方案，提供应用性能、基础设�
 
 - 连接 AWS EKS，并通过官方 Helm Chart 安装 DataKit。
 - 创建 Web RUM 应用，并通过节点 DataKit 接收 RUM、Browser Logs 与 Session Replay 数据。
-- 使用公开 GHCR 镜像部署微服务商城，无需在 Workshop 环境中构建镜像。
+- 使用公开 Harbor 固定版本镜像部署微服务商城，无需在 Workshop 环境中构建镜像。
 - 通过 `project=mall-demo` 关联 Kubernetes 指标、APM、日志、JVM、Profiling 与 RUM 数据。
 - 生成业务流量、注入可恢复的故障，并配置告警与关联分析流程。
 

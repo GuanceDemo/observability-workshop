@@ -5,25 +5,37 @@ weight : 23
 
 ## 部署示範應用
 
-本章使用公開 GHCR 映像檔將商城 Demo 部署到 AWS EKS，無需在 CloudShell 中建置映像檔或設定 ECR。除 Gateway 外，訂單、庫存、支付、MySQL 和 Redis 都僅在叢集內部存取。
+本章使用公開 Harbor `2.3.0` 映像將商城 Demo 部署到 AWS EKS，無需在 CloudShell 中建置映像、設定 ECR 或登入映像倉庫。除 Gateway 外，訂單、庫存、支付、MySQL 和 Redis 都只在叢集內部存取。
+
+Gateway 會公開到網際網路，Demo 故障介面有意不要求控制憑證。此 profile 只能用於隔離、短期的 Workshop 叢集，練習結束後應及時清理。
+
+### 快速路徑：自動安裝和驗證
+
+如果選擇自動化路徑，執行：
+
+```shell
+scripts/workshop.sh install
+```
+
+腳本會確認 Kubernetes context，安裝或升級兩個 Helm Release，等待 DataKit 和六個應用工作負載，取得 LoadBalancer URL，執行 smoke test，產生流量並檢查故障恢復。看到 `verification passed` 後即可繼續後續觀測章節。
 
 ### 步驟一：使用 Helm 部署商城 Demo
 
-執行以下命令安裝應用程式：
+分步路徑使用固定版本的 TrueWatch Workshop profile：
 
 ```shell
 helm upgrade --install demo charts/observability-demo \
   --namespace observability-demo \
   --create-namespace \
-  -f charts/observability-demo/values-eks.yaml \
-  --set rum.enabled=true \
+  -f charts/observability-demo/values-workshop-truewatch.yaml \
   --set-string rum.applicationId="$RUM_APPLICATION_ID" \
+  --set-string observability.clusterName="$EKS_CLUSTER_NAME" \
   --set-string observabilityConsole.workspaceId="$TRUEWATCH_WORKSPACE_ID"
 
 unset RUM_APPLICATION_ID TRUEWATCH_WORKSPACE_ID
 ```
 
-![01](/static/static-24/01.png)
+此 profile 使用 `IfNotPresent` 拉取 `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.0`。映像公開並同時支援 `linux/amd64` 和 `linux/arm64`。
 
 ### 步驟二：等待工作負載就緒
 
@@ -35,40 +47,59 @@ kubectl wait --for=condition=Available deployment --all \
 kubectl -n observability-demo get pods
 ```
 
-![02](/static/static-24/02.png)
-
-正常情況下會看到 Gateway、order、inventory、payment、MySQL 和 Redis 六個工作負載。Java Pod 以非 root 使用者執行，並透過節點 IP 將 Trace、JVM 指標和 Profiling 資料傳送到 DataKit。
+正常情況下會看到 Gateway、order、inventory、payment、MySQL 和 Redis 六個工作負載。Java Pod 以非 root 使用者執行，並透過節點 IP 將 Trace、JVM 指標和 Profiling 資料傳送到 DataKit。應用與 DataKit 使用相同的 `EKS_CLUSTER_NAME` 完成關聯。
 
 ### 步驟三：取得公網存取 URL
 
-AWS 建立 Load Balancer 通常需要幾分鐘。執行以下命令等待 Gateway 的公網位址：
+在十分鐘內等待 LoadBalancer hostname 或 IP：
 
 ```shell
-GATEWAY_HOST=""
-until [ -n "$GATEWAY_HOST" ]; do
-  GATEWAY_HOST="$(kubectl -n observability-demo get service \
+deadline=$((SECONDS + 600))
+GATEWAY_ADDRESS=""
+while [[ -z "$GATEWAY_ADDRESS" && "$SECONDS" -lt "$deadline" ]]; do
+  GATEWAY_ADDRESS="$(kubectl -n observability-demo get service \
     -l app.kubernetes.io/component=gateway-service \
     -o jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}')"
-  [ -n "$GATEWAY_HOST" ] || sleep 10
+  if [[ -z "$GATEWAY_ADDRESS" ]]; then
+    GATEWAY_ADDRESS="$(kubectl -n observability-demo get service \
+      -l app.kubernetes.io/component=gateway-service \
+      -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}')"
+  fi
+  [[ -n "$GATEWAY_ADDRESS" ]] || sleep 10
 done
 
-kubectl -n observability-demo get service \
-  -l app.kubernetes.io/component=gateway-service
+if [[ -z "$GATEWAY_ADDRESS" ]]; then
+  kubectl -n observability-demo describe service \
+    -l app.kubernetes.io/component=gateway-service
+  exit 1
+fi
+
+export DEMO_BASE_URL="http://${GATEWAY_ADDRESS}"
+echo "$DEMO_BASE_URL"
 ```
 
-![03](/static/static-24/03.png)
+這是 AWS 自動分配的公網地址，無需準備自有網域，但 LoadBalancer 會產生 AWS 費用。
 
-這是 AWS 自動分配的公網 DNS，無需事先準備自有網域。Load Balancer 會產生 AWS 費用，Workshop 結束後請按本章末尾的命令進行清理。
+### 步驟四：驗證部署
 
-### 步驟四：開啟商城並驗證部署
-
-在瀏覽器中開啟 `EXTERNAL-IP`。商城頁面無需登入，支援中文與英文切換。首次進行故障操作時，頁面會提示輸入故障控制口令，該值僅保存在當前瀏覽器的 `sessionStorage`。
-
-在 CloudShell 中取得口令並執行自動驗證：
+在瀏覽器中開啟 `$DEMO_BASE_URL`，然後執行完整的自動驗證：
 
 ```shell
-printf '%s\n' "$(kubectl -n observability-demo get secret demo-observability-demo \
-  -o jsonpath='{.data.demo-control-token}' | base64 --decode)"
+scripts/workshop.sh verify
 ```
 
-![04](/static/static-24/04.png)
+此命令會執行 smoke test、產生正常訂單、注入 `payment_slow` 並恢復正常狀態。成功時最後輸出 `verification passed`。故障注入、恢復和預熱均不需要控制口令。
+
+### 清理
+
+刪除應用和公網 LoadBalancer，同時保留 DataKit：
+
+```shell
+scripts/workshop.sh cleanup
+```
+
+只有在叢集不再需要 DataKit 時，才刪除兩個 Release：
+
+```shell
+scripts/workshop.sh cleanup --with-datakit
+```
