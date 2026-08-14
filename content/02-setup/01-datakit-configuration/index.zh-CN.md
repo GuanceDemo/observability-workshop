@@ -5,16 +5,16 @@ weight : 21
 
 ## 在 AWS EKS 配置 DataKit
 
-请按照以下步骤在 Amazon EKS 中完成 DataKit 与 TrueWatch 的集成。除 TrueWatch 控制台操作外，本章命令均在同一个 AWS CloudShell 终端中执行。
+请按照以下步骤在 Amazon EKS 中完成 DataKit 与观测云的集成。除观测云控制台操作外，本章命令均在同一个 AWS CloudShell 终端中执行。
 
 ### 步骤一：准备信息并声明参数
 
 开始前准备以下信息：
 
 - EKS 集群名称。
-- TrueWatch 工作区提供的 DataWay URL。
+- 观测云工作区提供的 DataWay URL。
 
-登录 TrueWatch Cloud，进入 **Integration → DataKit → Kubernetes(Helm)**，复制 `datakit.dataway_url` 的完整值：
+登录[观测云控制台](https://console.guance.com/)，进入 **Integration → DataKit → Kubernetes(Helm)**，复制 `datakit.dataway_url` 的完整值：
 
 ![01](/static/static-22/01.png)
 
@@ -22,7 +22,6 @@ weight : 21
 
 ```shell
 export EKS_CLUSTER_NAME="eks-demo-cluster"
-export AWS_REGION="us-west-2"
 read -rsp 'DataWay URL: ' DATAWAY_URL && export DATAWAY_URL && echo
 ```
 
@@ -54,11 +53,10 @@ helm version --short
 
 ### 步骤三：连接目标 EKS 集群
 
-使用第一步声明的参数生成当前 CloudShell 的 kubeconfig：
+使用第一步声明的集群名称生成当前 CloudShell 的 kubeconfig。AWS CloudShell 会自动提供当前区域：
 
 ```shell
 aws eks update-kubeconfig \
-  --region "$AWS_REGION" \
   --name "$EKS_CLUSTER_NAME"
 
 kubectl config current-context
@@ -72,7 +70,7 @@ kubectl get nodes
 ### 步骤四：克隆 Demo 仓库
 
 ```shell
-export DEMO_VERSION="2.3.0"
+export DEMO_VERSION="2.3.1"
 git clone --branch "v${DEMO_VERSION}" --depth 1 \
   https://github.com/GuanceDemo/observability-demo.git
 cd observability-demo
@@ -85,7 +83,7 @@ cd observability-demo
 添加官方 DataKit Chart 仓库，并安装固定版本 `2.5.0`：
 
 ```shell
-helm repo add datakit https://pubrepo.truewatch.com/chartrepo/datakit
+helm repo add datakit https://pubrepo.guance.com/chartrepo/datakit
 helm repo update
 
 helm upgrade --install datakit datakit/datakit \
@@ -110,9 +108,9 @@ kubectl logs -n datakit daemonset/datakit --tail=200 | grep 'add input'
 
 ![03](/static/static-22/03.png)
 
-### 步骤六：在 TrueWatch 验证 DataKit 集成状态
+### 步骤六：在观测云验证 DataKit 集成状态
 
-数分钟后，验证数据是否正确传送至 TrueWatch：
+数分钟后，验证数据是否正确传送至观测云：
 
 1. 进入 **Infrastructure**，按 `project=mall-demo` 筛选并查看 EKS 集群节点信息。
 	![04](/static/static-22/04.png)

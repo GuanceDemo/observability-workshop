@@ -13,7 +13,7 @@ Toby AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由
 
 在创建 Agent 之前，需要先确认工作空间已开启 AI 功能：
 
-1. 登录 TrueWatch。
+1. 登录[观测云控制台](https://console.guance.com/)。
 2. 进入 **Management → Workspace Settings**。
 3. 找到 **Security** 配置区域。
 4. 开启 **AI 智能分析**。
@@ -51,7 +51,7 @@ kubectl version --client
 继续使用第二章声明的 EKS 参数，并填写 Agent 安装命令中的 Beak Endpoint：
 
 ```shell
-export BEAK_ENDPOINT="https://agent-api.truewatch.com"
+export BEAK_ENDPOINT="<Run & Deploy 页面提供的 Endpoint>"
 ```
 
 执行仓库中的安装脚本：

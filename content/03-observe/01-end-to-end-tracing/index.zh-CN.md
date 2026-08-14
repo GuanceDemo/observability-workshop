@@ -15,7 +15,7 @@ weight : 32
 
 ### 步骤二：分析用户会话
 
-在 TrueWatch 中前往 **RUM → Explorers → Session**，添加 `project=mall-demo` 过滤条件，然后打开刚刚产生的会话。
+在观测云中前往 **RUM → Explorers → Session**，添加 `project=mall-demo` 过滤条件，然后打开刚刚产生的会话。
 
 ![02](/static/static-25/02.png)
 
@@ -27,7 +27,7 @@ weight : 32
 
 ### 步骤四：查看相关追踪（Trace）
 
-在商城 Demo 的右下角点击 **Open trace details** 跳转到 Truewatch Trace详情。在 Trace 瀑布图中确认 Gateway、order、MySQL、inventory、Redis 与 payment 调用是否完整。
+在商城 Demo 的右下角点击 **Open trace details** 跳转到观测云 Trace 详情。在 Trace 瀑布图中确认 Gateway、order、MySQL、inventory、Redis 与 payment 调用是否完整。
 
 ![04](/static/static-25/04.png)
 

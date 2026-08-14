@@ -15,7 +15,7 @@ Open the store in a browser, browse products, and submit an order.
 
 ### Step 2: Analyze the User Session
 
-In TrueWatch, navigate to **RUM → Explorers → Session**, add the filter `project=mall-demo`, and open the session that was just generated.
+In Guance, navigate to **RUM → Explorers → Session**, add the filter `project=mall-demo`, and open the session that was just generated.
 
 ![02](/static/static-25/02.png)
 
@@ -27,7 +27,7 @@ In the session details, open **Session Replay** to play back the store browsing 
 
 ### Step 4: View Related Traces
 
-In the bottom-right corner of the store demo, click **Open trace details** to navigate to the TrueWatch Trace details. In the Trace waterfall chart, verify that the Gateway, order, MySQL, inventory, Redis, and payment calls are complete.
+In the bottom-right corner of the store demo, click **Open trace details** to navigate to the Guance Trace details. In the Trace waterfall chart, verify that the Gateway, order, MySQL, inventory, Redis, and payment calls are complete.
 
 ![04](/static/static-25/04.png)
 

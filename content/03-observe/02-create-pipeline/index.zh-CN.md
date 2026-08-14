@@ -5,7 +5,7 @@ weight : 31
 
 ## 创建日志管道
 
-TrueWatch 支持在 DataKit 端或平台中央端使用 Pipeline 处理日志。本节将创建中央 Pipeline，从 Demo 的完整原始日志中提取链路、业务、故障和运行环境字段。
+观测云支持在 DataKit 端或平台中央端使用 Pipeline 处理日志。本节将创建中央 Pipeline，从 Demo 的完整原始日志中提取链路、业务、故障和运行环境字段。
 
 ### 步骤一：创建新的管道
 

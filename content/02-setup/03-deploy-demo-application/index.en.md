@@ -5,27 +5,29 @@ weight : 23
 
 ## Deploy Demo Application
 
-This chapter deploys the shopping mall demo to AWS EKS using the public Harbor `2.3.0` images. No image build, ECR configuration, or registry login is required in CloudShell. Except for the Gateway, the order, inventory, payment, MySQL, and Redis services remain cluster-internal.
+This chapter deploys the shopping mall demo to AWS EKS using the public Harbor `2.3.1` images. No image build, ECR configuration, or registry login is required in CloudShell. Except for the Gateway, the order, inventory, payment, MySQL, and Redis services remain cluster-internal.
 
 The Gateway is public and the demo fault endpoints intentionally require no credential. Use this profile only in an isolated, short-lived workshop cluster and clean it up after the exercise.
 
 ### Step 1: Deploy the Shopping Mall Demo with Helm
 
-Install the application with the pinned TrueWatch workshop profile:
+Install the application with the pinned Guance EKS profile:
 
 ```shell
 helm upgrade --install demo charts/observability-demo \
   --namespace observability-demo \
   --create-namespace \
-  -f charts/observability-demo/values-workshop-truewatch.yaml \
+  -f charts/observability-demo/values-eks.yaml \
+  --set-string rum.enabled=true \
   --set-string rum.applicationId="$RUM_APPLICATION_ID" \
   --set-string observability.clusterName="$EKS_CLUSTER_NAME" \
-  --set-string observabilityConsole.workspaceId="$TRUEWATCH_WORKSPACE_ID"
+  --set-string observabilityConsole.url="https://console.guance.com/" \
+  --set-string observabilityConsole.workspaceId="$GUANCE_WORKSPACE_ID"
 
-unset RUM_APPLICATION_ID TRUEWATCH_WORKSPACE_ID
+unset RUM_APPLICATION_ID GUANCE_WORKSPACE_ID
 ```
 
-The profile pulls `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.0` with `IfNotPresent`. The images are public and support `linux/amd64` and `linux/arm64`.
+The profile pulls `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.1` with `IfNotPresent`. The images are public and support `linux/amd64` and `linux/arm64`.
 
 ### Step 2: Wait for Workloads to Become Ready
 
@@ -72,13 +74,16 @@ AWS assigns this public address automatically. No custom domain is required, but
 
 ### Step 4: Verify the Deployment
 
-Open `$DEMO_BASE_URL` in a browser, then run the complete automated verification:
+Open `$DEMO_BASE_URL` in a browser, then run the smoke test, generate traffic, and verify fault recovery step by step:
 
 ```shell
-scripts/workshop.sh verify
+DATAKIT_PROVIDER=guance DEMO_PROJECT=mall-demo scripts/smoke-test.sh
+scripts/generate-traffic.sh
+scripts/inject-fault.sh payment_slow
+scripts/inject-fault.sh off
 ```
 
-The command runs the smoke test, generates normal orders, injects `payment_slow`, and restores the normal state. A successful run ends with `verification passed`. Fault injection, recovery, and warm-up do not require a control token.
+The smoke test ends with `smoke test passed`. The following commands generate normal orders, inject `payment_slow`, and restore the normal state. Fault injection, recovery, and warm-up do not require a control token.
 
 ### Cleanup
 

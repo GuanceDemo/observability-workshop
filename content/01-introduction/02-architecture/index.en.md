@@ -5,7 +5,7 @@ weight : 12
 
 ## Architecture Overview
 
-This workshop uses a Java microservice mall designed for observability education. Browser requests first enter the Gateway, then the Order service calls MySQL, Inventory service, Redis, and Payment service. DataKit runs as a DaemonSet on each EKS node, sending infrastructure, APM, logs, JVM, Profiling, and RUM data to TrueWatch.
+This workshop uses a Java microservice mall designed for observability education. Browser requests first enter the Gateway, then the Order service calls MySQL, Inventory service, Redis, and Payment service. DataKit runs as a DaemonSet on each EKS node, sending infrastructure, APM, logs, JVM, Profiling, and RUM data to Guance.
 
 ## Deployment Architecture
 
@@ -22,7 +22,7 @@ The system consists of the following components:
 - **Payment Service:** Processes payment calls and provides demonstration scenarios for slow calls, errors, and CPU hotspots.
 - **MySQL and Redis:** Use `emptyDir` ephemeral volumes, storing only demo data during the workshop without production-grade persistence or high availability.
 - **DataKit:** Deployed as a DaemonSet via a separate Helm release, collecting Kubernetes/container metrics, application logs, Traces, JVM StatsD, Profiling, and RUM.
-- **TrueWatch:** Receives data reported by DataKit, providing Explorer, Dashboard, APM, Logs, RUM, Alerting, and AI analysis capabilities.
+- **Guance:** Receives data reported by DataKit, providing Explorer, Dashboard, APM, Logs, RUM, Alerting, and AI analysis capabilities.
 
 The application and DataKit use two separate Helm releases: `demo` in the `observability-demo` namespace and `datakit` in the `datakit` namespace. All demo signals are uniformly tagged with `project=mall-demo` for cross-data-type correlation analysis.
 
@@ -33,4 +33,4 @@ The application and DataKit use two separate Helm releases: `demo` in the `obser
 3. The Java Agent sends Traces and Profiling to the node's port `9529`, and JVM StatsD metrics to port `8125`.
 4. Java Pods deliver container logs to DataKit via Annotations, using the `java-selfheal-demo.p` Pipeline to parse correlation fields.
 5. The browser forwards RUM data to the node DataKit through the same-origin `/rum-proxy`, without storing the DataWay token or Public DataWay client token in the frontend.
-6. DataKit uses the DataWay URL provided during installation to send all observability data to the TrueWatch workspace.
+6. DataKit uses the DataWay URL provided during installation to send all observability data to the Guance workspace.

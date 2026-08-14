@@ -5,7 +5,7 @@ weight : 31
 
 ## 建立日誌管道
 
-TrueWatch 支援在 DataKit 端或平台中央端使用 Pipeline 處理日誌。本節將建立中央 Pipeline，從 Demo 的完整原始日誌中提取鏈路、業務、故障和執行環境欄位。
+觀測雲支援在 DataKit 端或平台中央端使用 Pipeline 處理日誌。本節將建立中央 Pipeline，從 Demo 的完整原始日誌中提取鏈路、業務、故障和執行環境欄位。
 
 ### 步驟一：建立新的管道
 

@@ -5,16 +5,16 @@ weight : 21
 
 ## Configure DataKit on AWS EKS
 
-Follow the steps below to integrate DataKit with TrueWatch in Amazon EKS. Unless otherwise noted (e.g., TrueWatch console operations), all commands in this chapter are executed in the same AWS CloudShell terminal.
+Follow the steps below to integrate DataKit with Guance in Amazon EKS. Unless otherwise noted (e.g., Guance console operations), all commands in this chapter are executed in the same AWS CloudShell terminal.
 
 ### Step 1: Prepare Information and Declare Parameters
 
 Before you begin, gather the following information:
 
 - The EKS cluster name.
-- The DataWay URL provided by your TrueWatch workspace.
+- The DataWay URL provided by your Guance workspace.
 
-Log in to TrueWatch Cloud, navigate to **Integration → DataKit → Kubernetes(Helm)**, and copy the full value of `datakit.dataway_url`:
+Log in to the [Guance console](https://console.guance.com/), navigate to **Integration → DataKit → Kubernetes(Helm)**, and copy the full value of `datakit.dataway_url`:
 
 ![01](/static/static-22/01.png)
 
@@ -22,7 +22,6 @@ Open AWS CloudShell and declare all parameters used in this chapter. The DataWay
 
 ```shell
 export EKS_CLUSTER_NAME="eks-demo-cluster"
-export AWS_REGION="us-west-2"
 read -rsp 'DataWay URL: ' DATAWAY_URL && export DATAWAY_URL && echo
 ```
 
@@ -54,11 +53,10 @@ This ensures Helm remains available even after CloudShell is reopened.
 
 ### Step 3: Connect to the Target EKS Cluster
 
-Use the parameters declared in Step 1 to generate the kubeconfig for the current CloudShell session:
+Use the cluster name declared in Step 1 to generate the kubeconfig for the current CloudShell session. AWS CloudShell supplies the current Region automatically:
 
 ```shell
 aws eks update-kubeconfig \
-  --region "$AWS_REGION" \
   --name "$EKS_CLUSTER_NAME"
 
 kubectl config current-context
@@ -72,7 +70,7 @@ When `kubectl get nodes` shows at least one node with `Ready` status, the connec
 ### Step 4: Clone the Demo Repository
 
 ```shell
-export DEMO_VERSION="2.3.0"
+export DEMO_VERSION="2.3.1"
 git clone --branch "v${DEMO_VERSION}" --depth 1 \
   https://github.com/GuanceDemo/observability-demo.git
 cd observability-demo
@@ -85,7 +83,7 @@ All subsequent Helm and script commands are executed from the repository root di
 Add the official DataKit Chart repository and install the pinned version `2.5.0`:
 
 ```shell
-helm repo add datakit https://pubrepo.truewatch.com/chartrepo/datakit
+helm repo add datakit https://pubrepo.guance.com/chartrepo/datakit
 helm repo update
 
 helm upgrade --install datakit datakit/datakit \
@@ -110,9 +108,9 @@ kubectl logs -n datakit daemonset/datakit --tail=200 | grep 'add input'
 
 ![03](/static/static-22/03.png)
 
-### Step 6: Verify DataKit Integration Status in TrueWatch
+### Step 6: Verify DataKit Integration Status in Guance
 
-After a few minutes, verify that data is being sent to TrueWatch correctly:
+After a few minutes, verify that data is being sent to Guance correctly:
 
 1. Go to **Infrastructure**, filter by `project=mall-demo`, and view EKS cluster node information.
 	![04](/static/static-22/04.png)

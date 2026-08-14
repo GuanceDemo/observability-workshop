@@ -1338,7 +1338,7 @@
               "open": "newWin",
               "show": true,
               "type": "custom",
-              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+              "url": "https://console.guance.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
             },
             {
               "open": "newWin",
@@ -3932,7 +3932,7 @@
               "open": "newWin",
               "show": true,
               "type": "custom",
-              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+              "url": "https://console.guance.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
             },
             {
               "open": "newWin",
@@ -4174,7 +4174,7 @@
               "open": "newWin",
               "show": true,
               "type": "custom",
-              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+              "url": "https://console.guance.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
             },
             {
               "open": "newWin",
@@ -4416,7 +4416,7 @@
               "open": "newWin",
               "show": true,
               "type": "custom",
-              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+              "url": "https://console.guance.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
             },
             {
               "open": "newWin",
@@ -4658,7 +4658,7 @@
               "open": "newWin",
               "show": true,
               "type": "custom",
-              "url": "https://ap1-console.truewatch.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
+              "url": "https://console.guance.com/tracing/link/all?time=#{TR}&tags={\"service\":[\"#{T.service}\"],\"status\":[\"error\"]}"
             },
             {
               "open": "newWin",

@@ -5,13 +5,13 @@ weight : 22
 
 ## 建立 RUM 客戶端應用
 
-TrueWatch RUM 用於採集商城頁面的存取效能、Resource、Error、Browser Logs 與 Session Replay，並與後端 Trace 關聯。
+觀測雲 RUM 用於採集商城頁面的存取效能、Resource、Error、Browser Logs 與 Session Replay，並與後端 Trace 關聯。
 
 ### 步驟一：建立新的客戶端應用
 
-按照以下步驟在 TrueWatch 建立 Web 類型的客戶端應用：
+按照以下步驟在觀測雲建立 Web 類型的客戶端應用：
 
-1. 登入 TrueWatch 控制台，點擊 **RUM → Application → Create**。
+1. 登入[觀測雲控制台](https://console.guance.com/)，點擊 **RUM → Application → Create**。
 2. 選擇 **Web** 作為應用類型。
 3. 在「應用名稱」中輸入 `Mall Demo`，應用 ID 輸入 `mall_demo`。
 4. 選擇 **Local Deployment** **CDN Synchronous Loading**。
@@ -27,28 +27,28 @@ TrueWatch RUM 用於採集商城頁面的存取效能、Resource、Error、Brows
 
 ```shell
 read -rp 'RUM Application ID: ' RUM_APPLICATION_ID && export RUM_APPLICATION_ID
-read -rp 'TrueWatch Workspace ID: ' TRUEWATCH_WORKSPACE_ID && export TRUEWATCH_WORKSPACE_ID
+read -rp '觀測雲 Workspace ID: ' GUANCE_WORKSPACE_ID && export GUANCE_WORKSPACE_ID
 ```
 
 ![03](/static/static-23/03.png)
 
-下一章會透過 Helm 將 RUM Application ID 和 TrueWatch Workspace ID 傳入應用。
+下一章會透過 Helm 將 RUM Application ID 和觀測雲 Workspace ID 傳入應用。
 
 ### 步驟三：準備 SourceMap 檔案
 
 Demo 已包含用於演示原始碼還原的壓縮 JavaScript 與 SourceMap。在倉庫根目錄執行：
 
 ```shell
-scripts/package-rum-sourcemap.sh --version 2.3.0
+scripts/package-rum-sourcemap.sh --version 2.3.1
 
-SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap-2.3.0.zip)"
+SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap-2.3.1.zip)"
 ls -lh "$SOURCE_MAP_FILE"
 echo "$SOURCE_MAP_FILE"
 ```
 
 ![04](/static/static-23/04.png)
 
-隨後將 AWS CloudShell 裡面的 observability-demo-rum-sourcemap-2.3.0.zip 檔案下載到瀏覽器預設下載目錄：
+隨後將 AWS CloudShell 裡面的 observability-demo-rum-sourcemap-2.3.1.zip 檔案下載到瀏覽器預設下載目錄：
 
 1. 點擊 AWS CloudShell 右上角的 **Actions**。
 2. 選擇 **Download file**。
@@ -57,9 +57,9 @@ echo "$SOURCE_MAP_FILE"
 
 ![05](/static/static-23/05.png)
 
-產生的檔案位於 `dist/observability-demo-rum-sourcemap-2.3.0.zip`。進入剛剛建立的 RUM 應用設定，在 **SourceMap** 頁面上傳該壓縮包，並填寫：
+產生的檔案位於 `dist/observability-demo-rum-sourcemap-2.3.1.zip`。進入剛剛建立的 RUM 應用設定，在 **SourceMap** 頁面上傳該壓縮包，並填寫：
 
 - Environment：`demo`
-- Version：`2.3.0`
+- Version：`2.3.1`
 
 應用部署完成後，可以在 Demo 頁面啟用 `frontend_sourcemap_error`，再點擊商城中的購買按鈕。上傳 SourceMap 前，錯誤堆疊指向壓縮檔案；上傳後應還原到 `assets/src/checkout-sourcemap-fault.js` 中的原始碼位置。

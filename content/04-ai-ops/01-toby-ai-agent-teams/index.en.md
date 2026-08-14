@@ -13,7 +13,7 @@ Toby AI can be used directly within the platform; the Agent Runtime for Agent Te
 
 Before creating an Agent, ensure the AI feature is enabled in your workspace:
 
-1. Log in to TrueWatch.
+1. Log in to the [Guance console](https://console.guance.com/).
 2. Navigate to **Management → Workspace Settings**.
 3. Locate the **Security** configuration section.
 4. Enable **AI Intelligent Analysis**.
@@ -51,7 +51,7 @@ kubectl version --client
 Continue using the EKS parameters declared in Chapter 2, and set the Beak Endpoint from the Agent installation command:
 
 ```shell
-export BEAK_ENDPOINT="https://agent-api.truewatch.com"
+export BEAK_ENDPOINT="<Endpoint from Run & Deploy>"
 ```
 
 Run the installation script from the repository:

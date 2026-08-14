@@ -1,15 +1,15 @@
 ---
-title : "TrueWatch Features Overview"
+title : "Guance Features Overview"
 weight : 11
 ---
 
-## TrueWatch Features Overview
+## Guance Features Overview
 
 This workshop uses a unified `project=mall-demo` tag across infrastructure, APM, logs, JVM, Profiling, and RUM. After deployment, you can observe the same mall order flow from different signals on the following feature pages.
 
 ### Interactive Dashboards
 
-TrueWatch provides numerous built-in dashboards, enabling quick and straightforward analysis of observability data.
+Guance provides numerous built-in dashboards, enabling quick and straightforward analysis of observability data.
 
 ![01](/static/static-21/01.png)
 
@@ -45,18 +45,18 @@ Proactively monitor service availability through globally distributed synthetic 
 
 ### Customized Monitoring with Advanced Alerting
 
-Quickly set up monitoring systems with diverse monitoring rules and pre-configured templates. TrueWatch supports alert aggregation, silencing, and routing for efficient incident management.
+Quickly set up monitoring systems with diverse monitoring rules and pre-configured templates. Guance supports alert aggregation, silencing, and routing for efficient incident management.
 
 ![07](/static/static-21/07.png)
 
 ### Extensive Integrations
 
-Seamlessly integrate TrueWatch with Automata and various external data sources. Automate inspections, generate reports, and implement highly customized automation tailored to business needs.
+Seamlessly integrate Guance with Automata and various external data sources. Automate inspections, generate reports, and implement highly customized automation tailored to business needs.
 
 ![08](/static/static-21/08.png)
 
 ### Observability AI Assistant
 
-Leveraging advanced LLM technology, TrueWatch's Observability AI Assistant provides round-the-clock technical support, assisting with feature usage and proactively performing root cause analysis based on existing data.
+Leveraging advanced LLM technology, Guance's Observability AI Assistant provides round-the-clock technical support, assisting with feature usage and proactively performing root cause analysis based on existing data.
 
 ![09](/static/static-21/09.png)

@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  DEMO_VERSION: 2.3.0
+  DEMO_VERSION: 2.3.1
 
 jobs:
   verify:
@@ -24,15 +24,23 @@ jobs:
         shell: bash
         run: |
           if rg -n -i \
-            'TrueWatchTech/observability-demo|cherrycove/observability-demo|ghcr|demo-control-token|DEMO_CONTROL_TOKEN|sessionStorage|scripts/workshop\.sh install|\blatest\b' \
-            content/02-setup; then
+            'TrueWatchTech/observability-demo|cherrycove/observability-demo|ghcr|demo-control-token|DEMO_CONTROL_TOKEN|sessionStorage|scripts/workshop\.sh install|\blatest\b|\bTrueWatch\b|ap1-console\.truewatch\.com|pubrepo\.truewatch\.com/chartrepo/datakit|AWS_REGION|--region' \
+            content; then
             echo 'obsolete deployment contract found in workshop content' >&2
             exit 1
           fi
+          if rg -n 'ap1-console\.truewatch\.com' static/attachments; then
+            echo 'obsolete console deep link found in workshop attachments' >&2
+            exit 1
+          fi
+          grep -q 'https://console.guance.com/tracing/link/all' \
+            static/attachments/chapter-07/product-service-operational-quality-dashboard.json
           for locale in en zh-CN zh-TW; do
+            grep -q 'https://auth.guance.com/businessRegister' "content/01-introduction/index.${locale}.md"
             grep -q 'GuanceDemo/observability-demo' "content/02-setup/01-datakit-configuration/index.${locale}.md"
-            grep -q 'values-workshop-truewatch.yaml' "content/02-setup/03-deploy-demo-application/index.${locale}.md"
-            grep -q '2.3.0' "content/02-setup/02-create-client-application/index.${locale}.md"
+            grep -q 'values-eks.yaml' "content/02-setup/03-deploy-demo-application/index.${locale}.md"
+            grep -q 'https://console.guance.com/' "content/02-setup/03-deploy-demo-application/index.${locale}.md"
+            grep -q '2.3.1' "content/02-setup/02-create-client-application/index.${locale}.md"
           done
       - name: Clone the pinned official demo release
         run: |
@@ -43,19 +51,25 @@ jobs:
         run: |
           for script in scripts/*.sh; do bash -n "$script"; done
           helm lint charts/observability-demo \
-            --values charts/observability-demo/values-workshop-truewatch.yaml \
+            --values charts/observability-demo/values-eks.yaml \
+            --set-string rum.enabled=true \
             --set-string rum.applicationId=test-rum \
             --set-string observability.clusterName=test-cluster \
+            --set-string observabilityConsole.url=https://console.guance.com/ \
             --set-string observabilityConsole.workspaceId=test-workspace
           helm template demo charts/observability-demo \
             --namespace observability-demo \
-            --values charts/observability-demo/values-workshop-truewatch.yaml \
+            --values charts/observability-demo/values-eks.yaml \
+            --set-string rum.enabled=true \
             --set-string rum.applicationId=test-rum \
             --set-string observability.clusterName=test-cluster \
+            --set-string observabilityConsole.url=https://console.guance.com/ \
             --set-string observabilityConsole.workspaceId=test-workspace \
             >/tmp/workshop-rendered.yaml
-          grep -q 'pubrepo.jiagouyun.com/demo/observability-demo-gateway-service:2.3.0' /tmp/workshop-rendered.yaml
+          grep -q 'pubrepo.jiagouyun.com/demo/observability-demo-gateway-service:2.3.1' /tmp/workshop-rendered.yaml
           grep -q 'cluster_name_k8s:test-cluster' /tmp/workshop-rendered.yaml
+          grep -A20 'name: DATAKIT_PROVIDER' /tmp/workshop-rendered.yaml | grep -q 'guance'
+          grep -A20 'name: OBSERVABILITY_CONSOLE_URL' /tmp/workshop-rendered.yaml | grep -q 'https://console.guance.com/'
       - name: Verify public Harbor images
         run: |
           for service in gateway order inventory payment; do

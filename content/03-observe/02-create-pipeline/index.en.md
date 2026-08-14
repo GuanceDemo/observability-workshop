@@ -5,7 +5,7 @@ weight : 31
 
 ## Create Log Pipeline
 
-TrueWatch supports processing logs using Pipelines either on the DataKit side or on the platform's central side. In this section, you will create a central Pipeline to extract trace, business, fault, and runtime environment fields from the complete raw logs of the Demo application.
+Guance supports processing logs using Pipelines either on the DataKit side or on the platform's central side. In this section, you will create a central Pipeline to extract trace, business, fault, and runtime environment fields from the complete raw logs of the Demo application.
 
 ### Step 1: Create a New Pipeline
 
