@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           if rg -n -i \
-            'TrueWatchTech/observability-demo|cherrycove/observability-demo|ghcr|demo-control-token|DEMO_CONTROL_TOKEN|sessionStorage|\blatest\b' \
+            'TrueWatchTech/observability-demo|cherrycove/observability-demo|ghcr|demo-control-token|DEMO_CONTROL_TOKEN|sessionStorage|scripts/workshop\.sh install|\blatest\b' \
             content/02-setup; then
             echo 'obsolete deployment contract found in workshop content' >&2
             exit 1

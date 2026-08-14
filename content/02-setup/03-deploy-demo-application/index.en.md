@@ -9,19 +9,9 @@ This chapter deploys the shopping mall demo to AWS EKS using the public Harbor `
 
 The Gateway is public and the demo fault endpoints intentionally require no credential. Use this profile only in an isolated, short-lived workshop cluster and clean it up after the exercise.
 
-### Fast path: install and verify automatically
-
-If you selected the automated path, run:
-
-```shell
-scripts/workshop.sh install
-```
-
-The script confirms the Kubernetes context, installs or upgrades both Helm releases, waits for DataKit and all six application workloads, discovers the LoadBalancer URL, runs the smoke test, generates traffic, and checks fault recovery. Continue with the observation chapters after it prints `verification passed`.
-
 ### Step 1: Deploy the Shopping Mall Demo with Helm
 
-For the manual path, install the application with the pinned TrueWatch workshop profile:
+Install the application with the pinned TrueWatch workshop profile:
 
 ```shell
 helm upgrade --install demo charts/observability-demo \

@@ -9,19 +9,9 @@ weight : 23
 
 Gateway 会暴露到公网，Demo 故障接口有意不要求控制凭证。该 profile 只能用于隔离、短期的 Workshop 集群，练习结束后应及时清理。
 
-### 快速路径：自动安装和验证
-
-如果选择自动化路径，执行：
-
-```shell
-scripts/workshop.sh install
-```
-
-脚本会确认 Kubernetes context，安装或升级两个 Helm Release，等待 DataKit 和六个应用工作负载，发现 LoadBalancer URL，运行 smoke test，生成流量并检查故障恢复。看到 `verification passed` 后即可继续后续观测章节。
-
 ### 步骤一：使用 Helm 部署商城 Demo
 
-分步路径使用固定版本的 TrueWatch Workshop profile：
+使用固定版本的 TrueWatch Workshop profile：
 
 ```shell
 helm upgrade --install demo charts/observability-demo \
