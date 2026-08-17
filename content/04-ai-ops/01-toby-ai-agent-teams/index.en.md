@@ -1,13 +1,13 @@
 ---
-title : "Toby AI & Agent Teams Demo"
+title : "Obsy AI & Agent Teams Demo"
 weight : 41
 ---
 
-## Toby AI & Agent Teams Demo
+## Obsy AI & Agent Teams Demo
 
-This chapter builds on the payment anomalies and monitoring alerts generated in the previous chapter to demonstrate Toby AI's ability to analyze error Traces, as well as Agent Teams' ability to receive alerts, access EKS, and generate remediation recommendations.
+This chapter builds on the payment anomalies and monitoring alerts generated in the previous chapter to demonstrate Obsy AI's ability to analyze error Traces, as well as Agent Teams' ability to receive alerts, access EKS, and generate remediation recommendations.
 
-Toby AI can be used directly within the platform; the Agent Runtime for Agent Teams must be deployed by the user. This Workshop temporarily installs the Runtime on an EKS EC2 worker node and performs a unified cleanup after the demo.
+Obsy AI can be used directly within the platform; the Agent Runtime for Agent Teams must be deployed by the user. This Workshop temporarily installs the Runtime on an EKS EC2 worker node and performs a unified cleanup after the demo.
 
 ### Step 1: Enable AI Intelligent Analysis
 
@@ -23,9 +23,9 @@ If you cannot see this toggle, contact your workspace administrator to verify pe
 
 ### Step 2: Create the Workshop Agent
 
-Click **Toby AI → Toby Agent Teams** at the top of the platform to enter the Agent Workspace and create an Agent dedicated to this Workshop:
+Click **Obsy AI → Obsy Agent Teams** at the top of the platform to enter the Agent Workspace and create an Agent dedicated to this Workshop:
 
-- Quick Start: `Observability Navigator`
+- Quick Start: `Obs Navigator`
 
 Navigate to the Agent's **Run & Deploy** page, select the Linux installation method, and confirm the following from the installation command:
 
@@ -82,7 +82,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 ### Step 4: Verify Agent Runtime
 
-After installation, return to the Agent Workspace and wait for the `Observability Navigator` status to change to **Online**.
+After installation, return to the Agent Workspace and wait for the `Obs Navigator` status to change to **Online**.
 
 Create a read-only verification task:
 
@@ -104,9 +104,9 @@ Navigate to **APM → Traces** and search for the anomalous Trace using the foll
 
 Open a Trace containing a payment-service error Span, confirm that the Gateway returned HTTP 503, and record the Trace ID.
 
-### Step 6: Analyze the Error Trace with Toby AI
+### Step 6: Analyze the Error Trace with Obsy AI
 
-On the error Trace detail page, open **Toby AI**, select the current Trace for analysis, and enter:
+On the error Trace detail page, open **Obsy AI**, select the current Trace for analysis, and enter:
 
 ```text
 Analyze the current error Trace. Identify which service the fault originated in, upstream and downstream impact, key evidence, possible root causes, and the recommended remediation order.
@@ -133,26 +133,26 @@ Correlate logs using the same trace_id, confirm the error cause in payment-servi
 First, navigate to **Monitoring → Alert Strategies** and create or edit the alert strategy used in this Workshop:
 
 1. Under **Association**, add the service error rate, HTTP status code error rate, and response time monitors created in Chapter 7.
-2. Expand **Notification Rules** and set the timezone to `(UTC+09:00) Asia/Tokyo`.
-3. Select notification by **Level** and choose `Observability Navigator` as the notification target for the `Fatal` level. If the monitors use other event levels, add the same Agent notification rule for those levels.
+2. Expand **Notification Rules** and set the timezone to `(UTC+08:00) Asia/Shanghai`.
+3. Select notification by **Level** and choose `Obs Navigator` as the notification target for the `Fatal` level. If the monitors use other event levels, add the same Agent notification rule for those levels.
 4. Click **Save**. Only events matching the notification level will be delivered to the Agent.
 
-If `Observability Navigator` does not appear in the notification target list, first confirm that the Agent has been created in the current workspace and that the Runtime status is **Online**.
+If `Obs Navigator` does not appear in the notification target list, first confirm that the Agent has been created in the current workspace and that the Runtime status is **Online**.
 
 ![04](/static/static-28/04.png)
 
-Go to the Agent Workspace, select the deployed `Observability Navigator` that is in Online status, then navigate to **Task Intake** and create or verify the **Workspace hook**:
+Go to the Agent Workspace, select the deployed `Obs Navigator` that is in Online status, then navigate to **Task Intake** and create or verify **Workspace**:
 
-- Name: `Observability Navigator Event Webhook`
+- Name: `Obs Navigator Event Webhook`
 - Intake type: `Workspace`
 - Trigger method: `Platform delivery`
 - Execution period: `1 minute window`
-- Permission mode: Use the current Workshop workspace permissions
+- Permission mode: `Default permissions`
 - Status: `Active`
 
 ![05](/static/static-28/05.png)
 
-Deliver the alert strategy from the Chapter 7 monitors to this task intake, then trigger the payment error again. Confirm that the **Received messages** count increases, and open the new task in the execution history or **My Tasks** to check whether the Agent automatically performs correlated analysis of events, Traces, logs, and EKS resources.
+Deliver the alert strategy from the Chapter 7 monitors to this task intake, then trigger the payment error again. Confirm that the **Received messages** count increases, and open the new task in the execution history to check whether the Agent automatically performs correlated analysis of events, Traces, logs, and EKS resources.
 
 ### Step 8: Close the Fault and Verify End-to-End
 
@@ -162,7 +162,7 @@ Return to the mall Demo, disable the current fault, and continue submitting norm
 2. The alert event enters recovery status.
 3. The Agent task retains the analysis conclusions and remediation recommendations from this anomaly.
 
-You can enter the following in Toby AI to generate a post-incident review:
+You can enter the following in Obsy AI to generate a post-incident review:
 
 ```text
 Compile the payment-service alert, impact scope, root cause evidence, remediation process, and recovery verification from this incident into a retrospective Note.

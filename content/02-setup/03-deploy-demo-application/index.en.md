@@ -27,6 +27,8 @@ helm upgrade --install demo charts/observability-demo \
 unset RUM_APPLICATION_ID GUANCE_WORKSPACE_ID
 ```
 
+![01](/static/static-24/01.png)
+
 The profile pulls `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.1` with `IfNotPresent`. The images are public and support `linux/amd64` and `linux/arm64`.
 
 ### Step 2: Wait for Workloads to Become Ready
@@ -38,6 +40,8 @@ kubectl wait --for=condition=Available deployment --all \
 
 kubectl -n observability-demo get pods
 ```
+
+![02](/static/static-24/02.png)
 
 Under normal conditions you should see six workloads: Gateway, order, inventory, payment, MySQL, and Redis. The Java Pods run as a non-root user and send Trace, JVM metrics, and Profiling data to DataKit through the node IP. The application and DataKit use the same `EKS_CLUSTER_NAME` for correlation.
 
@@ -70,31 +74,12 @@ export DEMO_BASE_URL="http://${GATEWAY_ADDRESS}"
 echo "$DEMO_BASE_URL"
 ```
 
+![03](/static/static-24/03.png)
+
 AWS assigns this public address automatically. No custom domain is required, but the LoadBalancer incurs AWS charges.
 
 ### Step 4: Verify the Deployment
 
-Open `$DEMO_BASE_URL` in a browser, then run the smoke test, generate traffic, and verify fault recovery step by step:
+Open `$DEMO_BASE_URL` in a browser:
 
-```shell
-DATAKIT_PROVIDER=guance DEMO_PROJECT=mall-demo scripts/smoke-test.sh
-scripts/generate-traffic.sh
-scripts/inject-fault.sh payment_slow
-scripts/inject-fault.sh off
-```
-
-The smoke test ends with `smoke test passed`. The following commands generate normal orders, inject `payment_slow`, and restore the normal state. Fault injection, recovery, and warm-up do not require a control token.
-
-### Cleanup
-
-Remove the application and public LoadBalancer while preserving DataKit:
-
-```shell
-scripts/workshop.sh cleanup
-```
-
-Only when the cluster no longer needs DataKit, remove both releases:
-
-```shell
-scripts/workshop.sh cleanup --with-datakit
-```
+![04](/static/static-24/04.png)

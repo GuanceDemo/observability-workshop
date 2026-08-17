@@ -27,6 +27,8 @@ helm upgrade --install demo charts/observability-demo \
 unset RUM_APPLICATION_ID GUANCE_WORKSPACE_ID
 ```
 
+![01](/static/static-24/01.png)
+
 此 profile 使用 `IfNotPresent` 拉取 `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.1`。映像公開並同時支援 `linux/amd64` 和 `linux/arm64`。
 
 ### 步驟二：等待工作負載就緒
@@ -38,6 +40,8 @@ kubectl wait --for=condition=Available deployment --all \
 
 kubectl -n observability-demo get pods
 ```
+
+![02](/static/static-24/02.png)
 
 正常情況下會看到 Gateway、order、inventory、payment、MySQL 和 Redis 六個工作負載。Java Pod 以非 root 使用者執行，並透過節點 IP 將 Trace、JVM 指標和 Profiling 資料傳送到 DataKit。應用與 DataKit 使用相同的 `EKS_CLUSTER_NAME` 完成關聯。
 
@@ -70,31 +74,12 @@ export DEMO_BASE_URL="http://${GATEWAY_ADDRESS}"
 echo "$DEMO_BASE_URL"
 ```
 
+![03](/static/static-24/03.png)
+
 這是 AWS 自動分配的公網地址，無需準備自有網域，但 LoadBalancer 會產生 AWS 費用。
 
 ### 步驟四：驗證部署
 
-在瀏覽器中開啟 `$DEMO_BASE_URL`，然後分步執行 smoke test、流量產生和故障恢復驗證：
+在瀏覽器中開啟 `$DEMO_BASE_URL`：
 
-```shell
-DATAKIT_PROVIDER=guance DEMO_PROJECT=mall-demo scripts/smoke-test.sh
-scripts/generate-traffic.sh
-scripts/inject-fault.sh payment_slow
-scripts/inject-fault.sh off
-```
-
-smoke test 成功時會輸出 `smoke test passed`。後續命令會產生正常訂單、注入 `payment_slow` 並恢復正常狀態。故障注入、恢復和預熱均不需要控制口令。
-
-### 清理
-
-刪除應用和公網 LoadBalancer，同時保留 DataKit：
-
-```shell
-scripts/workshop.sh cleanup
-```
-
-只有在叢集不再需要 DataKit 時，才刪除兩個 Release：
-
-```shell
-scripts/workshop.sh cleanup --with-datakit
-```
+![04](/static/static-24/04.png)

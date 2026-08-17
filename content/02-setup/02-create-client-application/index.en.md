@@ -14,8 +14,7 @@ Follow these steps to create a Web-type client application in Guance:
 1. Log in to the [Guance console](https://console.guance.com/), then click **RUM → Application → Create**.
 2. Select **Web** as the application type.
 3. Enter `Mall Demo` for the application name, and `mall_demo` for the application ID.
-4. Select **Local Deployment** **CDN Synchronous Loading**.
-5. Click **Create**, then copy the **Application ID** and the current workspace's **Workspace ID**.
+4. Click **Create**, then copy the **Application ID** and the current workspace's **Workspace ID**.
 
 ![01](/static/static-23/01.png)
 
@@ -62,4 +61,6 @@ The generated file is located at `dist/observability-demo-rum-sourcemap-2.3.1.zi
 - Environment: `demo`
 - Version: `2.3.1`
 
-After the application is deployed, you can enable `frontend_sourcemap_error` on the Demo page, then click the purchase button in the mall. Before uploading the SourceMap, the error stack points to the compressed file; after uploading, it should resolve to the source location in `assets/src/checkout-sourcemap-fault.js`.
+![06](/static/static-23/06.png)
+
+After the application is deployed, you can enable `SourceMap source location error` on the Demo page, then click the purchase button in the mall. Before uploading the SourceMap, the error stack points to the compressed file; after uploading, it should resolve to the source location in `assets/src/checkout-sourcemap-fault.js`.

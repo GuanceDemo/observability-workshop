@@ -14,7 +14,7 @@ weight : 21
 - EKS 集群名称。
 - 观测云工作区提供的 DataWay URL。
 
-登录[观测云控制台](https://console.guance.com/)，进入 **Integration → DataKit → Kubernetes(Helm)**，复制 `datakit.dataway_url` 的完整值：
+登录[观测云控制台](https://console.guance.com/)，进入 **集成 → DataKit → Kubernetes(Helm)**，复制 `datakit.dataway_url` 的完整值：
 
 ![01](/static/static-22/01.png)
 
@@ -112,13 +112,13 @@ kubectl logs -n datakit daemonset/datakit --tail=200 | grep 'add input'
 
 数分钟后，验证数据是否正确传送至观测云：
 
-1. 进入 **Infrastructure**，按 `project=mall-demo` 筛选并查看 EKS 集群节点信息。
+1. 进入 **基础设施**，查看 EKS 集群节点信息。
 	![04](/static/static-22/04.png)
-2. 前往 **Containers → Pods**，查看 DataKit Pod 的基本信息与性能指标。
+2. 前往 **容器 → Pods**，查看 DataKit Pod 的基本信息与性能指标。
 	![05](/static/static-22/05.png)
-3. 点击 **Analysis Dashboard**，查看更详细的 Kubernetes 分析仪表板。
+3. 点击 **分析看板**，查看更详细的 Kubernetes 分析仪表板。
 	![06](/static/static-22/06.png)
-4. 在 **Logs** 中查看 Kubernetes 组件日志与集群事件。
-	![08](/static/static-22/08.png)
+4. 在 **日志** 中查看 Kubernetes 组件日志与集群事件。
+	![07](/static/static-22/07.png)
 
 此时商城应用尚未部署，因此 APM、应用日志、JVM、Profiling 与 RUM 数据会在后续章节完成应用安装和流量生成后出现。

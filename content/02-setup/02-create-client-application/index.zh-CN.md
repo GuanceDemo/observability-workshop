@@ -11,11 +11,10 @@ weight : 22
 
 按照以下步骤在观测云创建 Web 类型的客户端应用：
 
-1. 登录[观测云控制台](https://console.guance.com/)，点击 **RUM → Application → Create**。
+1. 登录[观测云控制台](https://console.guance.com/)，点击 **用户访问监测 → 应用列表 → 新建应用**。
 2. 选择 **Web** 作为应用类型。
 3. 在「应用名称」中输入 `Mall Demo`，应用 ID 输入 `mall_demo`。
-4. 选择 **Local Deployment** **CDN Synchronous Loading**。
-5. 点击 **Create**，复制 **Application ID** 和当前工作空间的 **Workspace ID**。
+4. 点击 **创建**，复制 **Application ID** 和当前工作空间的 **Workspace ID**。
 
 ![01](/static/static-23/01.png)
 
@@ -62,4 +61,6 @@ echo "$SOURCE_MAP_FILE"
 - Environment：`demo`
 - Version：`2.3.1`
 
-应用部署完成后，可以在 Demo 页面启用 `frontend_sourcemap_error`，再点击商城中的购买按钮。上传 SourceMap 前，错误栈指向压缩文件；上传后应还原到 `assets/src/checkout-sourcemap-fault.js` 中的源码位置。
+![06](/static/static-23/06.png)
+
+应用部署完成后，可以在 Demo 页面启用 `SourceMap 源码定位错误`，再点击商城中的购买按钮。上传 SourceMap 前，错误栈指向压缩文件；上传后应还原到 `assets/src/checkout-sourcemap-fault.js` 中的源码位置。

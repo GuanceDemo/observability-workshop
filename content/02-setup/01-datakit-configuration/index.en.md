@@ -112,13 +112,13 @@ kubectl logs -n datakit daemonset/datakit --tail=200 | grep 'add input'
 
 After a few minutes, verify that data is being sent to Guance correctly:
 
-1. Go to **Infrastructure**, filter by `project=mall-demo`, and view EKS cluster node information.
+1. Go to **Infrastructure** and view EKS cluster node information.
 	![04](/static/static-22/04.png)
 2. Navigate to **Containers → Pods** to view basic information and performance metrics for the DataKit Pods.
 	![05](/static/static-22/05.png)
 3. Click **Analysis Dashboard** to view the detailed Kubernetes analysis dashboard.
 	![06](/static/static-22/06.png)
 4. Check **Logs** to view Kubernetes component logs and cluster events.
-	![08](/static/static-22/08.png)
+	![07](/static/static-22/07.png)
 
 At this point the mall application has not been deployed yet, so APM, application logs, JVM, Profiling, and RUM data will appear in later chapters after the application is installed and traffic is generated.

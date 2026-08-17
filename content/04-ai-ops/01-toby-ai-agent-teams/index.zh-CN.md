@@ -1,33 +1,33 @@
 ---
-title : "Toby AI 与 Agent Teams 能力演示"
+title : "Obsy AI 与 Agent Teams 能力演示"
 weight : 41
 ---
 
-## Toby AI 与 Agent Teams 能力演示
+## Obsy AI 与 Agent Teams 能力演示
 
-本章基于前一章产生的支付异常和监控告警，演示 Toby AI 对错误 Trace 的分析能力，以及 Agent Teams 接收告警、访问 EKS 并生成处置建议的能力。
+本章基于前一章产生的支付异常和监控告警，演示 Obsy AI 对错误 Trace 的分析能力，以及 Agent Teams 接收告警、访问 EKS 并生成处置建议的能力。
 
-Toby AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由用户部署。本 Workshop 将 Runtime 临时安装到一台 EKS EC2 工作节点，演示结束后再统一清理。
+Obsy AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由用户部署。本 Workshop 将 Runtime 临时安装到一台 EKS EC2 工作节点，演示结束后再统一清理。
 
 ### 步骤一：开启 AI 智能分析
 
 在创建 Agent 之前，需要先确认工作空间已开启 AI 功能：
 
 1. 登录[观测云控制台](https://console.guance.com/)。
-2. 进入 **Management → Workspace Settings**。
-3. 找到 **Security** 配置区域。
-4. 开启 **AI 智能分析**。
+2. 进入 **管理 → 空间设置**。
+3. 找到 **安全** 配置区域。
+4. 开启 **AI 服务**。
 5. 确认开关已经生效。
 
 如果看不到此开关，请联系工作空间管理员确认权限和功能授权。
 
 ### 步骤二：创建 Workshop Agent
 
-点击平台顶部的 **Toby AI → Toby Agent Teams**，进入 Agent Workspace 并创建一个专用于本次 Workshop 的 Agent：
+点击平台顶部的 **Obsy AI → Obsy Agent Teams**，进入 Agent Workspace 并创建一个专用于本次 Workshop 的 Agent：
 
-- Quick Start：`Observability Navigator`
+- 新建Agent：`Obs 领航员`
 
-进入该 Agent 的 **Run & Deploy** 页面，选择 Linux 安装方式，并从专属安装命令中确认以下内容：
+进入该 Agent 的 **运行与部署** 页面，选择 Linux 安装方式，并从专属安装命令中确认以下内容：
 
 - Agent ID
 - Agent API Key
@@ -82,7 +82,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 ### 步骤四：验证 Agent Runtime
 
-安装完成后回到 Agent Workspace，等待 `Observability Navigator` 状态变为 **Online**。
+安装完成后回到 Agent Workspace，等待 `Obs 领航员` 状态变为 **在线**。
 
 创建一个只读验证任务：
 
@@ -94,9 +94,9 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 ### 步骤五：准备支付异常与告警事件
 
-在商城 Demo 中选择 **Backend → Payment 5xx error → Inject selected fault**，连续提交多笔订单，等待第七章创建的错误率监控器触发告警。
+在商城 Demo 中选择 **后端 → 支付 5xx 错误 → 注入选中故障**，连续提交多笔订单，等待第七章创建的错误率监控器触发告警。
 
-进入 **APM → Traces**，使用以下条件查找本次异常 Trace：
+进入 **应用性能监测 → 链路**，使用以下条件查找本次异常 Trace：
 
 - `project=mall-demo`
 - `service=payment-service`
@@ -104,9 +104,9 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 打开一条包含 payment-service 错误 Span 的 Trace，确认 Gateway 返回 HTTP 503，并记录该 Trace ID。
 
-### 步骤六：使用 Toby AI 分析错误 Trace
+### 步骤六：使用 Obsy AI 分析错误 Trace
 
-在错误 Trace 详情页打开 **Toby AI**，选择分析当前 Trace，并输入：
+在错误 Trace 详情页打开 **Obsy AI**，选择分析当前 Trace，并输入：
 
 ```text
 分析当前错误 Trace，说明故障发生在哪个服务、上下游影响、关键证据、可能根因和建议的处理顺序。
@@ -130,29 +130,29 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 ### 步骤七：使用 Agent Teams 处理告警任务
 
-首先进入 **Monitoring → Alert Strategies**，新建或编辑本 Workshop 使用的告警策略：
+首先进入 **监控 → 告警策略管理**，新建或编辑本 Workshop 使用的告警策略：
 
 1. 在 **关联** 中加入第七章创建的服务错误率、HTTP 状态码错误率和响应时间监控器。
-2. 展开 **通知规则**，将时区设置为 `(UTC+09:00) Asia/Tokyo`。
-3. 选择 **按等级（Level）** 通知，并为 `Fatal` 等级选择通知对象 `Observability Navigator`。如果监控器使用其他事件等级，请为对应等级增加相同的 Agent 通知规则。
+2. 展开 **通知规则**，将时区设置为 `(UTC+08:00) Asia/Shanghai`。
+3. 选择 **按等级（Level）** 通知，并为 `Fatal` 等级选择通知对象 `Obs 领航员`。如果监控器使用其他事件等级，请为对应等级增加相同的 Agent 通知规则。
 4. 点击 **保存**。只有匹配通知等级的事件才会投递给 Agent。
 
-如果通知对象列表中没有 `Observability Navigator`，请先确认该 Agent 已在当前工作空间创建，并且 Runtime 状态为 **Online**。
+如果通知对象列表中没有 `Obs 领航员`，请先确认该 Agent 已在当前工作空间创建，并且 Runtime 状态为 **在线**。
 
 ![04](/static/static-28/04.png)
 
-进入 Agent Workspace，选择已经部署并处于 Online 状态的 `Observability Navigator`，随后进入 **Task Intake**，创建或检查**Workspace hook**：
+进入 Agent Workspace，选择已经部署并处于在线状态的 `Obs 领航员`，随后进入 **任务接入**，创建或检查**工作空间**：
 
-- Name：`Observability Navigator Event Webhook`
-- Intake type：`Workspace`
-- Trigger method：`Platform delivery`
-- Execution period：`1 minute window`
-- Permission mode：使用当前 Workshop 工作空间权限
-- Status：`Active`
+- 名称：`Obs 领航员 Event Webhook`
+- 接入类型：`工作空间`
+- 触发方式：`平台投递`
+- 执行周期：`1 分钟窗口`
+- 权限模式：`默认权限`
+- 状态：`启用中`
 
 ![05](/static/static-28/05.png)
 
-将第七章监控器的告警策略投递到该任务入口，再次触发支付错误。确认 **Received messages** 数量增加，并在运行记录或 **My Tasks** 中打开新任务，检查 Agent 是否自动完成事件、Trace、日志和 EKS 资源的关联分析。
+将第七章监控器的告警策略投递到该任务入口，再次触发支付错误。确认 **接收消息** 数量增加，并在运行记录中打开新任务，检查 Agent 是否自动完成事件、Trace、日志和 EKS 资源的关联分析。
 
 ### 步骤八：关闭故障并验证闭环
 
@@ -162,7 +162,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 2. 告警事件进入恢复状态。
 3. Agent 任务保留了本次异常的分析结论和处理建议。
 
-可以在 Toby AI 中输入以下内容，生成本次演示的复盘记录：
+可以在 Obsy AI 中输入以下内容，生成本次演示的复盘记录：
 
 ```text
 将本次 payment-service 告警、影响范围、根因证据、处置过程和恢复验证整理成一份复盘 Note。
@@ -179,7 +179,7 @@ scripts/install-obs-agent-eks-node-demo.sh --cleanup
 unset BEAK_ENDPOINT TARGET_INSTANCE_ID TARGET_NODE_NAME
 ```
 
-确认清理完成后，在 Agent Workspace 中删除本 Workshop 创建的 Agent 和 Task Intake。
+确认清理完成后，在 Agent Workspace 中删除本 Workshop 创建的 Agent 和任务接入。
 
 然后在 CloudShell 中卸载应用：
 

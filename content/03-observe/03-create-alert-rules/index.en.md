@@ -30,11 +30,11 @@ Open `Product Error Rate` and `Product P90 Latency`, and verify that the detecti
 
 Return to the monitor list and confirm that the monitor status is **Enable**.
 
-### Step 3: Set Up Project SLO
+### Step 3: Set Up Product SLO
 
 Navigate to **Monitoring → SLO**, click **Create SLO**, and configure the following parameters (Service SLO is similar):
 
-- SLO Name: `Project SLO`
+- SLO Name: `Product SLO`
 - SLI Monitors: `Product Error Rate`, `Product P90 Latency`
 - Target: `95%`
 - Minimum Target: `90%`
@@ -48,21 +48,21 @@ After saving, confirm that the SLO page displays the compliance rate, error budg
 
 ### Step 4: Import the Product Service Operational Quality Dashboard
 
-Navigate to **Dashboards**, click **New Dashboard → Import Dashboard**, select **Official Dashboard**, and upload `product-service-operational-quality-dashboard.json`.
+Navigate to **Dashboards**, click **New Dashboard → Import Dashboard**, and upload `product-service-operational-quality-dashboard.json`.
 
 Confirm the following information before completing the import:
 
 - Dashboard Name: `Product Service Operational Quality Analysis Dashboard`
-- Identifier: `product-service-operational-quality`
+- Identifier: `Product Service Operational Quality Analysis Dashboard`
 
-Open the dashboard and set the **Product** variable at the top to `mall-demo`. Edit the `Product SLO` chart, select the `Project SLO` you just created in the current workspace, and save the dashboard.
+Open the dashboard and set the **Product** variable at the top to `mall-demo`.
 
 ### Step 5: Generate Anomalies and Verify Monitoring Results
 
 Inject a payment error in the mall demo and generate business traffic. After one detection interval has elapsed, verify the following in sequence:
 
 1. The relevant error rate monitors in **Monitoring → Monitors** enter an alert state.
-2. The `Project SLO` in **Monitoring → SLO** begins consuming error budget.
+2. The `Product SLO` in **Monitoring → SLO** begins consuming error budget.
 3. The product service operational quality dashboard displays error requests, alert events, and SLO changes.
 
 ![04](/static/static-27/04.png)

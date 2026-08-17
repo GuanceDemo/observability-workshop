@@ -7,4 +7,4 @@ weight : 40
 
 This chapter builds on the anomalies and alerts generated in the previous chapter to demonstrate Guance AI capabilities:
 
-1. Deploy Agent Runtime on an EKS node, use Toby AI and Agent Teams to analyze Traces and alerts, complete the fault handling loop, and clean up Workshop resources.
+1. Deploy Agent Runtime on an EKS node, use Obsy AI and Agent Teams to analyze Traces and alerts, complete the fault handling loop, and clean up Workshop resources.

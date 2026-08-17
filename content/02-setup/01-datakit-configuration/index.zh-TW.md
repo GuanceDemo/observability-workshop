@@ -14,7 +14,7 @@ weight : 21
 - EKS 叢集名稱。
 - 觀測雲工作區提供的 DataWay URL。
 
-登入[觀測雲控制台](https://console.guance.com/)，進入 **Integration → DataKit → Kubernetes(Helm)**，複製 `datakit.dataway_url` 的完整值：
+登入[觀測雲控制台](https://console.guance.com/)，進入 **整合 → DataKit → Kubernetes(Helm)**，複製 `datakit.dataway_url` 的完整值：
 
 ![01](/static/static-22/01.png)
 
@@ -112,13 +112,13 @@ kubectl logs -n datakit daemonset/datakit --tail=200 | grep 'add input'
 
 數分鐘後，驗證資料是否正確傳送至觀測雲：
 
-1. 進入 **Infrastructure**，按 `project=mall-demo` 篩選並查看 EKS 叢集節點資訊。
+1. 進入 **基礎設施**，查看 EKS 叢集節點資訊。
 	![04](/static/static-22/04.png)
-2. 前往 **Containers → Pods**，查看 DataKit Pod 的基本資訊與效能指標。
+2. 前往 **容器 → Pods**，查看 DataKit Pod 的基本資訊與效能指標。
 	![05](/static/static-22/05.png)
-3. 點擊 **Analysis Dashboard**，查看更詳細的 Kubernetes 分析儀表板。
+3. 點擊 **分析儀表板**，查看更詳細的 Kubernetes 分析儀表板。
 	![06](/static/static-22/06.png)
-4. 在 **Logs** 中查看 Kubernetes 元件日誌與叢集事件。
-	![08](/static/static-22/08.png)
+4. 在 **日誌** 中查看 Kubernetes 元件日誌與叢集事件。
+	![07](/static/static-22/07.png)
 
 此時商城應用尚未部署，因此 APM、應用日誌、JVM、Profiling 與 RUM 資料會在後續章節完成應用安裝和流量產生後出現。

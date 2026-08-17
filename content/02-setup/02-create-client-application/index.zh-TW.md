@@ -11,11 +11,10 @@ weight : 22
 
 按照以下步驟在觀測雲建立 Web 類型的客戶端應用：
 
-1. 登入[觀測雲控制台](https://console.guance.com/)，點擊 **RUM → Application → Create**。
+1. 登入[觀測雲控制台](https://console.guance.com/)，點擊 **使用者存取監測 → 應用列表 → 新建應用**。
 2. 選擇 **Web** 作為應用類型。
 3. 在「應用名稱」中輸入 `Mall Demo`，應用 ID 輸入 `mall_demo`。
-4. 選擇 **Local Deployment** **CDN Synchronous Loading**。
-5. 點擊 **Create**，複製 **Application ID** 和當前工作空間的 **Workspace ID**。
+4. 點擊 **建立**，複製 **Application ID** 和當前工作空間的 **Workspace ID**。
 
 ![01](/static/static-23/01.png)
 
@@ -62,4 +61,6 @@ echo "$SOURCE_MAP_FILE"
 - Environment：`demo`
 - Version：`2.3.1`
 
-應用部署完成後，可以在 Demo 頁面啟用 `frontend_sourcemap_error`，再點擊商城中的購買按鈕。上傳 SourceMap 前，錯誤堆疊指向壓縮檔案；上傳後應還原到 `assets/src/checkout-sourcemap-fault.js` 中的原始碼位置。
+![06](/static/static-23/06.png)
+
+應用部署完成後，可以在 Demo 頁面啟用 `SourceMap 原始碼定位錯誤`，再點擊商城中的購買按鈕。上傳 SourceMap 前，錯誤堆疊指向壓縮檔案；上傳後應還原到 `assets/src/checkout-sourcemap-fault.js` 中的原始碼位置。
