@@ -7,7 +7,7 @@ weight : 41
 
 This chapter builds on the payment anomalies and monitoring alerts generated in the previous chapter to demonstrate Obsy AI's ability to analyze error Traces, as well as Agent Teams' ability to receive alerts, access EKS, and generate remediation recommendations.
 
-Obsy AI can be used directly within the platform; the Agent Runtime for Agent Teams must be deployed by the user. This Workshop temporarily installs the Runtime on an EKS EC2 worker node and performs a unified cleanup after the demo.
+Obsy AI can be used directly within the platform; the Agent Runtime for Agent Teams must be deployed by the user. This Workshop temporarily installs the Runtime on an EKS EC2 worker node and performs a unified cleanup after completing the daily CVE inspection in the next section.
 
 ### Step 1: Enable AI Intelligent Analysis
 
@@ -64,7 +64,7 @@ The script automatically performs the following operations:
 
 1. Selects a Ready Linux worker node in the target cluster.
 2. Creates a short-lived privileged helper Pod and mounts the target node's root filesystem.
-3. Creates a read-only Kubernetes ServiceAccount, RBAC, and a kubeconfig with a default validity of 8 hours.
+3. Creates a read-only Kubernetes ServiceAccount, RBAC, and kubeconfig.
 4. Installs `kubectl` matching the EKS version on the node.
 5. Installs the Agent using `Standard` permission mode and opens an encrypted Kubernetes exec interactive session.
 6. Automatically deletes the helper Pod when installation completes or the script exits.
@@ -169,33 +169,3 @@ Compile the payment-service alert, impact scope, root cause evidence, remediatio
 ```
 
 This completes the end-to-end demo covering fault injection, monitoring alerts, AI analysis, Agent processing, and recovery verification.
-
-### Post-Workshop Cleanup
-
-First, clean up the Agent Runtime while the EKS node is still running. This command uses a temporary helper Pod to remove the Agent, Owl credentials, and temporary Kubernetes RBAC from the node, and deletes the helper Pod upon completion:
-
-```shell
-scripts/install-obs-agent-eks-node-demo.sh --cleanup
-unset BEAK_ENDPOINT TARGET_INSTANCE_ID TARGET_NODE_NAME
-```
-
-After confirming the cleanup is complete, delete the Agent and Task Intake created for this Workshop in the Agent Workspace.
-
-Then uninstall the application in CloudShell:
-
-```shell
-kubectl config current-context
-helm list --all-namespaces
-
-helm uninstall demo -n observability-demo
-kubectl delete namespace observability-demo --ignore-not-found
-```
-
-After the Gateway Service is deleted, verify in the AWS Console that the Load Balancer created for this Workshop has been released to avoid ongoing charges.
-
-Only when DataKit collection is no longer needed for the EKS cluster, run:
-
-```shell
-helm uninstall datakit -n datakit
-kubectl delete namespace datakit --ignore-not-found
-```

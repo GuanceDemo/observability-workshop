@@ -7,7 +7,7 @@ weight : 41
 
 本章基於前一章產生的支付異常和監控告警，演示 Obsy AI 對錯誤 Trace 的分析能力，以及 Agent Teams 接收告警、存取 EKS 並產生處置建議的能力。
 
-Obsy AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由使用者部署。本 Workshop 將 Runtime 臨時安裝到一台 EKS EC2 工作節點，演示結束後再統一清理。
+Obsy AI 可以直接在平台中使用；Agent Teams 的 Agent Runtime 需要由使用者部署。本 Workshop 將 Runtime 臨時安裝到一台 EKS EC2 工作節點，並在下一節完成每日 CVE 自動巡檢後統一清理。
 
 ### 步驟一：開啟 AI 智慧分析
 
@@ -64,7 +64,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 1. 選擇目標叢集中的一台 Ready Linux 工作節點。
 2. 建立一個短生命週期的特權 helper Pod，並掛載目標節點根檔案系統。
-3. 建立 Kubernetes 唯讀 ServiceAccount、RBAC 和預設有效期為 8 小時的 kubeconfig。
+3. 建立 Kubernetes 唯讀 ServiceAccount、RBAC 和 kubeconfig。
 4. 在節點上安裝與 EKS 版本匹配的 `kubectl`。
 5. 使用 `Standard` 權限模式安裝 Agent，並開啟加密的 Kubernetes exec 互動會話。
 6. 安裝完成或腳本結束時自動刪除 helper Pod。
@@ -169,33 +169,3 @@ scripts/install-obs-agent-eks-node-demo.sh
 ```
 
 至此完成從故障注入、監控告警、AI 分析、Agent 處理到恢復驗證的閉環演示。
-
-### Workshop 結束後清理
-
-先在 EKS 節點仍處於運行狀態時清理 Agent Runtime。該命令會透過臨時 helper Pod 刪除節點上的 Agent 與 Owl 憑證及臨時 Kubernetes RBAC，並在結束時刪除 helper Pod：
-
-```shell
-scripts/install-obs-agent-eks-node-demo.sh --cleanup
-unset BEAK_ENDPOINT TARGET_INSTANCE_ID TARGET_NODE_NAME
-```
-
-確認清理完成後，在 Agent Workspace 中刪除本 Workshop 建立的 Agent 和任務接入。
-
-然後在 CloudShell 中解除安裝應用程式：
-
-```shell
-kubectl config current-context
-helm list --all-namespaces
-
-helm uninstall demo -n observability-demo
-kubectl delete namespace observability-demo --ignore-not-found
-```
-
-等待 Gateway Service 刪除後，在 AWS 主控台確認本 Workshop 建立的 Load Balancer 已被釋放，避免繼續產生費用。
-
-僅當該 EKS 叢集不再需要 DataKit 採集時，再執行：
-
-```shell
-helm uninstall datakit -n datakit
-kubectl delete namespace datakit --ignore-not-found
-```

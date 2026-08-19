@@ -64,7 +64,7 @@ scripts/install-obs-agent-eks-node-demo.sh
 
 1. 选择目标集群中的一台 Ready Linux 工作节点。
 2. 创建一个短生命周期的特权 helper Pod，并挂载目标节点根文件系统。
-3. 创建 Kubernetes 只读 ServiceAccount、RBAC 和默认有效期为 8 小时的 kubeconfig。
+3. 创建 Kubernetes 只读 ServiceAccount、RBAC 和 kubeconfig。
 4. 在节点上安装与 EKS 版本匹配的 `kubectl`。
 5. 使用 `Standard` 权限模式安装 Agent，并打开加密的 Kubernetes exec 交互会话。
 6. 安装完成或脚本退出时自动删除 helper Pod。
@@ -169,33 +169,3 @@ scripts/install-obs-agent-eks-node-demo.sh
 ```
 
 至此完成从故障注入、监控告警、AI 分析、Agent 处理到恢复验证的闭环演示。
-
-### Workshop 结束后清理
-
-先在 EKS 节点仍处于运行状态时清理 Agent Runtime。该命令会通过临时 helper Pod 删除节点上的 Agent 与 Owl 凭证及临时 Kubernetes RBAC，并在结束时删除 helper Pod：
-
-```shell
-scripts/install-obs-agent-eks-node-demo.sh --cleanup
-unset BEAK_ENDPOINT TARGET_INSTANCE_ID TARGET_NODE_NAME
-```
-
-确认清理完成后，在 Agent Workspace 中删除本 Workshop 创建的 Agent 和任务接入。
-
-然后在 CloudShell 中卸载应用：
-
-```shell
-kubectl config current-context
-helm list --all-namespaces
-
-helm uninstall demo -n observability-demo
-kubectl delete namespace observability-demo --ignore-not-found
-```
-
-等待 Gateway Service 删除后，在 AWS 控制台确认本 Workshop 创建的 Load Balancer 已被释放，避免继续产生费用。
-
-仅当该 EKS 集群不再需要 DataKit 采集时，再执行：
-
-```shell
-helm uninstall datakit -n datakit
-kubectl delete namespace datakit --ignore-not-found
-```
