@@ -5,7 +5,7 @@ weight : 23
 
 ## Deploy Demo Application
 
-This chapter deploys the shopping mall demo to AWS EKS using the public Harbor `2.3.1` images. No image build, ECR configuration, or registry login is required in CloudShell. Except for the Gateway, the order, inventory, payment, MySQL, and Redis services remain cluster-internal.
+This chapter deploys the shopping mall demo to AWS EKS using the public Harbor `2.3.5` images. No image build, ECR configuration, or registry login is required in CloudShell. Except for the Gateway, the order, inventory, payment, MySQL, and Redis services remain cluster-internal.
 
 The Gateway is public and the demo fault endpoints intentionally require no credential. Use this profile only in an isolated, short-lived workshop cluster and clean it up after the exercise.
 
@@ -29,7 +29,7 @@ unset RUM_APPLICATION_ID GUANCE_WORKSPACE_ID
 
 ![01](/static/static-24/01.png)
 
-The profile pulls `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.1` with `IfNotPresent`. The images are public and support `linux/amd64` and `linux/arm64`.
+The profile pulls `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.5` with `IfNotPresent`. The images are public and support `linux/amd64` and `linux/arm64`.
 
 ### Step 2: Wait for Workloads to Become Ready
 

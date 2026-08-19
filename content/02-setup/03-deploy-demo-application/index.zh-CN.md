@@ -5,7 +5,7 @@ weight : 23
 
 ## 部署示范应用
 
-本章使用公开 Harbor `2.3.1` 镜像将商城 Demo 部署到 AWS EKS，无需在 CloudShell 中构建镜像、配置 ECR 或登录镜像仓库。除 Gateway 外，订单、库存、支付、MySQL 和 Redis 都只在集群内部访问。
+本章使用公开 Harbor `2.3.5` 镜像将商城 Demo 部署到 AWS EKS，无需在 CloudShell 中构建镜像、配置 ECR 或登录镜像仓库。除 Gateway 外，订单、库存、支付、MySQL 和 Redis 都只在集群内部访问。
 
 Gateway 会暴露到公网，Demo 故障接口有意不要求控制凭证。该 profile 只能用于隔离、短期的 Workshop 集群，练习结束后应及时清理。
 
@@ -29,7 +29,7 @@ unset RUM_APPLICATION_ID GUANCE_WORKSPACE_ID
 
 ![01](/static/static-24/01.png)
 
-该 profile 使用 `IfNotPresent` 拉取 `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.1`。镜像公开并同时支持 `linux/amd64` 和 `linux/arm64`。
+该 profile 使用 `IfNotPresent` 拉取 `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.5`。镜像公开并同时支持 `linux/amd64` 和 `linux/arm64`。
 
 ### 步骤二：等待工作负载就绪
 

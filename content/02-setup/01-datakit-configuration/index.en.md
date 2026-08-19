@@ -70,7 +70,7 @@ When `kubectl get nodes` shows at least one node with `Ready` status, the connec
 ### Step 4: Clone the Demo Repository
 
 ```shell
-export DEMO_VERSION="2.3.1"
+export DEMO_VERSION="2.3.5"
 git clone --branch "v${DEMO_VERSION}" --depth 1 \
   https://github.com/GuanceDemo/observability-demo.git
 cd observability-demo

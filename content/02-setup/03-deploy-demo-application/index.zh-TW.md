@@ -5,7 +5,7 @@ weight : 23
 
 ## 部署示範應用
 
-本章使用公開 Harbor `2.3.1` 映像將商城 Demo 部署到 AWS EKS，無需在 CloudShell 中建置映像、設定 ECR 或登入映像倉庫。除 Gateway 外，訂單、庫存、支付、MySQL 和 Redis 都只在叢集內部存取。
+本章使用公開 Harbor `2.3.5` 映像將商城 Demo 部署到 AWS EKS，無需在 CloudShell 中建置映像、設定 ECR 或登入映像倉庫。除 Gateway 外，訂單、庫存、支付、MySQL 和 Redis 都只在叢集內部存取。
 
 Gateway 會公開到網際網路，Demo 故障介面有意不要求控制憑證。此 profile 只能用於隔離、短期的 Workshop 叢集，練習結束後應及時清理。
 
@@ -29,7 +29,7 @@ unset RUM_APPLICATION_ID GUANCE_WORKSPACE_ID
 
 ![01](/static/static-24/01.png)
 
-此 profile 使用 `IfNotPresent` 拉取 `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.1`。映像公開並同時支援 `linux/amd64` 和 `linux/arm64`。
+此 profile 使用 `IfNotPresent` 拉取 `pubrepo.jiagouyun.com/demo/observability-demo-{gateway,order,inventory,payment}-service:2.3.5`。映像公開並同時支援 `linux/amd64` 和 `linux/arm64`。
 
 ### 步驟二：等待工作負載就緒
 

@@ -38,16 +38,16 @@ read -rp '觀測雲 Workspace ID: ' GUANCE_WORKSPACE_ID && export GUANCE_WORKSPA
 Demo 已包含用於演示原始碼還原的壓縮 JavaScript 與 SourceMap。在倉庫根目錄執行：
 
 ```shell
-scripts/package-rum-sourcemap.sh --version 2.3.1
+scripts/package-rum-sourcemap.sh --version 2.3.5
 
-SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap-2.3.1.zip)"
+SOURCE_MAP_FILE="$(realpath dist/observability-demo-rum-sourcemap-2.3.5.zip)"
 ls -lh "$SOURCE_MAP_FILE"
 echo "$SOURCE_MAP_FILE"
 ```
 
 ![04](/static/static-23/04.png)
 
-隨後將 AWS CloudShell 裡面的 observability-demo-rum-sourcemap-2.3.1.zip 檔案下載到瀏覽器預設下載目錄：
+隨後將 AWS CloudShell 裡面的 observability-demo-rum-sourcemap-2.3.5.zip 檔案下載到瀏覽器預設下載目錄：
 
 1. 點擊 AWS CloudShell 右上角的 **Actions**。
 2. 選擇 **Download file**。
@@ -56,10 +56,10 @@ echo "$SOURCE_MAP_FILE"
 
 ![05](/static/static-23/05.png)
 
-產生的檔案位於 `dist/observability-demo-rum-sourcemap-2.3.1.zip`。進入剛剛建立的 RUM 應用設定，在 **SourceMap** 頁面上傳該壓縮包，並填寫：
+產生的檔案位於 `dist/observability-demo-rum-sourcemap-2.3.5.zip`。進入剛剛建立的 RUM 應用設定，在 **SourceMap** 頁面上傳該壓縮包，並填寫：
 
 - Environment：`demo`
-- Version：`2.3.1`
+- Version：`2.3.5`
 
 ![06](/static/static-23/06.png)
 

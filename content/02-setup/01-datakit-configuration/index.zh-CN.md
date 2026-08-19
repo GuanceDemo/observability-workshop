@@ -70,7 +70,7 @@ kubectl get nodes
 ### 步骤四：克隆 Demo 仓库
 
 ```shell
-export DEMO_VERSION="2.3.1"
+export DEMO_VERSION="2.3.5"
 git clone --branch "v${DEMO_VERSION}" --depth 1 \
   https://github.com/GuanceDemo/observability-demo.git
 cd observability-demo
